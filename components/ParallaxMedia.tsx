@@ -9,25 +9,36 @@ export function ParallaxMedia({ strength = 14, className = "", alt, ...props }: 
   const ref = useRef<HTMLDivElement>(null);
 
   function handleMove(event: PointerEvent<HTMLDivElement>) {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
+    if (event.pointerType !== "mouse") return;
+    const element = ref.current;
+    if (!element) return;
+    const rect = element.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
-    el.style.setProperty("--parallax-x", `${x * strength}px`);
-    el.style.setProperty("--parallax-y", `${y * strength}px`);
+    element.style.setProperty("--parallax-x", `${x * strength}px`);
+    element.style.setProperty("--parallax-y", `${y * strength}px`);
   }
 
   function handleLeave() {
-    const el = ref.current;
-    if (!el) return;
-    el.style.setProperty("--parallax-x", "0px");
-    el.style.setProperty("--parallax-y", "0px");
+    const element = ref.current;
+    if (!element) return;
+    element.style.setProperty("--parallax-x", "0px");
+    element.style.setProperty("--parallax-y", "0px");
   }
 
   return (
-    <div ref={ref} className={`parallax-media ${className}`.trim()} onPointerMove={handleMove} onPointerLeave={handleLeave}>
-      <Image {...props} alt={alt} className="parallax-image" />
+    <div
+      ref={ref}
+      className={`parallax-media ${className}`.trim()}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+    >
+      <Image
+        {...props}
+        alt={alt}
+        quality={100}
+        className={`parallax-image ${props.className ?? ""}`.trim()}
+      />
     </div>
   );
 }
