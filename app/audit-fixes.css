@@ -1,0 +1,101 @@
+/* Final visual audit: Vietnamese typography + calmer editorial image geometry. */
+:lang(vi) .prose .lead,
+:lang(vi) .contact-grid .lead,
+:lang(vi) .article-body p,
+:lang(vi) .article-intro,
+:lang(vi) .product-lead,
+:lang(vi) .large-copy {
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: normal;
+  word-spacing: normal;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+:lang(vi) .prose .lead,
+:lang(vi) .contact-grid .lead {
+  line-height: 1.18;
+}
+
+/* Do not stretch recovered portrait photography into a wide hero crop. */
+.hero-image-wrap {
+  width: min(34vw, 560px);
+  min-height: min(68vh, 700px);
+  aspect-ratio: 0.82;
+  justify-self: center;
+  align-self: center;
+  background: var(--paper-deep);
+}
+
+.hero-image-wrap .archive-slideshow {
+  min-height: 0;
+  height: 100%;
+}
+
+.hero-image-wrap .archive-slide-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Keep the image visually quieter than the editorial copy. */
+.archive-slide-image {
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.001);
+}
+
+.archive-slide.is-active .archive-slide-image {
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.004);
+}
+
+/* About: portrait editorial treatment, not a full-width archive wall. */
+.about-grid .portrait {
+  aspect-ratio: 0.82;
+  max-height: 700px;
+}
+
+.about-grid .archive-slideshow {
+  min-height: 0;
+  height: 100%;
+}
+
+/* Shop: make the product image support the information instead of dominating it. */
+.shop-feature {
+  grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.72fr);
+  gap: 7vw;
+}
+
+.shop-feature-image {
+  aspect-ratio: 0.92;
+  max-height: 610px;
+  justify-self: center;
+  width: min(100%, 560px);
+}
+
+.product-image {
+  aspect-ratio: 0.9;
+}
+
+.product-gallery-image {
+  aspect-ratio: 0.88;
+}
+
+@media (max-width: 900px) {
+  .hero-image-wrap {
+    width: min(82vw, 520px);
+    min-height: 0;
+    aspect-ratio: 0.82;
+    margin: 0 auto 24px;
+  }
+
+  .hero-image-wrap .archive-slideshow {
+    min-height: 0;
+  }
+
+  .about-grid .portrait {
+    max-height: none;
+  }
+
+  .shop-feature-image {
+    width: min(88vw, 520px);
+    max-height: 620px;
+  }
+}
