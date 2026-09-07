@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#f3efe8"/>
-  <circle cx="256" cy="238" r="172" fill="#1d1a17"/>
-  <circle cx="256" cy="238" r="151" fill="none" stroke="#d8c7b2" stroke-width="4"/>
-  <text x="256" y="274" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="126" letter-spacing="-10" fill="#f3efe8">CH</text>
-  <text x="256" y="366" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" letter-spacing="9" fill="#8a6a4d">VINTAGE</text>
-</svg>
