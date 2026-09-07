@@ -1,11 +1,11 @@
 "use client";
 
 import { FormEvent } from "react";
-import type { Locale } from "@/lib/i18n";
-import { ui } from "@/lib/i18n";
+import type { ContactLocale } from "@/lib/contact-copy";
+import { contactCopy } from "@/lib/contact-copy";
 
-export function ContactForm({ locale }: { locale: Locale }) {
-  const labels = ui[locale];
+export function ContactForm({ locale }: { locale: ContactLocale }) {
+  const labels = contactCopy[locale];
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -14,7 +14,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
     const email = String(form.get("email") ?? "").trim();
     const message = String(form.get("message") ?? "").trim();
     const subject = locale === "vi" ? `Yêu cầu từ ${name || "khách hàng"}` : `Enquiry from ${name || "customer"}`;
-    const body = `${locale === "vi" ? "Tên" : "Name"}: ${name}\n${locale === "vi" ? "Email" : "Email"}: ${email}\n\n${locale === "vi" ? "Lời nhắn" : "Message"}:\n${message}`;
+    const body = `${labels.name}: ${name}\n${labels.email}: ${email}\n\n${labels.message}:\n${message}`;
     window.location.href = `mailto:cohaivintage@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
