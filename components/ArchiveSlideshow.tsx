@@ -64,6 +64,7 @@ export function ArchiveSlideshow({ slides, interval = 7000 }: ArchiveSlideshowPr
             fill
             priority={index === 0}
             quality={100}
+            unoptimized
             sizes="(max-width: 900px) 100vw, 47vw"
             className="archive-slide-image"
           />
