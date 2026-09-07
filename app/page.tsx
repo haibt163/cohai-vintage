@@ -1,20 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { editorialPosts, products } from "@/lib/content";
+import { archiveSlides } from "@/lib/archive-media";
 import { getLocale, localizedPost, localizedProduct, ui } from "@/lib/i18n";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
-
-const archiveSlides = [
-  { src: "/assets/original/2025/03/STREET-STYLE-3.jpg", alt: "Vintage street style from the Cô Hai Vintage archive" },
-  { src: "/assets/original/2025/03/STREET-STYLE-1.jpg", alt: "A second street-style photograph from the Cô Hai Vintage archive" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE.jpg", alt: "Cô Hai Vintage archive portrait" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-1.jpg", alt: "Cô Hai Vintage archive portrait, second view" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-2.jpg", alt: "Cô Hai Vintage archive portrait, third view" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-3.jpg", alt: "Cô Hai Vintage archive portrait, fourth view" },
-  { src: "/assets/original/2025/03/FLEA-MARKET.jpg", alt: "Flea market scene from the Cô Hai Vintage archive" },
-  { src: "/assets/original/2025/03/MIKIMOTO-1.jpg", alt: "Akoya pearl editorial image from the Cô Hai Vintage archive" },
-];
 
 export default async function Home() {
   const locale = await getLocale();
