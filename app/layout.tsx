@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./motion.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PointerAtmosphere } from "@/components/PointerAtmosphere";
+import { RevealObserver } from "@/components/RevealObserver";
 import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
@@ -15,7 +18,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang={locale}>
       <body>
+        <PointerAtmosphere />
         <Header />
+        <RevealObserver />
         <main>{children}</main>
         <Footer />
       </body>
