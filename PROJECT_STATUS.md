@@ -1,8 +1,10 @@
 # Cô Hai Vintage — Project Status
 
-## Current state
+## Current state — 7 September 2026
 
-The reconstruction is now through the final Phase 5 production audit and is kept deployable on `main`.
+The modern Cô Hai Vintage reconstruction is running well on `main` and satisfies the large majority of the agreed functional and visual requirements. `main` remains the authoritative, deployable source.
+
+Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, but a small number of visual verification items remain intentionally open for the next conversation.
 
 ## Phase 3 — COMPLETE
 
@@ -11,6 +13,7 @@ The reconstruction is now through the final Phase 5 production audit and is kept
 - Three Louis Vuitton product routes restored with supporting galleries.
 - Product copy remains conservative: no unsupported pricing, condition, provenance or authenticity claims.
 - Canonical media location remains `public/assets/original/`.
+- Verified product galleries currently use only the recovered Louis Vuitton assets mapped in `lib/content.ts`.
 
 ## Phase 4 — COMPLETE
 
@@ -19,12 +22,14 @@ The reconstruction is now through the final Phase 5 production audit and is kept
 - Magnetic navigation interactions.
 - Visible mouse parallax on editorial photography.
 - High-quality image rendering with `quality={100}` on image-led experiences.
-- Homepage archive slideshow using eight verified recovered image assets, with slow automatic rotation and manual controls.
-- About page founder archive slideshow using all four verified `CO-HAI-VINTAGE` portrait assets.
+- Homepage archive slideshow using the 18 verified recovered archive images, with slow automatic rotation and manual controls.
+- About page founder archive slideshow focused on the four verified `CO-HAI-VINTAGE` founder portrait assets rather than mixing unrelated editorial/product imagery.
 - Shop, product, Contact and About routes visually integrated.
 - Responsive mobile/tablet layouts and reduced-motion support.
+- Vietnamese typography/spacing refinements added to address visible word-spacing and diacritic rendering issues.
+- Hero and Shop image geometry restrained so recovered portrait photography is not unnecessarily stretched into wide crops.
 
-## Phase 5 — COMPLETE
+## Phase 5 — SUBSTANTIALLY COMPLETE
 
 ### Route integrity
 
@@ -41,8 +46,9 @@ The reconstruction is now through the final Phase 5 production audit and is kept
 ### Image-reference audit
 
 - Primary image-led routes use verified recovered Cô Hai media.
-- Homepage and About use multiple genuine archive assets rather than repeatedly enlarging one image.
+- Homepage and About use genuine archive assets rather than repeatedly enlarging one image.
 - Product/editorial images use the recovered source paths and full-quality Next image delivery.
+- The three product galleries have been checked against the recovered filenames; no broken product image path is currently known.
 - No guessed Louis Vuitton Patent filename was introduced.
 
 ### Interaction / responsive audit
@@ -59,14 +65,53 @@ The reconstruction is now through the final Phase 5 production audit and is kept
 - Carousel controls have accessible labels and pressed state.
 - Missing routes use a branded 404 experience.
 - Site metadata, Open Graph defaults, Apple web-app metadata, theme colour and installable manifest configured.
-- Custom Cô Hai Vintage icon replaces the default Next.js presentation and includes an iPhone-friendly Apple icon.
+- Custom Cô Hai Vintage generated icon routes are implemented for the browser icon and Apple/iOS icon.
 
-### Performance / validation
+### Validation
 
-- `npm run lint` passes.
-- `npm run typecheck` passes.
-- `npm run build` passes in GitHub Actions.
-- CI now validates lint, TypeScript and production build on pushes and pull requests to `main`.
+The latest GitHub Actions validation run for the current visual fixes is green:
+
+- `npm run lint` — PASS
+- `npm run typecheck` — PASS
+- `npm run build` — PASS
+
+## Pending issues / next-audit items
+
+These items are deliberately recorded as OPEN rather than treated as finished:
+
+1. **Recovered photography sharpness — OPEN / PRIORITY**
+   - The site is using the correct recovered photographs, but the photos still look somewhat blurry/soft in the live presentation.
+   - Do not replace them with stock imagery or invent higher-resolution variants.
+   - Next audit should determine whether the softness comes from the recovered source resolution, browser/device rendering, Next image delivery, CSS cropping/scaling, or a combination.
+   - Keep the current image sources intact until that audit is completed.
+
+2. **Favicon / iOS icon live verification — OPEN**
+   - Custom generated Cô Hai Vintage icon routes have been implemented and the production build passes.
+   - Live deployment still needs browser verification because the previous Vercel/default icon and iOS missing-icon behaviour may be affected by deployment state and aggressive browser/Home Screen caching.
+   - Verify desktop browser tab/favicon and iOS Home Screen icon after the latest deployment; if necessary clear/re-add the Home Screen shortcut before judging the icon.
+
+3. **Final cross-device visual audit — OPEN**
+   - Recheck the live site on desktop, tablet and iPhone after deployment.
+   - Pay particular attention to Vietnamese line wrapping/diacritics, hero image framing, About portraits, Shop image scale, and any perceived missing/incorrect image.
+   - Confirm there are no console errors, broken network requests, unexpected layout shifts, or browser-specific rendering regressions.
+
+4. **Shop image perception — OPEN FOR VISUAL RECHECK**
+   - The recovered product gallery filenames/paths are present and mapped correctly.
+   - The earlier concern that a Shop image appeared missing may be a presentation/crop/loading issue rather than a missing source file. Recheck the live gallery visually before changing the source mapping.
+
+5. **Production deployment verification — OPEN**
+   - GitHub `main` is validated and deployable, but the final production URL should be checked after the latest commit is deployed.
+   - Do not mark the above visual items closed solely because CI is green; they require real browser/device verification.
+
+## Known good decisions — preserve these
+
+- Keep genuine recovered WordPress media as the source of truth.
+- Keep the 18 verified archive images; do not fabricate two additional images just to reach a larger slideshow count.
+- Keep the About slideshow focused on the four founder archive portraits.
+- Keep product gallery mappings as currently defined in `lib/content.ts` unless a source audit proves otherwise.
+- Keep motion subtle and respect reduced-motion preferences.
+- Keep the bilingual EN/VI experience and Vietnamese typography refinements.
+- Do not reintroduce Astra starter/demo imagery where genuine Cô Hai media exists.
 
 ## Local workflow
 
@@ -90,3 +135,7 @@ Do not commit SQL dumps, `wp-config.php`, passwords, API keys, `.env` files, Blu
 ## Deployment rule
 
 `main` is the authoritative reconstruction branch. Keep it clean and deployable; make future changes through the same documented workflow and preserve recovered genuine media as the source of truth.
+
+## Next-conversation handoff
+
+Start the next conversation by reading this file together with `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, and `MEDIA-MAPPING.md`. The immediate priority is **not** another broad redesign. Begin with the OPEN items above, especially the photography sharpness/source-resolution audit and live favicon/iOS verification, then perform the final cross-device visual audit before declaring Phase 5 fully closed.
