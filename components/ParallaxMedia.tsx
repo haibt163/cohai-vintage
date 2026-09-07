@@ -33,12 +33,7 @@ export function ParallaxMedia({ strength = 14, className = "", alt, ...props }: 
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
     >
-      <Image
-        {...props}
-        alt={alt}
-        quality={100}
-        className={`parallax-image ${props.className ?? ""}`.trim()}
-      />
+      <Image {...props} alt={alt} quality={100} className="parallax-image" />
     </div>
   );
 }
