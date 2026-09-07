@@ -3,7 +3,7 @@
   --parallax-y: 0px;
 }
 
-/* Image quality + restrained editorial motion. */
+/* Image quality: never enlarge recovered photography more than necessary. */
 .parallax-media {
   overflow: hidden;
   isolation: isolate;
@@ -11,7 +11,7 @@
 }
 
 .parallax-image {
-  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.018);
+  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.005);
   transform-origin: center center;
   will-change: transform;
   transition: transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
@@ -19,7 +19,7 @@
 }
 
 .parallax-media:hover .parallax-image {
-  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.035);
+  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.012);
 }
 
 .archive-slideshow {
@@ -28,7 +28,7 @@
   height: 100%;
   min-height: 520px;
   overflow: hidden;
-  background: var(--soft);
+  background: var(--paper-deep);
   isolation: isolate;
 }
 
@@ -49,7 +49,7 @@
 
 .archive-slide-image {
   object-fit: cover;
-  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.035);
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.008);
   transform-origin: center center;
   will-change: transform;
   transition: transform 8500ms cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -57,7 +57,7 @@
 }
 
 .archive-slide.is-active .archive-slide-image {
-  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.085);
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.015);
 }
 
 .archive-slideshow:hover .archive-slide.is-active .archive-slide-image {
@@ -103,6 +103,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .archive-dots button {
@@ -137,9 +139,71 @@
   text-transform: uppercase;
 }
 
-/* Keep hero photography crisp by avoiding unnecessary enlargement. */
-.hero-image-wrap {
-  overflow: hidden;
+/* Larger, clearer brand and navigation typography. */
+.site-header {
+  min-height: 72px;
+}
+
+.header-inner {
+  min-height: 72px;
+  padding: 16px 32px;
+}
+
+.brand-mark {
+  font-size: 27px;
+  letter-spacing: 0.08em;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  letter-spacing: 0.42em;
+  margin-top: 7px;
+}
+
+.header-note {
+  font-size: 9px;
+  letter-spacing: 0.28em;
+}
+
+.desktop-nav {
+  gap: 24px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.language-switcher,
+.language-switcher button {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+}
+
+.header-mobile-language {
+  display: none;
+}
+
+.site-footer {
+  padding-top: 78px;
+  padding-bottom: 30px;
+}
+
+.footer-brand {
+  font-size: 36px;
+  letter-spacing: -0.025em;
+}
+
+.footer-inner p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.footer-links {
+  gap: 28px;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+}
+
+.footer-bottom {
+  font-size: 10px;
 }
 
 @media (min-width: 901px) {
@@ -153,12 +217,71 @@
 }
 
 @media (max-width: 900px) {
+  .header-inner {
+    grid-template-columns: 1fr auto auto;
+    min-height: 66px;
+    padding: 11px 18px;
+    gap: 16px;
+  }
+
+  .header-mobile-language {
+    display: block;
+  }
+
+  .header-mobile-language .language-switcher {
+    margin: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 253, 248, 0.72);
+  }
+
+  .mobile-nav .language-switcher {
+    display: none;
+  }
+
+  .brand-mark {
+    font-size: 23px;
+  }
+
+  .brand-subtitle {
+    font-size: 8px;
+  }
+
+  .mobile-nav summary {
+    font-size: 10px;
+  }
+
   .archive-slideshow {
     min-height: 62vh;
   }
 
   .archive-slide-image {
-    transform: scale(1.035);
+    transform: scale(1.005);
+  }
+
+  .archive-slide.is-active .archive-slide-image {
+    transform: scale(1.008);
+  }
+
+  .footer-brand {
+    font-size: 30px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    padding-bottom: 55px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 18px 24px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 9px;
   }
 }
 
