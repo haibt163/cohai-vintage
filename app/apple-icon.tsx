@@ -6,33 +6,13 @@ export const contentType = "image/png";
 export default function AppleIcon() {
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#f3efe8",
-          borderRadius: 40,
-        }}
-      >
-        <div
-          style={{
-            width: 132,
-            height: 132,
-            borderRadius: "50%",
-            background: "#1d1a17",
-            border: "3px solid #d8c7b2",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#f3efe8",
-          }}
-        >
-          <div style={{ fontSize: 49, fontFamily: "Georgia", letterSpacing: -4, lineHeight: 1 }}>CH</div>
-          <div style={{ fontSize: 9, fontFamily: "Arial", letterSpacing: 3, color: "#b08b68", marginTop: 7 }}>VINTAGE</div>
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#171513" }}>
+        <div style={{ width: 148, height: 148, border: "2px solid #b59a7e", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+          <div style={{ width: 96, height: 73, border: "3px solid #f4f0e9", borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", marginTop: 20 }}>
+            <div style={{ position: "absolute", width: 51, height: 29, border: "3px solid #f4f0e9", borderBottom: 0, borderRadius: "29px 29px 0 0", top: -31, left: 19 }} />
+            <div style={{ fontSize: 29, fontFamily: "Georgia", color: "#f4f0e9", letterSpacing: -3 }}>CH</div>
+          </div>
+          <div style={{ position: "absolute", right: 13, top: 12, width: 8, height: 8, borderRadius: "50%", background: "#b59a7e" }} />
         </div>
       </div>
     ),
