@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   applicationName: "Cô Hai Vintage",
   keywords: ["Cô Hai Vintage", "vintage fashion", "Saigon vintage", "vintage handbags", "luxury vintage", "jewellery"],
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.svg",
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
   },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
