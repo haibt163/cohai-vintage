@@ -42,7 +42,7 @@ Genuine recovered media is stored under:
 
 The implemented catalogue uses genuine mapped families for the founder, Flea Market, Akoya/Mikimoto, street style, Bernard Arnault and Coco Chanel subjects. Product pages use the recovered Louis Vuitton product families documented in `MEDIA-MAPPING.md`.
 
-The previous hero used `CO-HAI-VINTAGE.jpg`, which reads as visually dark/spooky in the current browser preview. The Phase 4 hero now uses the verified `CO-HAI-VINTAGE-1.jpg` family instead. Legacy recovered Astra/demo files remain as source material and should only be removed after the Phase 5 reference audit.
+The original spooky-looking hero has been removed from the homepage. The current homepage hero uses the verified `STREET-STYLE-3.jpg` archive image; the About page uses the separate verified `CO-HAI-VINTAGE.jpg` founder archive image. Legacy recovered Astra/demo files remain as source material and should only be removed after the Phase 5 reference audit.
 
 ## Phase 3 — status: COMPLETE
 
@@ -68,12 +68,14 @@ Completed in the current pass:
 - Dynamic document `lang` attribute for English/Vietnamese.
 - Pointer-based magnetic navigation interactions.
 - Pointer parallax image movement on hero, editorial and product imagery.
-- Staggered entrance motion and reduced-motion fallback.
+- Subtle pointer-following atmosphere on desktop.
+- IntersectionObserver-based scroll reveal with staggered motion and reduced-motion fallback.
 - Homepage rebuilt around a cleaner editorial rhythm with a non-spooky verified hero image, journal storytelling, product feature and closing statement.
 - Journal landing page art-directed as an image-led editorial archive.
 - Shop landing page now has a featured piece followed by the collection grid.
 - About, Contact, article and product detail routes now share the same visual language and bilingual UI.
 - Mobile navigation includes the language control and responsive layouts were reworked.
+- Contact enquiry form now opens a pre-filled email composition rather than leaving a dead submit button.
 
 ## Phase 5 — IN PROGRESS
 
@@ -114,7 +116,7 @@ Never commit:
 
 ## Continuity
 
-Phase 4 is now considered complete. Continue with the Phase 5 production audit, using:
+Phase 4 is complete. Continue with the Phase 5 production audit, using:
 
 - `AGENTS.md`
 - `PROJECT_STATUS.md`
