@@ -83,6 +83,25 @@ main,
   opacity: 0.55;
 }
 
+@media (min-width: 901px) {
+  .section-narrow {
+    width: min(1240px, calc(100% - 96px));
+    max-width: 1240px;
+  }
+
+  .editorial-grid {
+    gap: 28px;
+  }
+
+  .feature-split {
+    gap: 64px;
+  }
+
+  .mini-product-image {
+    aspect-ratio: 0.9;
+  }
+}
+
 @media (max-width: 900px) {
   .pointer-atmosphere { display: none; }
 
