@@ -1,14 +1,14 @@
 "use client";
 
 import Image, { type ImageProps } from "next/image";
-import { useRef } from "react";
+import { useRef, type PointerEvent } from "react";
 
 type ParallaxMediaProps = ImageProps & { strength?: number; className?: string };
 
 export function ParallaxMedia({ strength = 14, className = "", ...props }: ParallaxMediaProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  function handleMove(event: React.PointerEvent<HTMLDivElement>) {
+  function handleMove(event: PointerEvent<HTMLDivElement>) {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
