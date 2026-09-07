@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MagneticLink } from "@/components/MagneticLink";
 
 export function Footer() {
   return (
@@ -9,13 +10,16 @@ export function Footer() {
           <p>Vintage fashion, objects, jewellery and stories with a sense of history.</p>
         </div>
         <div className="footer-links">
-          <Link href="/about">About</Link>
-          <Link href="/portfolio">Journal</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/shop">Shop</Link>
+          <MagneticLink href="/about">About</MagneticLink>
+          <MagneticLink href="/portfolio">Journal</MagneticLink>
+          <MagneticLink href="/contact">Contact</MagneticLink>
+          <MagneticLink href="/shop">Shop</MagneticLink>
         </div>
       </div>
-      <div className="footer-bottom">© {new Date().getFullYear()} Cô Hai Vintage. All rights reserved.</div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} Cô Hai Vintage. All rights reserved.</span>
+        <span className="footer-mark">CHV / 01</span>
+      </div>
     </footer>
   );
 }
