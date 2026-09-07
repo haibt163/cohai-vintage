@@ -32,6 +32,10 @@ Do not choose generic stock imagery merely because it looks cleaner.
 
 Before using an asset, inspect its actual subject and use the documented WordPress mapping in `MEDIA-MAPPING.md` and `ORIGINAL-WORDPRESS.md`.
 
+### Image-quality rule
+
+The recovered photographs are currently the correct source assets, but some still appear somewhat blurry/soft in the live site. This is an OPEN audit item. Do not silently substitute stock imagery, upscale-and-pretend it is original, or invent missing source variants. First audit source resolution, actual rendered dimensions, Next image delivery, CSS scaling/cropping, and device/browser behaviour.
+
 ## Editorial source material
 
 Important genuine subjects include:
@@ -90,12 +94,26 @@ Motion must remain refined. Avoid excessive animation, gimmicks, or motion that 
 
 ### Phase 5 — Final polish and production readiness
 
-- Audit every route and asset reference.
-- Remove unused Astra/demo assets only after reference checks.
-- Check mobile/tablet/desktop layouts.
-- Run lint and production build.
-- Check metadata, accessibility, broken links, image loading, and console errors.
-- Keep GitHub `main` clean and deployable.
+Phase 5 is substantially complete but remains OPEN until the documented visual verification items are closed.
+
+Completed:
+
+- route and asset-reference audit
+- responsive layout work
+- accessibility and metadata work
+- branded 404
+- custom browser/Apple icon implementation
+- lint, typecheck and production build validation
+
+Still open:
+
+- recovered-photo sharpness/source-resolution audit
+- live favicon and iOS Home Screen icon verification
+- final desktop/tablet/iPhone visual audit
+- final Shop image/crop/loading recheck
+- final production deployment/browser verification
+
+Do not mark Phase 5 fully closed merely because CI is green; the remaining items require visual/live verification.
 
 ## Workflow
 
@@ -104,7 +122,10 @@ Before major changes, inspect the existing implementation and the relevant recov
 After meaningful changes, run:
 
 - `npm run lint`
+- `npm run typecheck`
 - `npm run build`
+
+The latest validation for the current visual fixes is green. Preserve that state while addressing the remaining audit items.
 
 Do not commit generated secrets or hosting recovery material.
 
@@ -126,4 +147,4 @@ At the beginning of a new conversation, read this file together with:
 - `ORIGINAL-WORDPRESS.md`
 - `MEDIA-MAPPING.md`
 
-These files define the reconstruction context and current direction.
+Then continue from the OPEN items in `PROJECT_STATUS.md`. The immediate next task is an audit/fix pass, not a broad redesign.
