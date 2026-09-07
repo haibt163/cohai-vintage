@@ -1,23 +1,25 @@
-import Link from "next/link";
+import { getLocale, ui } from "@/lib/i18n";
 import { MagneticLink } from "@/components/MagneticLink";
 
-export function Footer() {
+export async function Footer() {
+  const locale = await getLocale();
+  const labels = ui[locale];
   return (
     <footer className="site-footer">
       <div className="footer-inner">
         <div>
           <div className="footer-brand">CÔ HAI VINTAGE</div>
-          <p>Vintage fashion, objects, jewellery and stories with a sense of history.</p>
+          <p>{labels.footer}</p>
         </div>
         <div className="footer-links">
-          <MagneticLink href="/about">About</MagneticLink>
-          <MagneticLink href="/portfolio">Journal</MagneticLink>
-          <MagneticLink href="/contact">Contact</MagneticLink>
-          <MagneticLink href="/shop">Shop</MagneticLink>
+          <MagneticLink href="/about">{labels.about}</MagneticLink>
+          <MagneticLink href="/portfolio">{labels.journal}</MagneticLink>
+          <MagneticLink href="/contact">{labels.contact}</MagneticLink>
+          <MagneticLink href="/shop">{labels.shop}</MagneticLink>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Cô Hai Vintage. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Cô Hai Vintage. {labels.rights}</span>
         <span className="footer-mark">CHV / 01</span>
       </div>
     </footer>
