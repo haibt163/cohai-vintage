@@ -1,124 +1,92 @@
 # Cô Hai Vintage — Project Status
 
-## Current direction
+## Current state
 
-Rebuild the Cô Hai Vintage website as a clean, modern, premium Next.js application rather than reproducing the original WordPress/Elementor/Astra implementation.
+The reconstruction is now through the final Phase 5 production audit and is kept deployable on `main`.
 
-GitHub `main` is the authoritative source of truth. The recovered WordPress material remains the source for genuine editorial subjects, product information and photography.
+## Phase 3 — COMPLETE
 
-## Current stack
+- Recovered genuine editorial photography integrated from `public/assets/original/`.
+- Recovered editorial subjects restored, including Flea Market, Akoya Pearl / Mikimoto, Have the Right Outfit, Bernard Arnault and Coco Chanel.
+- Three Louis Vuitton product routes restored with supporting galleries.
+- Product copy remains conservative: no unsupported pricing, condition, provenance or authenticity claims.
+- Canonical media location remains `public/assets/original/`.
 
-- Next.js 16
-- React 19
-- TypeScript
-- App Router
-- GitHub `main` is the authoritative source of truth
+## Phase 4 — COMPLETE
 
-## Source reconstruction
+- Premium editorial typography, spacing and section composition.
+- Distinctive Cô Hai Vintage header/navigation and bilingual EN/VI switcher.
+- Magnetic navigation interactions.
+- Visible mouse parallax on editorial photography.
+- High-quality image rendering with `quality={100}` on image-led experiences.
+- Homepage archive slideshow using eight verified recovered image assets, with slow automatic rotation and manual controls.
+- About page founder archive slideshow using all four verified `CO-HAI-VINTAGE` portrait assets.
+- Shop, product, Contact and About routes visually integrated.
+- Responsive mobile/tablet layouts and reduced-motion support.
 
-The original site was a WordPress installation using Astra + Elementor. The recovered material contains genuine Cô Hai Vintage editorial content, product information, and media.
+## Phase 5 — COMPLETE
 
-Important editorial subjects:
+### Route integrity
 
-- Cô Hai Vintage founder/story
-- Flea Market / vintage culture
-- Akoya Pearl / Mikimoto
-- Bernard Arnault / LVMH
-- Coco Chanel
-- Louis Vuitton's Patent/history
-- Have the Right Outfit / style
+- `/` homepage.
+- `/about` founder/story page.
+- `/journal` canonical editorial archive.
+- `/journal/[slug]` canonical editorial articles.
+- `/shop` collection.
+- `/shop/[slug]` product detail routes.
+- `/contact` contact flow.
+- Legacy `/portfolio` routes redirect to the canonical Journal routes.
+- Branded `not-found` page added.
 
-Recovered product examples:
+### Image-reference audit
 
-- Louis Vuitton Vintage Concorde
-- Louis Vuitton Monogram Neverfull MM
-- Louis Vuitton Vintage Mono Kelly
+- Primary image-led routes use verified recovered Cô Hai media.
+- Homepage and About use multiple genuine archive assets rather than repeatedly enlarging one image.
+- Product/editorial images use the recovered source paths and full-quality Next image delivery.
+- No guessed Louis Vuitton Patent filename was introduced.
 
-## Media status
+### Interaction / responsive audit
 
-Genuine recovered media is stored under:
+- Scroll reveal reinitialises on Next.js client-side route changes.
+- In-view content is made visible immediately after navigation, preventing the previous refresh-only behaviour.
+- Mouse parallax is applied directly to image media rather than only to the ambient pointer layer.
+- Slideshow controls are keyboard-accessible and automatic motion respects `prefers-reduced-motion`.
+- Mobile removes desktop-only pointer effects while preserving touch-friendly controls.
 
-`public/assets/original/`
+### Accessibility / metadata
 
-The implemented catalogue uses genuine mapped families for the founder, Flea Market, Akoya/Mikimoto, street style, Bernard Arnault and Coco Chanel subjects. Product pages use the recovered Louis Vuitton product families documented in `MEDIA-MAPPING.md`.
+- Descriptive image alt text across archive and product experiences.
+- Carousel controls have accessible labels and pressed state.
+- Missing routes use a branded 404 experience.
+- Site metadata, Open Graph defaults, Apple web-app metadata, theme colour and installable manifest configured.
+- Custom Cô Hai Vintage icon replaces the default Next.js presentation and includes an iPhone-friendly Apple icon.
 
-The original spooky-looking hero has been removed from the homepage. The current homepage hero uses the verified `STREET-STYLE-3.jpg` archive image; the About page uses the separate verified `CO-HAI-VINTAGE.jpg` founder archive image. Legacy recovered Astra/demo files remain as source material and should only be removed after the Phase 5 reference audit.
+### Performance / validation
 
-## Phase 3 — status: COMPLETE
-
-Completed:
-
-- Genuine recovered editorial photography integrated into the site.
-- Journal restored around the recovered editorial subject families.
-- Coco Chanel editorial subject added using the mapped recovered image family.
-- Three confirmed vintage Louis Vuitton product detail routes with image galleries.
-- Product copy deliberately avoids unsupported price, condition, provenance, stock or authenticity claims.
-- Image references use the canonical recovered media location.
-- Editorial and product routes are statically parameterised.
-
-The Louis Vuitton Patent/history subject remains identified in the reconstruction map, but is intentionally not assigned a guessed filename until the exact recovered WordPress attachment mapping is verified.
-
-## Phase 4 — status: COMPLETE
-
-Completed in the current pass:
-
-- Premium editorial typography, spacing and layered paper-texture styling.
-- More distinctive glass/sticky header and stronger navigation hierarchy.
-- EN/VI language switcher using a persistent locale cookie and server-rendered translations.
-- Dynamic document `lang` attribute for English/Vietnamese.
-- Pointer-based magnetic navigation interactions.
-- Pointer parallax image movement on hero, editorial and product imagery.
-- Subtle pointer-following atmosphere on desktop.
-- IntersectionObserver-based scroll reveal with staggered motion and reduced-motion fallback.
-- Homepage rebuilt around a cleaner editorial rhythm with a non-spooky verified hero image, journal storytelling, product feature and closing statement.
-- Journal landing page art-directed as an image-led editorial archive.
-- Shop landing page now has a featured piece followed by the collection grid.
-- About, Contact, article and product detail routes now share the same visual language and bilingual UI.
-- Mobile navigation includes the language control and responsive layouts were reworked.
-- Contact enquiry form now opens a pre-filled email composition rather than leaving a dead submit button.
-
-## Phase 5 — IN PROGRESS
-
-Production audit now covers:
-
-- Route and navigation review.
-- Image-reference review and legacy asset cleanup planning.
-- Desktop/tablet/mobile layout checks.
-- Lint and production build through GitHub Actions.
-- Accessibility, metadata, image loading, performance and console-error review.
-- Keep `main` clean and deployable.
-
-Do not remove legacy media until repo-wide reference checks prove it is unused.
+- `npm run lint` passes.
+- `npm run typecheck` passes.
+- `npm run build` passes in GitHub Actions.
+- CI now validates lint, TypeScript and production build on pushes and pull requests to `main`.
 
 ## Local workflow
 
-After GitHub changes are made, synchronize the Windows working copy with:
+```bash
+git pull origin main
+npm run dev
+```
 
-`git pull origin main`
+Before committing local changes:
 
-Then run:
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
 
-`npm run dev`
-`npm run lint`
-`npm run build`
+## Security rules
 
-## Security
+Do not commit SQL dumps, `wp-config.php`, passwords, API keys, `.env` files, Bluehost/cPanel backups or other secrets.
 
-Never commit:
+## Deployment rule
 
-- SQL database dumps
-- `wp-config.php`
-- passwords
-- API keys
-- `.env` secrets
-- Bluehost/cPanel backup archives
-- other sensitive recovery files
-
-## Continuity
-
-Phase 4 is complete. Continue with the Phase 5 production audit, using:
-
-- `AGENTS.md`
-- `PROJECT_STATUS.md`
-- `ORIGINAL-WORDPRESS.md`
-- `MEDIA-MAPPING.md`
+`main` is the authoritative reconstruction branch. Keep it clean and deployable; make future changes through the same documented workflow and preserve recovered genuine media as the source of truth.
