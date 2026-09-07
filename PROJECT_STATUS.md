@@ -75,3 +75,7 @@ Never commit:
 - API keys
 - Bluehost/cPanel backup archives
 - other secrets
+
+## Phase 3A
+
+Phase 3A build prepared with genuine recovered Cô Hai media, editorial pages, product catalogue/detail pages, responsive styling, and central content definitions. Prepared package: `cohai-vintage-phase3A-build.zip`.
