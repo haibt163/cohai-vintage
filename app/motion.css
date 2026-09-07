@@ -1,0 +1,101 @@
+:root {
+  --pointer-x: 72vw;
+  --pointer-y: 28vh;
+}
+
+.pointer-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(480px circle at var(--pointer-x) var(--pointer-y), rgba(138, 104, 74, 0.09), transparent 68%);
+  transition: background-position 0.35s ease;
+}
+
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  animation: none !important;
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+.editorial-card,
+.product-card,
+.mini-product {
+  transition: transform 0.55s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.editorial-card:hover,
+.product-card:hover,
+.mini-product:hover {
+  transform: translateY(-5px);
+}
+
+.language-switcher {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 7px;
+  margin-left: 2px;
+  gap: 5px;
+  background: rgba(255, 253, 248, 0.58);
+  box-shadow: 0 4px 18px rgba(23, 21, 19, 0.05);
+}
+
+.language-switcher button {
+  min-width: 22px;
+  padding: 2px 3px;
+  border-radius: 999px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.language-switcher button.active {
+  background: var(--ink);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.mobile-nav[open] summary {
+  opacity: 0.55;
+}
+
+@media (max-width: 900px) {
+  .pointer-atmosphere { display: none; }
+
+  .editorial-card:hover,
+  .product-card:hover,
+  .mini-product:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pointer-atmosphere { display: none; }
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .editorial-card,
+  .product-card,
+  .mini-product,
+  .language-switcher button {
+    transition: none !important;
+  }
+}
