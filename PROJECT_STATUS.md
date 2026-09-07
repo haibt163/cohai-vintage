@@ -40,9 +40,9 @@ Genuine recovered media is stored under:
 
 `public/assets/original/`
 
-The implemented Phase 3 catalogue now uses genuine mapped families for the founder, Flea Market, Akoya/Mikimoto, street style, Bernard Arnault and Coco Chanel subjects. Product pages use the recovered Louis Vuitton product families documented in `MEDIA-MAPPING.md`.
+The implemented catalogue uses genuine mapped families for the founder, Flea Market, Akoya/Mikimoto, street style, Bernard Arnault and Coco Chanel subjects. Product pages use the recovered Louis Vuitton product families documented in `MEDIA-MAPPING.md`.
 
-The repository still contains legacy recovered Astra/demo files because the archive itself is retained as source material. Unused legacy files should only be removed after a repository-wide reference audit in Phase 5.
+The previous hero used `CO-HAI-VINTAGE.jpg`, which reads as visually dark/spooky in the current browser preview. The Phase 4 hero now uses the verified `CO-HAI-VINTAGE-1.jpg` family instead. Legacy recovered Astra/demo files remain as source material and should only be removed after the Phase 5 reference audit.
 
 ## Phase 3 — status: COMPLETE
 
@@ -58,35 +58,35 @@ Completed:
 
 The Louis Vuitton Patent/history subject remains identified in the reconstruction map, but is intentionally not assigned a guessed filename until the exact recovered WordPress attachment mapping is verified.
 
-## Phase 4 — status: IN PROGRESS
+## Phase 4 — status: COMPLETE
 
-Implemented:
+Completed in the current pass:
 
-- Premium editorial typography and spacing system.
-- More distinctive header treatment and navigation hierarchy.
-- Magnetic pointer interaction for desktop navigation and reduced-motion fallback.
-- Refined image hover/depth treatments.
-- Stronger editorial hero and section composition.
-- Product presentation and gallery proportions improved.
-- Responsive mobile/tablet layouts refined.
-- `prefers-reduced-motion` support added for interaction and image motion.
+- Premium editorial typography, spacing and layered paper-texture styling.
+- More distinctive glass/sticky header and stronger navigation hierarchy.
+- EN/VI language switcher using a persistent locale cookie and server-rendered translations.
+- Dynamic document `lang` attribute for English/Vietnamese.
+- Pointer-based magnetic navigation interactions.
+- Pointer parallax image movement on hero, editorial and product imagery.
+- Staggered entrance motion and reduced-motion fallback.
+- Homepage rebuilt around a cleaner editorial rhythm with a non-spooky verified hero image, journal storytelling, product feature and closing statement.
+- Journal landing page art-directed as an image-led editorial archive.
+- Shop landing page now has a featured piece followed by the collection grid.
+- About, Contact, article and product detail routes now share the same visual language and bilingual UI.
+- Mobile navigation includes the language control and responsive layouts were reworked.
 
-Remaining Phase 4 work:
+## Phase 5 — IN PROGRESS
 
-- More expressive editorial art direction across the Journal and Shop landing pages.
-- Additional image-led storytelling sections using verified recovered assets.
-- Further refinement of mobile navigation and interaction details.
-- Final cross-route visual consistency pass.
+Production audit now covers:
 
-## Phase 5 — next
-
-- Audit every route and navigation link.
-- Audit every image reference and identify broken/unused references.
-- Remove unused Astra/demo assets only after repository-wide reference checks.
-- Check desktop, tablet and mobile layouts.
-- Run lint and production build through CI.
-- Check accessibility, metadata, image loading, performance and console errors.
+- Route and navigation review.
+- Image-reference review and legacy asset cleanup planning.
+- Desktop/tablet/mobile layout checks.
+- Lint and production build through GitHub Actions.
+- Accessibility, metadata, image loading, performance and console-error review.
 - Keep `main` clean and deployable.
+
+Do not remove legacy media until repo-wide reference checks prove it is unused.
 
 ## Local workflow
 
@@ -94,12 +94,9 @@ After GitHub changes are made, synchronize the Windows working copy with:
 
 `git pull origin main`
 
-Then run the local development server with:
+Then run:
 
 `npm run dev`
-
-Before committing local changes, run:
-
 `npm run lint`
 `npm run build`
 
@@ -117,7 +114,7 @@ Never commit:
 
 ## Continuity
 
-The next session should continue from the Phase 4 work above, then execute the Phase 5 production audit. Read:
+Phase 4 is now considered complete. Continue with the Phase 5 production audit, using:
 
 - `AGENTS.md`
 - `PROJECT_STATUS.md`
