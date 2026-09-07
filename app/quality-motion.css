@@ -3,7 +3,7 @@
   --parallax-y: 0px;
 }
 
-/* Image quality: never enlarge recovered photography more than necessary. */
+/* Image quality: preserve recovered photography without artificial enlargement. */
 .parallax-media {
   overflow: hidden;
   isolation: isolate;
@@ -11,7 +11,7 @@
 }
 
 .parallax-image {
-  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.005);
+  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.002);
   transform-origin: center center;
   will-change: transform;
   transition: transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
@@ -19,7 +19,7 @@
 }
 
 .parallax-media:hover .parallax-image {
-  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.012);
+  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.008);
 }
 
 .archive-slideshow {
@@ -49,7 +49,7 @@
 
 .archive-slide-image {
   object-fit: cover;
-  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.008);
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.004);
   transform-origin: center center;
   will-change: transform;
   transition: transform 8500ms cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -57,7 +57,7 @@
 }
 
 .archive-slide.is-active .archive-slide-image {
-  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.015);
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.01);
 }
 
 .archive-slideshow:hover .archive-slide.is-active .archive-slide-image {
@@ -78,9 +78,7 @@
 }
 
 .archive-controls button,
-.archive-dots button {
-  pointer-events: auto;
-}
+.archive-dots button { pointer-events: auto; }
 
 .archive-controls > button {
   width: 38px;
@@ -94,34 +92,11 @@
   transition: transform 220ms ease, background 220ms ease;
 }
 
-.archive-controls > button:hover {
-  transform: translateY(-2px);
-  background: rgba(29, 26, 23, 0.66);
-}
+.archive-controls > button:hover { transform: translateY(-2px); background: rgba(29, 26, 23, 0.66); }
 
-.archive-dots {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.archive-dots button {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 253, 249, 0.5);
-  cursor: pointer;
-  transition: transform 220ms ease, background 220ms ease;
-}
-
-.archive-dots button.active {
-  transform: scale(1.55);
-  background: var(--white);
-}
+.archive-dots { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.archive-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 253, 249, 0.5); cursor: pointer; transition: transform 220ms ease, background 220ms ease; }
+.archive-dots button.active { transform: scale(1.55); background: var(--white); }
 
 .archive-caption {
   position: absolute;
@@ -139,163 +114,92 @@
   text-transform: uppercase;
 }
 
-/* Larger, clearer brand and navigation typography. */
-.site-header {
-  min-height: 72px;
-}
-
-.header-inner {
-  min-height: 72px;
-  padding: 16px 32px;
-}
-
-.brand-mark {
-  font-size: 27px;
-  letter-spacing: 0.08em;
-}
-
-.brand-subtitle {
-  font-size: 10px;
-  letter-spacing: 0.42em;
-  margin-top: 7px;
-}
-
-.header-note {
-  font-size: 9px;
-  letter-spacing: 0.28em;
-}
-
-.desktop-nav {
-  gap: 24px;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-}
-
-.language-switcher,
-.language-switcher button {
-  font-size: 10px;
-  letter-spacing: 0.13em;
-}
-
-.header-mobile-language {
-  display: none;
-}
-
-.site-footer {
-  padding-top: 78px;
-  padding-bottom: 30px;
-}
-
-.footer-brand {
-  font-size: 36px;
-  letter-spacing: -0.025em;
-}
-
-.footer-inner p {
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-.footer-links {
-  gap: 28px;
-  font-size: 11px;
-  letter-spacing: 0.13em;
-}
-
-.footer-bottom {
-  font-size: 10px;
-}
+.site-header { min-height: 72px; }
+.header-inner { min-height: 72px; padding: 16px 32px; }
+.brand-mark { font-size: 27px; letter-spacing: 0.08em; }
+.brand-subtitle { font-size: 10px; letter-spacing: 0.42em; margin-top: 7px; }
+.header-note { font-size: 9px; letter-spacing: 0.28em; }
+.desktop-nav { gap: 24px; font-size: 10px; letter-spacing: 0.16em; }
+.language-switcher, .language-switcher button { font-size: 10px; letter-spacing: 0.13em; }
+.header-mobile-language { display: none; }
+.site-footer { padding-top: 78px; padding-bottom: 30px; }
+.footer-brand { font-size: 36px; letter-spacing: -0.025em; }
+.footer-inner p { font-size: 14px; line-height: 1.65; }
+.footer-links { gap: 28px; font-size: 11px; letter-spacing: 0.13em; }
+.footer-bottom { font-size: 10px; }
 
 @media (min-width: 901px) {
-  .hero-image-wrap {
-    max-width: min(47vw, 900px);
+  .hero {
+    grid-template-columns: minmax(0, 1.25fr) minmax(380px, 0.75fr);
+    min-height: calc(100svh - 72px);
   }
 
-  .hero-image-wrap .archive-slideshow {
-    min-height: min(76vh, 790px);
+  .hero-image-wrap {
+    width: min(42vw, 720px);
+    min-height: min(72vh, 760px);
+    max-width: 720px;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .hero-image-wrap .archive-slideshow { min-height: min(72vh, 760px); }
+
+  .about-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.72fr);
+    gap: 7vw;
+  }
+
+  .about-grid .portrait {
+    max-height: 760px;
+  }
+
+  .shop-feature {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.68fr);
+    gap: 60px;
+  }
+
+  .shop-feature-image { max-height: 720px; }
+
+  .journal-row {
+    gap: 7vw;
+  }
+
+  .journal-image {
+    max-height: 620px;
+  }
+
+  .article-hero {
+    width: min(1180px, calc(100% - 60px));
+  }
+
+  .product-gallery-image {
+    max-height: 760px;
   }
 }
 
 @media (max-width: 900px) {
-  .header-inner {
-    grid-template-columns: 1fr auto auto;
-    min-height: 66px;
-    padding: 11px 18px;
-    gap: 16px;
-  }
+  .header-inner { grid-template-columns: 1fr auto auto; min-height: 66px; padding: 11px 18px; gap: 16px; }
+  .header-mobile-language { display: block; }
+  .header-mobile-language .language-switcher { margin: 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 253, 248, 0.72); }
+  .mobile-nav .language-switcher { display: none; }
+  .brand-mark { font-size: 23px; }
+  .brand-subtitle { font-size: 8px; }
+  .mobile-nav summary { font-size: 10px; }
+  .archive-slideshow { min-height: 62vh; }
+  .archive-slide-image { transform: scale(1.002); }
+  .archive-slide.is-active .archive-slide-image { transform: scale(1.006); }
+  .footer-brand { font-size: 30px; }
+  .footer-inner { flex-direction: column; padding-bottom: 55px; }
+  .footer-links { flex-wrap: wrap; gap: 18px 24px; }
+  .footer-bottom { flex-direction: column; gap: 10px; font-size: 9px; }
 
-  .header-mobile-language {
-    display: block;
-  }
-
-  .header-mobile-language .language-switcher {
-    margin: 0;
-    padding: 8px 10px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: rgba(255, 253, 248, 0.72);
-  }
-
-  .mobile-nav .language-switcher {
-    display: none;
-  }
-
-  .brand-mark {
-    font-size: 23px;
-  }
-
-  .brand-subtitle {
-    font-size: 8px;
-  }
-
-  .mobile-nav summary {
-    font-size: 10px;
-  }
-
-  .archive-slideshow {
-    min-height: 62vh;
-  }
-
-  .archive-slide-image {
-    transform: scale(1.005);
-  }
-
-  .archive-slide.is-active .archive-slide-image {
-    transform: scale(1.008);
-  }
-
-  .footer-brand {
-    font-size: 30px;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    padding-bottom: 55px;
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-    gap: 18px 24px;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 10px;
-    font-size: 9px;
-  }
+  .hero-image-wrap { min-height: 58vh; }
+  .hero-image-wrap .archive-slideshow { min-height: 58vh; }
+  .about-grid .portrait { max-height: 700px; }
+  .article-hero { width: calc(100% - 40px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .parallax-image,
-  .parallax-media:hover .parallax-image,
-  .archive-slide-image,
-  .archive-slide.is-active .archive-slide-image,
-  .archive-slideshow:hover .archive-slide.is-active .archive-slide-image {
-    transform: none;
-    transition: none;
-  }
-
-  .archive-slide {
-    transition: none;
-  }
+  .parallax-image, .parallax-media:hover .parallax-image, .archive-slide-image, .archive-slide.is-active .archive-slide-image, .archive-slideshow:hover .archive-slide.is-active .archive-slide-image { transform: none; transition: none; }
+  .archive-slide { transition: none; }
 }
