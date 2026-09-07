@@ -1,12 +1,6 @@
 import { getLocale, ui } from "@/lib/i18n";
+import { archiveSlides } from "@/lib/archive-media";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
-
-const founderSlides = [
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE.jpg", alt: "Cô Hai Vintage founder archive portrait" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-1.jpg", alt: "Cô Hai Vintage founder archive portrait, second view" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-2.jpg", alt: "Cô Hai Vintage founder archive portrait, third view" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-3.jpg", alt: "Cô Hai Vintage founder archive portrait, fourth view" },
-];
 
 export default async function About() {
   const locale = await getLocale();
@@ -19,7 +13,7 @@ export default async function About() {
       </section>
       <section className="about-grid section-narrow reveal">
         <div className="portrait founder-archive">
-          <ArchiveSlideshow slides={founderSlides} interval={7600} />
+          <ArchiveSlideshow slides={archiveSlides} interval={7600} />
         </div>
         <div className="prose">
           <p className="lead">{labels.aboutLead}</p>
