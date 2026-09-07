@@ -1,29 +1,50 @@
 import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/content";
+import { getLocale, localizedProduct, ui } from "@/lib/i18n";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 
-export default function Shop() {
+export default async function Shop() {
+  const locale = await getLocale();
+  const labels = ui[locale];
+  const pieces = products.map((product) => localizedProduct(product, locale));
+  const featured = pieces[0];
+
   return (
     <div className="page-shell">
-      <section className="page-hero">
-        <p className="eyebrow">Shop</p>
-        <h1>Selected pieces<br />with a past life.</h1>
-        <p className="page-dek">A curated starting collection of vintage Louis Vuitton pieces from the recovered Cô Hai archive.</p>
+      <section className="page-hero shop-hero">
+        <p className="eyebrow">{labels.shop}</p>
+        <h1>{labels.shopTitle}</h1>
+        <p className="page-dek">{labels.shopDek}</p>
       </section>
+      {featured && (
+        <section className="shop-feature section-narrow reveal">
+          <Link className="shop-feature-image" href={`/shop/${featured.slug}`}>
+            <ParallaxMedia src={featured.image} alt={featured.name} fill priority sizes="(max-width: 800px) 100vw, 62vw" strength={12} />
+            <span className="image-caption">01 / FEATURED PIECE</span>
+          </Link>
+          <div className="shop-feature-copy">
+            <p className="eyebrow">{featured.category}</p>
+            <h2>{featured.name}</h2>
+            <p>{featured.description}</p>
+            <Link className="button button-dark" href={`/shop/${featured.slug}`}>{labels.viewPiece}</Link>
+          </div>
+        </section>
+      )}
       <section className="section-narrow product-grid">
-        {products.map((product) => (
-          <article className="product-card" key={product.slug}>
-            <Link href={`/shop/${product.slug}`} className="product-image"><Image src={product.image} alt="" fill sizes="(max-width: 800px) 100vw, 33vw" /></Link>
+        {pieces.map((product, index) => (
+          <article className={`product-card reveal reveal-delay-${(index % 3) + 1}`} key={product.slug}>
+            <Link href={`/shop/${product.slug}`} className="product-image"><ParallaxMedia src={product.image} alt={product.name} fill sizes="(max-width: 800px) 100vw, 33vw" strength={7} /></Link>
             <p className="card-category">{product.category}</p>
             <h2><Link href={`/shop/${product.slug}`}>{product.name}</Link></h2>
             <p>{product.description}</p>
-            <Link className="text-link" href={`/shop/${product.slug}`}>View piece →</Link>
+            <Link className="text-link" href={`/shop/${product.slug}`}>{labels.viewPiece}</Link>
           </article>
         ))}
       </section>
       <section className="shop-note">
-        <p className="eyebrow">A note on vintage</p>
-        <p>Availability, condition and pricing should be confirmed for each individual piece before publication. The current catalogue deliberately avoids inventing those details.</p>
+        <p className="eyebrow">{labels.noteTitle}</p>
+        <p>{labels.note}</p>
       </section>
     </div>
   );
