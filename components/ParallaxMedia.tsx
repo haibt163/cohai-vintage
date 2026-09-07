@@ -5,7 +5,7 @@ import { useRef, type PointerEvent } from "react";
 
 type ParallaxMediaProps = ImageProps & { strength?: number; className?: string };
 
-export function ParallaxMedia({ strength = 14, className = "", ...props }: ParallaxMediaProps) {
+export function ParallaxMedia({ strength = 14, className = "", alt, ...props }: ParallaxMediaProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   function handleMove(event: PointerEvent<HTMLDivElement>) {
@@ -27,7 +27,7 @@ export function ParallaxMedia({ strength = 14, className = "", ...props }: Paral
 
   return (
     <div ref={ref} className={`parallax-media ${className}`.trim()} onPointerMove={handleMove} onPointerLeave={handleLeave}>
-      <Image {...props} className="parallax-image" />
+      <Image {...props} alt={alt} className="parallax-image" />
     </div>
   );
 }
