@@ -63,6 +63,17 @@ export const editorialPosts: EditorialPost[] = [
       "For vintage collectors, this history matters because the object in front of us is often the result of decades of design language, manufacturing traditions and cultural influence."
     ],
   },
+  {
+    slug: "coco-chanel", title: "Coco Chanel", category: "Fashion History",
+    image: media("COCO-CHANEL.jpg"),
+    excerpt: "A look at the designer whose ideas changed the relationship between elegance, comfort and modern dress.",
+    intro: "Coco Chanel's influence is not simply a list of famous garments. It is a way of thinking about how a woman moves through the world in her clothes.",
+    paragraphs: [
+      "Chanel's design language challenged the highly restrictive conventions of early twentieth-century women's dress. Simpler shapes, practical materials and a controlled palette helped make ease part of the vocabulary of elegance.",
+      "The enduring lesson for vintage dressing is the value of proportion and restraint. A recognisable silhouette can be memorable without depending on decoration, while a small accessory can carry the character of an entire look.",
+      "Vintage pieces are especially revealing when viewed this way. The interest is not only in whether an object is old, but in whether its design still communicates something useful, beautiful and distinctly its own."
+    ],
+  },
 ];
 
 export const products: Product[] = [
