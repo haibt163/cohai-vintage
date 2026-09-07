@@ -36,9 +36,27 @@ Use this source carefully and preserve the substance of the original story rathe
 
 The modern site should preserve the genuine editorial subjects, product facts, imagery, and recognizable brand context while replacing the old Elementor/Astra implementation with a polished Next.js experience.
 
+## Current reconstruction state
+
+The site is now a functioning premium Next.js implementation on GitHub `main`. Phase 3 authentic content/media restoration and Phase 4 visual transformation are complete. Phase 5 is substantially complete, with a short list of live visual verification items intentionally carried forward.
+
+The current implementation uses 18 verified recovered archive images for the homepage slideshow and four verified founder archive portraits for the About slideshow. Product galleries are mapped to the recovered Louis Vuitton assets rather than invented filenames.
+
+## Open audit items
+
+The following must remain visible to future contributors:
+
+1. Recovered photographs still appear somewhat blurry/soft in the live presentation. Audit source resolution, rendered dimensions, Next image delivery, CSS scaling/cropping and device/browser behaviour before changing the media.
+2. Verify the custom browser favicon and Apple/iOS Home Screen icon on the deployed production site. Previous default/missing-icon observations may be affected by deployment and browser/Home Screen caching.
+3. Perform a final desktop/tablet/iPhone visual audit, including Vietnamese typography/line wrapping, hero framing, About portraits, Shop image presentation, console errors and broken network requests.
+4. Recheck the earlier perceived missing Shop image; current recovered product paths are mapped, so visually verify before changing source mapping.
+5. Confirm the latest GitHub `main` deployment in the production environment before closing Phase 5.
+
+Do not mark these items complete merely because automated CI passes. They require real visual/live verification.
+
 ## Design objective for the next phases
 
-The current implementation is an early functional shell. It should evolve into a distinctive, premium vintage-fashion/editorial site with:
+The current implementation should remain distinctive, premium and restrained:
 
 - genuine recovered photography
 - strong art direction and typography
@@ -53,11 +71,11 @@ Avoid generic template aesthetics and avoid replacing authentic source photograp
 
 ## Phase continuity
 
-Phase 3: restore authentic media, articles, and catalogue content.
+Phase 3: restore authentic media, articles, and catalogue content — **COMPLETE**.
 
-Phase 4: transform the shell into the premium visual/motion experience.
+Phase 4: transform the shell into the premium visual/motion experience — **COMPLETE**.
 
-Phase 5: final route, asset, accessibility, performance, and production audit.
+Phase 5: final route, asset, accessibility, performance, and production audit — **SUBSTANTIALLY COMPLETE; visual/live verification OPEN**.
 
 ## Security
 
