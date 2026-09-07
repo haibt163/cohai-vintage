@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./motion.css";
 import "./quality-motion.css";
+import "./audit-fixes.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PointerAtmosphere } from "@/components/PointerAtmosphere";
