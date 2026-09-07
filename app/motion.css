@@ -18,6 +18,11 @@ main,
   z-index: 1;
 }
 
+.desktop-nav {
+  gap: 17px;
+  white-space: nowrap;
+}
+
 .reveal {
   opacity: 0;
   transform: translate3d(0, 24px, 0);
@@ -54,6 +59,7 @@ main,
   gap: 5px;
   background: rgba(255, 253, 248, 0.58);
   box-shadow: 0 4px 18px rgba(23, 21, 19, 0.05);
+  flex: 0 0 auto;
 }
 
 .language-switcher button {
