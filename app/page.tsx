@@ -2,7 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { editorialPosts, products } from "@/lib/content";
 import { getLocale, localizedPost, localizedProduct, ui } from "@/lib/i18n";
+import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+
+const streetStyleSlides = [
+  { src: "/assets/original/2025/03/STREET-STYLE-3.jpg", alt: "Vintage street style from the Cô Hai Vintage archive" },
+  { src: "/assets/original/2025/03/STREET-STYLE-1.jpg", alt: "A second street-style photograph from the Cô Hai Vintage archive" },
+  { src: "/assets/original/2025/03/CO-HAI-VINTAGE.jpg", alt: "Cô Hai Vintage archive portrait" },
+];
 
 export default async function Home() {
   const locale = await getLocale();
@@ -24,7 +31,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="hero-image-wrap hero-parallax-wrap">
-          <ParallaxMedia src="/assets/original/2025/03/STREET-STYLE-3.jpg" alt="Vintage street style from the Cô Hai Vintage archive" fill priority sizes="(max-width: 900px) 100vw, 52vw" strength={22} />
+          <ArchiveSlideshow slides={streetStyleSlides} />
           <span className="image-caption">01 / STREET STYLE ARCHIVE</span>
         </div>
       </section>
@@ -38,16 +45,16 @@ export default async function Home() {
       <section className="editorial-section">
         <div className="section-heading section-narrow reveal">
           <div><p className="eyebrow">{labels.fromJournal}</p><h2>{labels.stories}</h2></div>
-          <Link className="text-link" href="/portfolio">{labels.viewAll}</Link>
+          <Link className="text-link" href="/journal">{labels.viewAll}</Link>
         </div>
         <div className="editorial-grid section-narrow">
           {posts.slice(0, 3).map((post, index) => (
             <article className={`editorial-card reveal reveal-delay-${index + 1}`} key={post.slug}>
-              <Link href={`/portfolio/${post.slug}`} className="card-image"><ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 33vw" strength={8} /></Link>
+              <Link href={`/journal/${post.slug}`} className="card-image"><ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 33vw" strength={8} /></Link>
               <p className="card-category">{post.category}</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
-              <Link className="text-link" href={`/portfolio/${post.slug}`}>{labels.read}</Link>
+              <Link className="text-link" href={`/journal/${post.slug}`}>{labels.read}</Link>
             </article>
           ))}
         </div>
