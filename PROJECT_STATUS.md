@@ -1,94 +1,77 @@
 # Cô Hai Vintage — Project Status
 
-## Current status
+## Current direction
 
-Phase 1 — Next.js foundation: COMPLETE
+Rebuild the Cô Hai Vintage website as a clean, modern Next.js application rather than reproducing the original WordPress/Elementor/Astra implementation.
 
-Phase 2 — Visual shell: COMPLETE
+## Current stack
 
-Phase 3A — Original media recovery: IN PROGRESS
-
-## Local project
-
-C:\Users\XPS\cohai-vintage
-
-## Stack
-
-- Next.js 16.3.4
+- Next.js 16
+- React 19
 - TypeScript
 - App Router
-- Tailwind
-- Node 24.15.0
-- npm 11.12.1
+- GitHub `main` is the authoritative source of truth
 
-## Original WordPress sources
+## Source reconstruction completed
 
-Primary current WordPress filesystem:
+The original site was a WordPress installation using Astra + Elementor. The recovered WordPress material contains genuine Cô Hai Vintage editorial content, product information, and media.
 
-website_1fe948e5
+Important genuine editorial subjects include:
 
-Current database:
+- Cô Hai Vintage founder/story
+- Flea Market / vintage culture
+- Akoya Pearl / Mikimoto
+- Bernard Arnault / LVMH
+- Coco Chanel
+- Louis Vuitton patent/history
+- Have the Right Outfit / style
 
-zbltvdmy_WPOE1
+Recovered product examples include:
 
-Current WP table prefix:
+- Louis Vuitton Vintage Concorde
+- Louis Vuitton Monogram Neverfull MM
+- Louis Vuitton Vintage Mono Kelly
 
-3EK_
+## Media rule
 
-Older genuine Cô Hai content source:
+Use genuine recovered Cô Hai media whenever appropriate.
 
-website_988a0339
+Do not substitute Astra starter/demo imagery simply because it is visually attractive.
 
-Older database prefix:
+Recovered genuine media belongs under:
 
-s44_
+`public/assets/original/`
 
-## Important discovery
+The earlier generic/demo assets have not yet been removed and should only be deleted after reference checks confirm they are unused.
 
-website_1fe948e5 contains a large amount of Astra
-starter/demo material.
+## Current implementation
 
-Do NOT assume those images represent Cô Hai Vintage.
+The repository contains the first modern site shell:
 
-The older WPELG installation contains genuine Cô Hai Vintage
-content and historical media references.
+- Home
+- About
+- Journal
+- Contact
+- Shop
+- shared navigation/footer
+- central editorial/product content definitions
 
-## Genuine media
+## Next phase
 
-Recovered from:
+1. Catalogue genuine recovered media.
+2. Replace remaining placeholder/demo image references.
+3. Build the editorial pages from recovered WordPress content.
+4. Build the shop/catalogue around recovered product data and imagery.
+5. Remove unused demo assets after reference checks.
+6. Run lint/build checks at each milestone.
 
-website_988a0339/wp-content/uploads/
+## Security
 
-Copied into:
+Never commit:
 
-public/assets/original/
-
-## Genuine content discovered
-
-- CÔ HAI VINTAGE
-- FLEA MARKET
-- AKOYA PEARL
-- BERNARD ARNAULT
-- COCO CHANEL
-- CHANEL
-- DIOR
-- LOUIS VUITTON
-- LOUIS VUITTON'S PATENT
-- SHOP
-- CART
-- CHECKOUT
-- MY ACCOUNT
-
-## Current objective
-
-Reconstruct the actual Cô Hai Vintage website in Next.js,
-using genuine historical content/media while modernizing
-the architecture and UX.
-
-## Critical rule
-
-Do not delete original media.
-
-Do not commit credentials or SQL dumps.
-
-Do not blindly copy WordPress plugins/themes into Next.js.
+- SQL database dumps
+- `wp-config.php`
+- passwords
+- API keys
+- Bluehost/cPanel backup archives
+- other secrets

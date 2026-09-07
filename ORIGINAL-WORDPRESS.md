@@ -1,104 +1,34 @@
-# Original WordPress Source
+# Original WordPress — Reconstruction Notes
 
-## Purpose
+The previous Cô Hai Vintage site was a WordPress installation built with Astra and Elementor.
 
-This document records the WordPress installations and database
-archives used as source material for the Cô Hai Vintage rebuild.
+The recovered installation contains genuine Cô Hai Vintage content and media. The rebuild should preserve the substance and provenance of that material while replacing the implementation with maintainable Next.js code.
 
-The Next.js application is the new production implementation.
-WordPress is treated as historical/source material.
+## Recovered editorial subjects
 
-## Current WordPress installation
+- Cô Hai Vintage — founder/story
+- Flea Market — vintage culture and second-hand reuse
+- Akoya Pearl — Mikimoto, Japanese pearl cultivation and history
+- Bernard Arnault — LVMH and luxury brands
+- Coco Chanel — fashion and styling principles
+- Louis Vuitton's Patent — Louis Vuitton history/patent material
+- Have the Right Outfit — personal style and dressing
 
-Filesystem:
+## Recovered shop material
 
-website_1fe948e5
+Confirmed vintage Louis Vuitton examples include:
 
-Database:
+- Louis Vuitton Vintage Concorde
+- Louis Vuitton Monogram Neverfull MM
+- Louis Vuitton Vintage Mono Kelly
 
-zbltvdmy_WPOE1
+## Reconstruction principle
 
-Table prefix:
+The old WordPress structure is source material, not a template to copy.
 
-3EK_
+Preserve genuine content, product facts, imagery and recognizable brand context where appropriate, while implementing the experience as a modern Next.js site.
 
-Theme:
+## Security
 
-Astra
-
-Page builder:
-
-Elementor
-
-Important pages:
-
-- Home — ID 1355
-- About — ID 1356
-- Contact — ID 1357
-- Portfolio — ID 1358
-- Shop — ID 1705
-
-## Historical Cô Hai installation
-
-Filesystem:
-
-website_988a0339
-
-Historical database:
-
-zbltvdmy_WPELG
-
-Additional historical snapshots:
-
-- zbltvdmy_WPELG-2025-03-23-7c20303.sql
-- zbltvdmy_WPELG-2025-03-24-95519c8.sql
-
-## Important finding
-
-The current website_1fe948e5 installation contains substantial
-Astra starter/demo material.
-
-These assets must NOT automatically be treated as genuine
-Cô Hai Vintage content.
-
-The older WPELG installation contains genuine historical
-Cô Hai Vintage content and should be used as the primary
-historical content reference.
-
-## Genuine historical content identified
-
-- CÔ HAI VINTAGE
-- FLEA MARKET
-- AKOYA PEARL
-- BERNARD ARNAULT
-- COCO CHANEL
-- CHANEL
-- DIOR
-- LOUIS VUITTON'S PATENT
-- SHOP
-- CART
-- CHECKOUT
-- MY ACCOUNT
-
-## Media
-
-Original historical media recovered from:
-
-website_988a0339/wp-content/uploads/
-
-Selected/recovered media is being migrated into:
-
-public/assets/original/
-
-## Rules
-
-Do not commit raw SQL databases.
-
-Do not commit wp-config.php or credentials.
-
-Do not copy WordPress plugins into the Next.js application.
-
-Do not assume Astra starter assets are Cô Hai assets.
-
-Preserve original historical media until its relevance has
-been established.
+Raw SQL exports, `wp-config.php`, hosting backups, credentials and other sensitive recovery files stay outside GitHub.
+EOF
