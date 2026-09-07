@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { editorialPosts, getEditorialPost } from "@/lib/content";
 import { getLocale, localizedPost, ui } from "@/lib/i18n";
