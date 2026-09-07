@@ -6,50 +6,93 @@ export const navigation = [
   { label: "Shop", href: "/shop" },
 ];
 
-export const editorialPosts = [
+export type EditorialPost = {
+  slug: string; title: string; category: string; image: string;
+  excerpt: string; intro: string; paragraphs: string[];
+};
+
+export type Product = {
+  slug: string; name: string; category: string; image: string;
+  gallery: string[]; description: string; details: string[];
+};
+
+const media = (name: string) => `/assets/original/2025/03/${name}`;
+
+export const editorialPosts: EditorialPost[] = [
   {
-    title: "Flea Market",
-    href: "/portfolio#flea-market",
-    category: "Vintage Culture",
-    image: "/assets/original/portfolio-15.jpg",
-    excerpt:
-      "A look at the world of second-hand objects, collecting, vintage clothing and the culture around thoughtful reuse.",
+    slug: "flea-market", title: "Flea Market", category: "Vintage Culture",
+    image: media("FLEA-MARKET.jpg"),
+    excerpt: "Why second-hand markets remain one of the most human ways to discover clothing, objects and stories.",
+    intro: "A flea market is more than a place to buy something old. It is a meeting point between memory, chance and the pleasure of finding something that has already lived a life.",
+    paragraphs: [
+      "The appeal of vintage begins with discovery. Pieces arrive without the uniformity of a modern shop floor: a garment may carry a particular cut, a small imperfection or a detail that makes it unmistakably of its time.",
+      "Buying pre-owned also changes our relationship with consumption. Extending the life of a beautiful object keeps materials and craftsmanship in circulation, while giving the next owner an opportunity to add another chapter.",
+      "For Cô Hai Vintage, that spirit of thoughtful reuse is part of the pleasure of dressing: choosing fewer things, choosing them well, and allowing character to matter."
+    ],
   },
   {
-    title: "Akoya Pearl",
-    href: "/portfolio#akoya-pearl",
-    category: "Jewellery",
-    image: "/assets/original/portfolio-9-min.jpg",
-    excerpt:
-      "The history, character and enduring allure of Akoya pearls, from Japanese craftsmanship to timeless dressing.",
+    slug: "akoya-pearl", title: "Akoya Pearl", category: "Jewellery",
+    image: media("MIKIMOTO-1.jpg"),
+    excerpt: "The Japanese pearl tradition that made the Akoya pearl a lasting symbol of refinement.",
+    intro: "Small in scale but extraordinary in presence, the Akoya pearl has become synonymous with luminous, quietly elegant jewellery.",
+    paragraphs: [
+      "The modern cultured-pearl story is closely associated with Kokichi Mikimoto and the development of pearl cultivation in Japan. His work helped make consistently beautiful cultured pearls available beyond the rarest natural examples.",
+      "Akoya pearls are prized for their lustre, rounded shapes and delicate colour. Their restrained scale is part of their versatility: a strand can feel formal, but it can also bring softness to an otherwise simple outfit.",
+      "Good vintage jewellery rewards close looking. Surface, nacre, setting and proportion all contribute to how a piece feels when worn, which is why provenance and condition deserve as much attention as the name on the clasp."
+    ],
   },
   {
-    title: "Have the Right Outfit",
-    href: "/portfolio#right-outfit",
-    category: "Style",
-    image: "/assets/original/portfolio-7-1.png",
-    excerpt:
-      "Style is personal: proportion, occasion, confidence and knowing what makes you feel unmistakably yourself.",
+    slug: "have-the-right-outfit", title: "Have the Right Outfit", category: "Style",
+    image: media("STREET-STYLE-3.jpg"),
+    excerpt: "Style is less about following a formula and more about understanding proportion, occasion and yourself.",
+    intro: "The right outfit is rarely the loudest one. It is the one that makes sense for the person wearing it.",
+    paragraphs: [
+      "Clothes communicate before we say anything. The most convincing looks tend to come from a clear understanding of proportion, context and the small details that make an outfit feel intentional.",
+      "Vintage makes that conversation particularly interesting. An older silhouette can be mixed with contemporary pieces, and an accessory with history can give a familiar outfit an entirely different character.",
+      "The goal is not perfection. It is confidence: knowing why a piece works, knowing when to stop adding, and leaving enough room for your own personality to remain visible."
+    ],
+  },
+  {
+    slug: "bernard-arnault", title: "Bernard Arnault", category: "Luxury & Business",
+    image: media("221215140542-bernard-arnault.jpg"),
+    excerpt: "A look at the business of luxury and the group that brought many historic maisons into one modern portfolio.",
+    intro: "Luxury is built from more than products. It depends on heritage, craftsmanship, distribution, image and the ability to make history feel relevant today.",
+    paragraphs: [
+      "Bernard Arnault became one of the defining figures in modern luxury through the development of LVMH, bringing together a portfolio of maisons with distinct identities and long histories.",
+      "The enduring lesson is that scale does not necessarily require every brand to look the same. The strongest luxury houses preserve their own codes while benefiting from shared expertise, global reach and investment.",
+      "For vintage collectors, this history matters because the object in front of us is often the result of decades of design language, manufacturing traditions and cultural influence."
+    ],
   },
 ];
 
-export const products = [
+export const products: Product[] = [
   {
-    name: "Louis Vuitton Vintage Concorde",
-    category: "Vintage Handbags",
-    description:
-      "A structured vintage Monogram piece with an S-lock closure and long adjustable strap.",
+    slug: "louis-vuitton-vintage-concorde", name: "Louis Vuitton Vintage Concorde",
+    category: "Vintage Handbags", image: media("LV-vintage-Concorde.webp"),
+    gallery: [media("LV-vintage-Concorde.webp"), media("lv-concorde-1.jpg"), media("LV-CONCORDE-2.webp")],
+    description: "A structured vintage Monogram silhouette with the character and proportions associated with Louis Vuitton travel-era design.",
+    details: ["Vintage Louis Vuitton Monogram", "S-lock closure", "Adjustable strap", "Pre-owned vintage piece"],
   },
   {
-    name: "Louis Vuitton Monogram Neverfull MM",
-    category: "Vintage Handbags",
-    description:
-      "A timeless pre-owned Monogram tote selected for its character, practicality and heritage.",
+    slug: "louis-vuitton-neverfull-mm", name: "Louis Vuitton Monogram Neverfull MM",
+    category: "Vintage Handbags", image: media("LV-NEVERFUL-MONO-MM.jpg"),
+    gallery: [media("LV-NEVERFUL-MONO-MM.jpg"), media("LV-neverfull-MM.jpg"), media("lv-neverfull-mm.webp")],
+    description: "The familiar Monogram tote considered through a vintage and pre-owned lens, where condition and individual character matter.",
+    details: ["Louis Vuitton Monogram canvas", "MM size", "Pre-owned vintage piece", "Condition to be confirmed individually"],
   },
   {
-    name: "Louis Vuitton Vintage Mono Kelly",
-    category: "Vintage Handbags",
-    description:
-      "A distinctive vintage silhouette with the character and patina that make pre-owned luxury special.",
+    slug: "louis-vuitton-vintage-mono-kelly", name: "Louis Vuitton Vintage Mono Kelly",
+    category: "Vintage Handbags", image: media("LV-KELLY-MONO.jpg"),
+    gallery: [media("LV-KELLY-MONO.jpg"), media("LV-KELLY-LOCK.jpg")],
+    description: "A distinctive vintage silhouette selected for its structured shape, hardware and the patina that gives pre-owned luxury its individuality.",
+    details: ["Louis Vuitton Monogram", "Structured vintage silhouette", "Signature lock hardware", "Pre-owned vintage piece"],
   },
 ];
+
+export function getEditorialPost(slug: string) {
+  return editorialPosts.find((post) => post.slug === slug);
+}
+
+export function getProduct(slug: string) {
+  return products.find((product) => product.slug === slug);
+}
