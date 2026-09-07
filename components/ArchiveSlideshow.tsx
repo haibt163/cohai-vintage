@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 
 type Slide = { src: string; alt: string };
 
@@ -29,7 +29,7 @@ export function ArchiveSlideshow({ slides, interval = 7000 }: ArchiveSlideshowPr
     setActive((current) => (current + direction + slides.length) % slides.length);
   }
 
-  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+  function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
     if (event.pointerType !== "mouse" || reducedMotion.current) return;
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -38,7 +38,7 @@ export function ArchiveSlideshow({ slides, interval = 7000 }: ArchiveSlideshowPr
     event.currentTarget.style.setProperty("--archive-y", `${y * 10}px`);
   }
 
-  function handlePointerLeave(event: React.PointerEvent<HTMLDivElement>) {
+  function handlePointerLeave(event: PointerEvent<HTMLDivElement>) {
     event.currentTarget.style.setProperty("--archive-x", "0px");
     event.currentTarget.style.setProperty("--archive-y", "0px");
   }
