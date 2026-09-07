@@ -6,14 +6,12 @@ export function RevealObserver() {
   useEffect(() => {
     document.documentElement.classList.add("motion-ready");
 
-    const items = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-    if (!items.length) return () => document.documentElement.classList.remove("motion-ready");
-
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      items.forEach((item) => item.classList.add("is-visible"));
-      return () => document.documentElement.classList.remove("motion-ready");
-    }
+    if (reduceMotion) return () => document.documentElement.classList.remove("motion-ready");
+
+    const reveal = (root: ParentNode) => {
+      root.querySelectorAll<HTMLElement>(".reveal:not(.is-visible)").forEach((item) => observer.observe(item));
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,9 +25,17 @@ export function RevealObserver() {
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
 
-    items.forEach((item) => observer.observe(item));
+    reveal(document);
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) reveal(node as Element);
+      }));
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
       document.documentElement.classList.remove("motion-ready");
     };
   }, []);
