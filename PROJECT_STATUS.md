@@ -4,7 +4,7 @@
 
 Rebuild the Cô Hai Vintage website as a clean, modern, premium Next.js application rather than reproducing the original WordPress/Elementor/Astra implementation.
 
-The current shell is functional but still too generic visually. The next work must move decisively toward the original Cô Hai Vintage identity using the recovered WordPress photography and editorial material.
+GitHub `main` is the authoritative source of truth. The recovered WordPress material remains the source for genuine editorial subjects, product information and photography.
 
 ## Current stack
 
@@ -40,70 +40,51 @@ Genuine recovered media is stored under:
 
 `public/assets/original/`
 
-Some legacy Astra/demo/stock imagery remains in the repository and is currently visible in parts of the site. This is NOT the desired final state.
+The implemented Phase 3 catalogue now uses genuine mapped families for the founder, Flea Market, Akoya/Mikimoto, street style, Bernard Arnault and Coco Chanel subjects. Product pages use the recovered Louis Vuitton product families documented in `MEDIA-MAPPING.md`.
 
-Phase 3 onward must replace those images with the correct recovered WordPress images wherever available. Do not keep stock imagery simply because it looks attractive.
+The repository still contains legacy recovered Astra/demo files because the archive itself is retained as source material. Unused legacy files should only be removed after a repository-wide reference audit in Phase 5.
 
-See `MEDIA-MAPPING.md` for the known media families and article/product relationships.
+## Phase 3 — status: COMPLETE
 
-## Current implementation status
+Completed:
 
-The repository currently has the first modern site shell with:
+- Genuine recovered editorial photography integrated into the site.
+- Journal restored around the recovered editorial subject families.
+- Coco Chanel editorial subject added using the mapped recovered image family.
+- Three confirmed vintage Louis Vuitton product detail routes with image galleries.
+- Product copy deliberately avoids unsupported price, condition, provenance, stock or authenticity claims.
+- Image references use the canonical recovered media location.
+- Editorial and product routes are statically parameterised.
 
-- Home
-- About
-- Journal
-- Contact
-- Shop
-- shared navigation/footer
-- central editorial/product content definitions
-- editorial detail routes
-- product detail routes
-- responsive CSS foundation
+The Louis Vuitton Patent/history subject remains identified in the reconstruction map, but is intentionally not assigned a guessed filename until the exact recovered WordPress attachment mapping is verified.
 
-Phase 3A code has been committed to `main`.
+## Phase 4 — status: IN PROGRESS
 
-## User visual assessment / next objective
+Implemented:
 
-The current local preview was checked and is considered too generic: several pages still show stock/demo photography and the UI feels like a starter template.
+- Premium editorial typography and spacing system.
+- More distinctive header treatment and navigation hierarchy.
+- Magnetic pointer interaction for desktop navigation and reduced-motion fallback.
+- Refined image hover/depth treatments.
+- Stronger editorial hero and section composition.
+- Product presentation and gallery proportions improved.
+- Responsive mobile/tablet layouts refined.
+- `prefers-reduced-motion` support added for interaction and image motion.
 
-The next implementation must:
+Remaining Phase 4 work:
 
-1. Replace current generic/demo imagery with the genuine WordPress photographs.
-2. Restore the original Cô Hai editorial articles rather than generic summaries where source material is available.
-3. Improve art direction, typography, spacing, composition, image crops, and navigation.
-4. Make the experience feel modern, slick, editorial, and premium rather than template-like.
-5. Add tasteful mouse/pointer parallax and hover interactions where appropriate.
-6. Support `prefers-reduced-motion` and avoid excessive animation.
-7. Ensure mobile/tablet layouts remain polished.
+- More expressive editorial art direction across the Journal and Shop landing pages.
+- Additional image-led storytelling sections using verified recovered assets.
+- Further refinement of mobile navigation and interaction details.
+- Final cross-route visual consistency pass.
 
-## Phase roadmap
-
-### Phase 3 — Authentic content and media
-
-- Complete genuine WordPress media catalogue.
-- Replace all visible placeholder/demo imagery where genuine source imagery exists.
-- Restore the original editorial subjects and article content.
-- Complete product imagery and galleries from recovered assets.
-- Verify every article/product image against the WordPress mapping.
-
-### Phase 4 — Premium redesign and motion
-
-- Rework current generic layouts into a distinctive Cô Hai Vintage visual system.
-- Introduce stronger editorial typography and visual hierarchy.
-- Improve navigation/header/footer.
-- Create richer image-led sections, galleries, cards, and product presentation.
-- Add subtle mouse/pointer parallax, image depth, reveal, and hover effects.
-- Respect reduced-motion preferences.
-- Avoid gimmicky effects or performance-heavy animation.
-
-### Phase 5 — Final polish / production readiness
+## Phase 5 — next
 
 - Audit every route and navigation link.
-- Audit every image reference.
+- Audit every image reference and identify broken/unused references.
 - Remove unused Astra/demo assets only after repository-wide reference checks.
 - Check desktop, tablet and mobile layouts.
-- Run lint and production build.
+- Run lint and production build through CI.
 - Check accessibility, metadata, image loading, performance and console errors.
 - Keep `main` clean and deployable.
 
@@ -136,11 +117,9 @@ Never commit:
 
 ## Continuity
 
-At the start of the next conversation, read:
+The next session should continue from the Phase 4 work above, then execute the Phase 5 production audit. Read:
 
 - `AGENTS.md`
 - `PROJECT_STATUS.md`
 - `ORIGINAL-WORDPRESS.md`
 - `MEDIA-MAPPING.md`
-
-The next session should continue from the Phase 3 → Phase 4 → Phase 5 roadmap rather than restarting the reconstruction.
