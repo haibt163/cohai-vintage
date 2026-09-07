@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getLocale, ui } from "@/lib/i18n";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 
