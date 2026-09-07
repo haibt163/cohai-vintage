@@ -13,10 +13,6 @@ export const metadata: Metadata = {
   description: "Vintage fashion, luxury pieces, jewellery and stories from Cô Hai Vintage, Saigon.",
   applicationName: "Cô Hai Vintage",
   keywords: ["Cô Hai Vintage", "vintage fashion", "Saigon vintage", "vintage handbags", "luxury vintage", "jewellery"],
-  icons: {
-    icon: "/icon.png",
-    apple: "/apple-icon.png",
-  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
