@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { navigation } from "@/lib/content";
+import { MagneticLink } from "@/components/MagneticLink";
 
 export function Header() {
   return (
@@ -9,6 +10,7 @@ export function Header() {
           <span className="brand-mark">CÔ HAI</span>
           <span className="brand-subtitle">VINTAGE</span>
         </Link>
+        <div className="header-note" aria-hidden="true">SAIGON · VINTAGE · STORIES</div>
         <details className="mobile-nav">
           <summary>Menu</summary>
           <nav aria-label="Mobile navigation">
@@ -19,7 +21,7 @@ export function Header() {
         </details>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navigation.map((item) => (
-            <Link key={item.href} href={item.href}>{item.label}</Link>
+            <MagneticLink key={item.href} href={item.href}>{item.label}</MagneticLink>
           ))}
         </nav>
       </div>
