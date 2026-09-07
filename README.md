@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cô Hai Vintage
 
-## Getting Started
+Modern Next.js rebuild of the Cô Hai Vintage website, using recovered genuine WordPress editorial content, product information, and photography as source material.
 
-First, run the development server:
+## Direction
+
+This is intentionally a new implementation rather than a reproduction of the old Elementor/Astra site.
+
+The target experience is:
+
+- premium vintage fashion/editorial
+- image-led and story-driven
+- modern and distinctive
+- elegant rather than template-like
+- responsive across desktop, tablet and mobile
+- enhanced with subtle, tasteful pointer/parallax motion
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Source material
 
-To learn more about Next.js, take a look at the following resources:
+The recovered WordPress source is documented in:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `ORIGINAL-WORDPRESS.md`
+- `MEDIA-MAPPING.md`
+- `PROJECT_STATUS.md`
+- `AGENTS.md`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Genuine recovered media is under `public/assets/original/`.
 
-## Deploy on Vercel
+## Phase roadmap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Phase 3:** authentic WordPress media, original editorial articles, and product catalogue restoration.
+- **Phase 4:** premium visual redesign, stronger art direction, and subtle mouse/pointer parallax.
+- **Phase 5:** final responsive, accessibility, performance, asset, route, and production audit.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Security
+
+Do not commit SQL dumps, `wp-config.php`, credentials, passwords, API keys, `.env` secrets, Bluehost/cPanel archives, or other sensitive recovery material.
+
+## Deployment
+
+The project is intended to remain deployable from GitHub `main` once the Phase 5 production checks are complete.
