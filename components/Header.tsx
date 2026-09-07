@@ -15,11 +15,13 @@ export async function Header() {
           <span className="brand-subtitle">VINTAGE</span>
         </MagneticLink>
         <div className="header-note" aria-hidden="true">{labels.saigon}</div>
+        <div className="header-mobile-language">
+          <LanguageSwitcher locale={locale} />
+        </div>
         <details className="mobile-nav">
           <summary>{labels.menu}</summary>
           <nav aria-label="Mobile navigation">
             {navigation.map((item) => <MagneticLink key={item.href} href={item.href}>{labels[item.key as keyof typeof labels]}</MagneticLink>)}
-            <LanguageSwitcher locale={locale} />
           </nav>
         </details>
         <nav className="desktop-nav" aria-label="Primary navigation">
