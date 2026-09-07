@@ -24,8 +24,8 @@ export default async function Home() {
           </div>
         </div>
         <div className="hero-image-wrap hero-parallax-wrap">
-          <ParallaxMedia src="/assets/original/2025/03/CO-HAI-VINTAGE-1.jpg" alt="Cô Hai Vintage" fill priority sizes="(max-width: 900px) 100vw, 52vw" strength={18} />
-          <span className="image-caption">01 / CÔ HAI VINTAGE</span>
+          <ParallaxMedia src="/assets/original/2025/03/STREET-STYLE-3.jpg" alt="Vintage street style from the Cô Hai Vintage archive" fill priority sizes="(max-width: 900px) 100vw, 52vw" strength={22} />
+          <span className="image-caption">01 / STREET STYLE ARCHIVE</span>
         </div>
       </section>
 
