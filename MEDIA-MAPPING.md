@@ -2,13 +2,13 @@
 
 ## Canonical media location
 
-Recovered genuine media should be stored beneath:
+Recovered genuine media belongs under:
 
 `public/assets/original/`
 
-## Confirmed recovered media families
+The old WordPress upload structure is preserved sufficiently to trace filenames back to the recovered source material.
 
-Examples include:
+## Confirmed genuine media families
 
 - `CO-HAI-VINTAGE*`
 - `FLEA-MARKET*`
@@ -20,55 +20,60 @@ Examples include:
 - `LV-vintage-Concorde*`
 - `LV-NEVERFUL-MONO-MM*`
 - `LV-KELLY-MONO*`
-- additional Louis Vuitton product imagery
+- related Louis Vuitton product imagery
 - brand and editorial assets
 
-## Confirmed editorial mappings
-
-### Flea Market
-
-Primary media family:
-
-`FLEA-MARKET*`
-
-### Akoya Pearl
-
-Primary media families:
-
-`MIKIMOTO*`
-`MIKOMOTO*`
-
-### Have the Right Outfit
-
-Primary media family:
-
-`STREET-STYLE*`
+## Editorial mappings
 
 ### Cô Hai Vintage
 
-Primary media family:
+Primary family: `CO-HAI-VINTAGE*`
 
-`CO-HAI-VINTAGE*`
+Use for the founder/story, identity, and brand-history sections.
+
+### Flea Market
+
+Primary family: `FLEA-MARKET*`
+
+Use the actual flea-market photographs rather than the current generic/demo image.
+
+### Akoya Pearl
+
+Primary families: `MIKIMOTO*`, `MIKOMOTO*`
+
+Use the recovered Mikimoto/pearl imagery for the article and supporting gallery.
+
+### Have the Right Outfit
+
+Primary family: `STREET-STYLE*`
+
+Use the recovered street-style imagery for the style article.
 
 ### Bernard Arnault
 
-Primary media family:
+Primary family: `BERNARD*`
 
-`BERNARD*`
+Use the recovered Bernard Arnault/LVMH imagery and verify the exact image before placement.
+
+### Coco Chanel
+
+Primary family: `COCO-CHANEL*`
+
+Reserved for the Coco Chanel editorial content to be restored in the later editorial pass.
+
+### Louis Vuitton's Patent
+
+Use the relevant recovered Louis Vuitton/history imagery identified from the original WordPress attachment mapping.
 
 ### Louis Vuitton products
 
-Relevant media families include:
+- `LV-vintage-Concorde*` — Vintage Concorde
+- `LV-NEVERFUL-MONO-MM*` — Monogram Neverfull MM
+- `LV-KELLY-MONO*` — Vintage Mono Kelly
+- related LV imagery — supporting product/history galleries
 
-- `LV-vintage-Concorde*`
-- `LV-NEVERFUL-MONO-MM*`
-- `LV-KELLY-MONO*`
-- related LV product imagery
+## Implementation rule
 
-## Important
+Filename alone does not prove correct placement. Inspect the actual asset and compare it against the recovered WordPress attachment/content mapping before assigning it to an article or product.
 
-Do not assume a filename alone proves the correct editorial placement.
-
-When implementing pages, inspect the actual asset and compare it with the recovered WordPress attachment/content mapping.
-
-Do not retain generic Astra starter imagery where genuine Cô Hai media exists.
+The current implementation contains some legacy Astra/demo imagery. Phase 3–5 work must progressively eliminate those references where genuine Cô Hai media is available, then remove unused demo assets only after a repository-wide reference check.
