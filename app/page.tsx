@@ -69,7 +69,7 @@ export default async function Home() {
           {pieces.map((product, index) => (
             <Link className={`mini-product reveal reveal-delay-${index + 1}`} href={`/shop/${product.slug}`} key={product.slug}>
               <div className="mini-product-image">
-                <Image src={product.image} alt={product.name} fill quality={100} sizes="(max-width: 800px) 33vw, 20vw" />
+                <Image src={product.image} alt={product.name} fill quality={100} unoptimized sizes="(max-width: 800px) 33vw, 20vw" />
               </div>
               <span>{product.name}</span>
             </Link>
