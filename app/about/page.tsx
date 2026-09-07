@@ -3,9 +3,9 @@ import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 
 const founderSlides = [
   { src: "/assets/original/2025/03/CO-HAI-VINTAGE.jpg", alt: "Cô Hai Vintage founder archive portrait" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-1.jpg", alt: "Cô Hai Vintage founder archive photograph" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-2.jpg", alt: "Cô Hai Vintage founder archive photograph" },
-  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-3.jpg", alt: "Cô Hai Vintage founder archive photograph" },
+  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-1.jpg", alt: "Cô Hai Vintage founder archive portrait, second view" },
+  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-2.jpg", alt: "Cô Hai Vintage founder archive portrait, third view" },
+  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-3.jpg", alt: "Cô Hai Vintage founder archive portrait, fourth view" },
 ];
 
 export default async function About() {
@@ -18,7 +18,9 @@ export default async function About() {
         <h1>{labels.aboutTitle}</h1>
       </section>
       <section className="about-grid section-narrow reveal">
-        <div className="portrait"><ArchiveSlideshow slides={founderSlides} interval={7200} /></div>
+        <div className="portrait founder-archive">
+          <ArchiveSlideshow slides={founderSlides} interval={7600} />
+        </div>
         <div className="prose">
           <p className="lead">{labels.aboutLead}</p>
           <p>{labels.about1}</p>
