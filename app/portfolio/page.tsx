@@ -17,7 +17,7 @@ export default async function Portfolio() {
       <section className="journal-list section-narrow">
         {posts.map((post, index) => (
           <article className={`journal-row reveal reveal-delay-${(index % 3) + 1}`} key={post.slug}>
-            <Link href={`/portfolio/${post.slug}`} className="journal-image"><ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 42vw" strength={10} /><span className="journal-index">0{index + 1}</span></ParallaxMedia></Link>
+            <Link href={`/portfolio/${post.slug}`} className="journal-image"><ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 42vw" strength={10} /><span className="journal-index">0{index + 1}</span></Link>
             <div><p className="eyebrow">{post.category}</p><h2>{post.title}</h2><p>{post.intro}</p><Link className="text-link" href={`/portfolio/${post.slug}`}>{labels.read}</Link></div>
           </article>
         ))}
