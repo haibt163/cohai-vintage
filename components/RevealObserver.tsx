@@ -1,17 +1,19 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export function RevealObserver() {
+  const pathname = usePathname();
+
   useEffect(() => {
     document.documentElement.classList.add("motion-ready");
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return () => document.documentElement.classList.remove("motion-ready");
-
-    const reveal = (root: ParentNode) => {
-      root.querySelectorAll<HTMLElement>(".reveal:not(.is-visible)").forEach((item) => observer.observe(item));
-    };
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      document.documentElement.classList.remove("motion-ready");
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -22,23 +24,47 @@ export function RevealObserver() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.02, rootMargin: "0px 0px -4% 0px" },
     );
 
+    const reveal = (root: ParentNode) => {
+      const candidates: Element[] = [];
+      if (root instanceof Element && root.matches(".reveal:not(.is-visible)")) candidates.push(root);
+      root.querySelectorAll<Element>(".reveal:not(.is-visible)").forEach((item) => candidates.push(item));
+
+      candidates.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const alreadyOnScreen = rect.top < window.innerHeight && rect.bottom > 0;
+        if (alreadyOnScreen) {
+          item.classList.add("is-visible");
+        } else {
+          observer.observe(item);
+        }
+      });
+    };
+
     reveal(document);
+
     const mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
-        if (node.nodeType === Node.ELEMENT_NODE) reveal(node as Element);
-      }));
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.ELEMENT_NODE) reveal(node as Element);
+        });
+      });
     });
+
     mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    const refresh = () => reveal(document);
+    window.addEventListener("resize", refresh, { passive: true });
 
     return () => {
       observer.disconnect();
       mutationObserver.disconnect();
+      window.removeEventListener("resize", refresh);
       document.documentElement.classList.remove("motion-ready");
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
