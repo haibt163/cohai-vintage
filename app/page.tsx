@@ -5,10 +5,15 @@ import { getLocale, localizedPost, localizedProduct, ui } from "@/lib/i18n";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 
-const streetStyleSlides = [
+const archiveSlides = [
   { src: "/assets/original/2025/03/STREET-STYLE-3.jpg", alt: "Vintage street style from the Cô Hai Vintage archive" },
   { src: "/assets/original/2025/03/STREET-STYLE-1.jpg", alt: "A second street-style photograph from the Cô Hai Vintage archive" },
   { src: "/assets/original/2025/03/CO-HAI-VINTAGE.jpg", alt: "Cô Hai Vintage archive portrait" },
+  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-1.jpg", alt: "Cô Hai Vintage archive portrait, second view" },
+  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-2.jpg", alt: "Cô Hai Vintage archive portrait, third view" },
+  { src: "/assets/original/2025/03/CO-HAI-VINTAGE-3.jpg", alt: "Cô Hai Vintage archive portrait, fourth view" },
+  { src: "/assets/original/2025/03/FLEA-MARKET.jpg", alt: "Flea market scene from the Cô Hai Vintage archive" },
+  { src: "/assets/original/2025/03/MIKIMOTO-1.jpg", alt: "Akoya pearl editorial image from the Cô Hai Vintage archive" },
 ];
 
 export default async function Home() {
@@ -16,7 +21,9 @@ export default async function Home() {
   const labels = ui[locale];
   const posts = editorialPosts.map((post) => localizedPost(post, locale));
   const pieces = products.map((product) => localizedProduct(product, locale));
-  const heroText = locale === "vi" ? "Một thế giới được tuyển chọn của thời trang vintage, những món đồ xa xỉ, trang sức và câu chuyện — với cá tính riêng và sự trân trọng dành cho những gì đã đi qua." : "A considered world of vintage fashion, luxury pieces, jewellery and stories — curated with personality and a respect for what came before.";
+  const heroText = locale === "vi"
+    ? "Một thế giới được tuyển chọn của thời trang vintage, những món đồ xa xỉ, trang sức và câu chuyện — với cá tính riêng và sự trân trọng dành cho những gì đã đi qua."
+    : "A considered world of vintage fashion, luxury pieces, jewellery and stories — curated with personality and a respect for what came before.";
 
   return (
     <>
@@ -31,8 +38,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="hero-image-wrap hero-parallax-wrap">
-          <ArchiveSlideshow slides={streetStyleSlides} />
-          <span className="image-caption">01 / STREET STYLE ARCHIVE</span>
+          <ArchiveSlideshow slides={archiveSlides} interval={7200} />
         </div>
       </section>
 
@@ -50,7 +56,9 @@ export default async function Home() {
         <div className="editorial-grid section-narrow">
           {posts.slice(0, 3).map((post, index) => (
             <article className={`editorial-card reveal reveal-delay-${index + 1}`} key={post.slug}>
-              <Link href={`/journal/${post.slug}`} className="card-image"><ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 33vw" strength={8} /></Link>
+              <Link href={`/journal/${post.slug}`} className="card-image">
+                <ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 33vw" strength={8} />
+              </Link>
               <p className="card-category">{post.category}</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
@@ -70,7 +78,9 @@ export default async function Home() {
         <div className="mini-product-grid">
           {pieces.map((product, index) => (
             <Link className={`mini-product reveal reveal-delay-${index + 1}`} href={`/shop/${product.slug}`} key={product.slug}>
-              <div className="mini-product-image"><Image src={product.image} alt={product.name} fill sizes="(max-width: 800px) 33vw, 20vw" /></div>
+              <div className="mini-product-image">
+                <Image src={product.image} alt={product.name} fill quality={100} sizes="(max-width: 800px) 33vw, 20vw" />
+              </div>
               <span>{product.name}</span>
             </Link>
           ))}
