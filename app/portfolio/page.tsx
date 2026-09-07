@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { editorialPosts } from "@/lib/content";
 
 export default function Portfolio() {
@@ -10,13 +11,13 @@ export default function Portfolio() {
       </section>
       <section className="journal-list section-narrow">
         {editorialPosts.map((post) => (
-          <article className="journal-row" id={post.title.toLowerCase().replaceAll(" ", "-")} key={post.title}>
-            <div className="journal-image"><Image src={post.image} alt="" fill sizes="(max-width: 800px) 100vw, 42vw" /></div>
+          <article className="journal-row" key={post.slug}>
+            <Link href={`/portfolio/${post.slug}`} className="journal-image"><Image src={post.image} alt="" fill sizes="(max-width: 800px) 100vw, 42vw" /></Link>
             <div>
               <p className="eyebrow">{post.category}</p>
               <h2>{post.title}</h2>
-              <p>{post.excerpt}</p>
-              <p className="muted">The full original article archive will be migrated and edited in Phase 3.</p>
+              <p>{post.intro}</p>
+              <Link className="text-link" href={`/portfolio/${post.slug}`}>Read the story →</Link>
             </div>
           </article>
         ))}
