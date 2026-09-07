@@ -9,7 +9,6 @@ import { RevealObserver } from "@/components/RevealObserver";
 import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cohaivintage.com"),
   title: { default: "Cô Hai Vintage", template: "%s — Cô Hai Vintage" },
   description: "Vintage fashion, luxury pieces, jewellery and stories from Cô Hai Vintage, Saigon.",
   applicationName: "Cô Hai Vintage",
