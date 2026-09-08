@@ -36,23 +36,43 @@ Use this source carefully and preserve the substance of the original story rathe
 
 The modern site should preserve the genuine editorial subjects, product facts, imagery, and recognizable brand context while replacing the old Elementor/Astra implementation with a polished Next.js experience.
 
+## Confirmed photography-source caveat
+
+The owner has confirmed a key quality fact during live review: some media extracted from the old WordPress site are **screenshots of the historical site presentation rather than the original uploaded photographs**. These files can therefore look soft even when the website renders them correctly.
+
+This is now part of the reconstruction history and must be preserved in future handoffs. The appropriate remedy is to replace those screenshot files with genuine originals using the same application filename/path whenever practical, rather than changing the design to hide the softness or inventing synthetic detail.
+
 ## Current reconstruction state
 
 The site is now a functioning premium Next.js implementation on GitHub `main`. Phase 3 authentic content/media restoration and Phase 4 visual transformation are complete. Phase 5 is substantially complete, with a short list of live visual verification items intentionally carried forward.
 
-The current implementation uses 18 verified recovered archive images for the homepage slideshow and four verified founder archive portraits for the About slideshow. Product galleries are mapped to the recovered Louis Vuitton assets rather than invented filenames.
+The current implementation uses the verified recovered archive set for the homepage slideshow and four verified founder archive portraits for the About slideshow. Product galleries are mapped to the recovered Louis Vuitton assets rather than invented filenames.
 
 ## Open audit items
 
 The following must remain visible to future contributors:
 
-1. Recovered photographs still appear somewhat blurry/soft in the live presentation. Audit source resolution, rendered dimensions, Next image delivery, CSS scaling/cropping and device/browser behaviour before changing the media.
+1. **Photography replacement / sharpness:** some recovered files are screenshots, not original uploads. Prepare a page-grouped replacement set and preserve existing filenames/paths where possible so the owner can manually swap in genuine originals without revising application code.
 2. Verify the custom browser favicon and Apple/iOS Home Screen icon on the deployed production site. Previous default/missing-icon observations may be affected by deployment and browser/Home Screen caching.
 3. Perform a final desktop/tablet/iPhone visual audit, including Vietnamese typography/line wrapping, hero framing, About portraits, Shop image presentation, console errors and broken network requests.
 4. Recheck the earlier perceived missing Shop image; current recovered product paths are mapped, so visually verify before changing source mapping.
 5. Confirm the latest GitHub `main` deployment in the production environment before closing Phase 5.
 
 Do not mark these items complete merely because automated CI passes. They require real visual/live verification.
+
+## Recommended photo replacement workflow
+
+Use a local staging structure such as:
+
+```text
+manual-photo-replacements/
+  landing/
+  about/
+  journal/
+  shop/
+```
+
+For every staged image, record the existing site filename/path, the page/section that uses it, the replacement source, pixel dimensions, and intended orientation/aspect. Rename the genuine original to match the current site filename wherever possible, then overwrite the corresponding file under `public/assets/original/`.
 
 ## Design objective for the next phases
 
