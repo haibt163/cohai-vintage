@@ -6,14 +6,14 @@ Modern Next.js rebuild of the Cô Hai Vintage website, using recovered genuine W
 
 The site is running well for most agreed requirements and `main` is the authoritative project branch.
 
-Phase 3 and Phase 4 are complete. Phase 5 is substantially complete, with a small number of visual/live verification items intentionally carried into the next audit.
+Phase 3 and Phase 4 are complete. Phase 5 is substantially complete, with a focused set of visual/live verification items intentionally carried into the next audit.
 
 ### OPEN items
 
-- **Photography sharpness:** recovered photos are correct but still appear somewhat blurry/soft in places. Audit source resolution, rendered size, Next image delivery, CSS scaling/cropping and device/browser behaviour. Do not replace genuine media with stock imagery.
-- **Favicon / iOS icon:** custom browser and Apple icon routes are implemented; verify them on the deployed production site, accounting for browser and iOS Home Screen caching.
+- **Photography sharpness / source replacement:** confirmed that some recovered WordPress images are screenshots rather than original uploaded photographs. Replace those files manually with the genuine originals while keeping the same filenames/paths where possible. Do not solve this by fake upscaling or stock substitutions.
+- **Favicon / iOS icon:** custom Cô Hai icon routes are implemented; verify on the deployed production site and on an actual iPhone after re-adding the Home Screen shortcut if necessary.
 - **Final cross-device visual audit:** desktop/tablet/iPhone check for Vietnamese typography, image framing, Shop presentation, console errors and broken network requests.
-- **Shop image recheck:** earlier perceived missing image should be visually rechecked before changing the currently verified product mappings.
+- **Shop image recheck:** visually verify the current product mappings and framing after source-photo replacement before changing mappings.
 - **Production deployment verification:** confirm the latest `main` build is what is actually served in production before closing Phase 5.
 
 Do not treat CI success alone as closure for these visual items.
@@ -48,7 +48,23 @@ npm run typecheck
 npm run build
 ```
 
-The latest GitHub Actions validation for the current visual fixes passes lint, typecheck and production build.
+Keep all three checks green after meaningful code changes.
+
+## Photography replacement workflow
+
+The owner will manually replace low-resolution screenshot files with genuine original photographs and push them to GitHub. The preferred approach is to preserve the exact existing filename/path so no application code needs to change.
+
+Recommended local staging structure:
+
+```text
+manual-photo-replacements/
+  landing/
+  about/
+  journal/
+  shop/
+```
+
+For each staged replacement, record the existing site filename, page/section usage, and intended orientation/aspect before copying the genuine original over `public/assets/original/<same-filename>`.
 
 ## Source material
 
@@ -60,8 +76,6 @@ The recovered WordPress source is documented in:
 - `AGENTS.md`
 
 Genuine recovered media is under `public/assets/original/`.
-
-The homepage archive currently uses 18 verified recovered images. The About page founder slideshow uses the four verified founder archive portraits. The three Louis Vuitton product galleries use the currently verified recovered assets mapped in `lib/content.ts`.
 
 ## Phase roadmap
 
