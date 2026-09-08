@@ -34,9 +34,9 @@ Before using an asset, inspect its actual subject and use the documented WordPre
 
 ### Image-quality rule
 
-Some recovered photographs are screenshots of the old web presentation rather than the original uploaded photos. This is now an OPEN source-quality finding. Do not try to hide the problem with aggressive CSS enlargement, sharpening filters, fake upscaling, or stock replacements.
+Some recovered photographs are screenshots of the old web presentation rather than the original uploaded photos. This is an OPEN source-quality finding. Do not try to hide the problem with aggressive CSS enlargement, sharpening filters, fake upscaling, or stock replacements.
 
-Preferred remediation: obtain the genuine original photograph and manually replace the corresponding file **using the same filename/path** wherever practical. This preserves the existing code references and minimizes token/code churn. Audit and record each replacement before copying it into `public/assets/original/`.
+Preferred remediation: obtain the genuine original photograph and manually replace the corresponding file **using the same filename/path** wherever practical. This preserves the existing code references and minimizes code churn. Audit and record each replacement before copying it into `public/assets/original/`.
 
 ## Editorial source material
 
@@ -117,21 +117,19 @@ Still open:
 
 Do not mark Phase 5 fully closed merely because CI is green; the remaining items require visual/live verification.
 
-## Workflow
+## Photography replacement workflow
 
-Before major changes, inspect the existing implementation and the relevant recovered source material.
+For the current handoff, the owner will manually replace screenshot-based photos and push the replacements to GitHub. Use this low-churn method whenever possible:
 
-For photography replacement work, prefer this low-churn workflow:
+1. identify the exact current filename/path used by the page or component;
+2. place the genuine replacement in a local staging folder;
+3. rename the genuine original to exactly match the existing filename;
+4. compare the replacement at realistic desktop and iPhone rendered sizes;
+5. overwrite the corresponding file under `public/assets/original/` without changing application code when the path is unchanged;
+6. run `npm run lint`, `npm run typecheck`, and `npm run build`;
+7. record the replacement in the handoff/manifest so the next audit can distinguish verified replacements from untouched screenshot files.
 
-1. identify the exact existing filename/path used by a page or component;
-2. place the genuine replacement in a local page-grouped staging folder;
-3. rename it to the exact existing filename;
-4. visually compare the replacement at the site's real rendered dimensions;
-5. copy it over the existing file under `public/assets/original/`;
-6. avoid source-code changes when the path can remain identical;
-7. run the normal validation commands.
-
-Suggested local staging structure:
+Suggested staging structure:
 
 ```text
 manual-photo-replacements/
@@ -141,13 +139,19 @@ manual-photo-replacements/
   shop/
 ```
 
-After meaningful changes, run:
+Do not add these staging folders to GitHub unless explicitly needed; they are a local working aid. Binary media replacement is intentionally owner-pushed to minimize agentic commit/token overhead.
+
+## Workflow
+
+Before major changes, inspect the existing implementation and the relevant recovered source material.
+
+After meaningful code or media changes, run:
 
 - `npm run lint`
 - `npm run typecheck`
 - `npm run build`
 
-The known-good green validation state should be preserved while resolving the remaining audit items.
+Preserve the known-good validation state while addressing the remaining audit items.
 
 Do not commit generated secrets or hosting recovery material.
 
@@ -169,4 +173,4 @@ At the beginning of a new conversation, read this file together with:
 - `ORIGINAL-WORDPRESS.md`
 - `MEDIA-MAPPING.md`
 
-Then continue from the OPEN items in `PROJECT_STATUS.md`. The immediate next task is photography replacement preparation and live verification, not a broad redesign.
+Then continue from the OPEN items in `PROJECT_STATUS.md`. The immediate task is photography replacement preparation and live verification, not a broad redesign.
