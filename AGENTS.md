@@ -26,7 +26,7 @@ GitHub `main` is the authoritative code source.
 
 ## Critical media rule
 
-The current site must progressively replace all remaining Astra starter/demo/stock imagery with the genuine recovered WordPress media whenever a genuine source asset exists.
+The current site must progressively replace all remaining Astra starter/demo/stock imagery with genuine recovered WordPress media whenever a genuine source asset exists.
 
 Do not choose generic stock imagery merely because it looks cleaner.
 
@@ -36,7 +36,9 @@ Before using an asset, inspect its actual subject and use the documented WordPre
 
 Some recovered photographs are screenshots of the old web presentation rather than the original uploaded photos. This is an OPEN source-quality finding. Do not try to hide the problem with aggressive CSS enlargement, sharpening filters, fake upscaling, or stock replacements.
 
-Preferred remediation: obtain the genuine original photograph and manually replace the corresponding file **using the same filename/path** wherever practical. This preserves the existing code references and minimizes code churn. Audit and record each replacement before copying it into `public/assets/original/`.
+Preferred remediation: obtain the genuine original photograph and manually replace the corresponding file **using the same filename/path** wherever practical. This preserves the existing code references and minimizes code churn.
+
+The reusable staging and safeguard procedure is documented in `PHOTO-REPLACEMENT-GUIDE.md`.
 
 ## Editorial source material
 
@@ -64,17 +66,17 @@ Do not invent prices, stock status, condition grades, provenance, authenticity c
 
 The target is a premium vintage-fashion/editorial experience: elegant, restrained, image-led, contemporary, and distinctive rather than a generic template.
 
-Future phases should prioritize:
+The current approved visual direction includes:
 
-- original WordPress photography
-- strong editorial typography and hierarchy
-- sophisticated spacing and composition
-- immersive image presentation without over-enlarging soft sources
-- subtle hover/motion treatments
-- tasteful mouse/pointer parallax where it improves the experience
-- responsive mobile behaviour
-- accessibility and reduced-motion support
-- fast loading and sensible image sizing
+- roughly 50/50 desktop homepage hero image/text composition;
+- larger, immersive photography without hiding poor source quality through fake enlargement;
+- Bodoni/Didot-style editorial serif headlines;
+- larger supporting/dek/body copy so the typographic hierarchy remains readable and balanced;
+- subtle magnetic navigation and tasteful mouse/pointer parallax;
+- responsive mobile behaviour;
+- accessibility and reduced-motion support.
+
+The larger supporting-copy treatment is intentional. Do not reduce normal editorial paragraphs back to tiny 13–15px website copy without a demonstrated device/layout reason.
 
 Motion must remain refined. Avoid excessive animation, gimmicks, or motion that harms readability/performance.
 
@@ -105,7 +107,10 @@ Completed:
 - accessibility and metadata work
 - branded 404
 - custom browser/Apple icon implementation
-- lint, typecheck and production build validation
+- premium visual typography and composition pass
+- stronger homepage hero/parallax treatment
+- enlarged supporting-copy hierarchy
+- lint/typecheck/build validation baseline
 
 Still open:
 
@@ -119,27 +124,23 @@ Do not mark Phase 5 fully closed merely because CI is green; the remaining items
 
 ## Photography replacement workflow
 
-For the current handoff, the owner will manually replace screenshot-based photos and push the replacements to GitHub. Use this low-churn method whenever possible:
+For the current handoff, the owner may manually replace screenshot-based photos and push the replacements to GitHub. Use this low-churn method whenever possible:
 
-1. identify the exact current filename/path used by the page or component;
-2. place the genuine replacement in a local staging folder;
-3. rename the genuine original to exactly match the existing filename;
-4. compare the replacement at realistic desktop and iPhone rendered sizes;
-5. overwrite the corresponding file under `public/assets/original/` without changing application code when the path is unchanged;
-6. run `npm run lint`, `npm run typecheck`, and `npm run build`;
-7. record the replacement in the handoff/manifest so the next audit can distinguish verified replacements from untouched screenshot files.
+1. Pull the latest `main`.
+2. Run `scripts/stage-current-photos.ps1` to create a fresh page-grouped staging set.
+3. Identify the exact filename/path and page usage from `manual-photo-replacements/PHOTO-REPLACEMENT-MANIFEST.md`.
+4. Obtain the genuine original photograph.
+5. Rename it to exactly match the approved filename and extension.
+6. Replace the staged copy; do not rename the canonical application asset merely to accommodate the source.
+7. Run `scripts/apply-photo-replacements.ps1`.
+8. **Never bypass a failed safeguard.** The apply script rejects unexpected filenames, missing approved filenames, and inconsistent duplicate copies across page groups using SHA-256 comparison.
+9. Inspect desktop and iPhone-sized rendering.
+10. Run `npm run lint`, `npm run typecheck`, and `npm run build`.
+11. Commit/push only the verified binary replacements.
 
-Suggested staging structure:
+The complete reusable procedure is in `PHOTO-REPLACEMENT-GUIDE.md`.
 
-```text
-manual-photo-replacements/
-  landing/
-  about/
-  journal/
-  shop/
-```
-
-Do not add these staging folders to GitHub unless explicitly needed; they are a local working aid. Binary media replacement is intentionally owner-pushed to minimize agentic commit/token overhead.
+Do not add the local staging binaries to GitHub as a separate media source. The canonical source remains `public/assets/original/2025/03/`.
 
 ## Workflow
 
@@ -153,8 +154,6 @@ After meaningful code or media changes, run:
 
 Preserve the known-good validation state while addressing the remaining audit items.
 
-Do not commit generated secrets or hosting recovery material.
-
 ## Never commit
 
 - SQL database dumps
@@ -167,10 +166,12 @@ Do not commit generated secrets or hosting recovery material.
 
 ## Continuity instruction
 
-At the beginning of a new conversation, read this file together with:
+At the beginning of a new conversation, read:
 
 - `PROJECT_STATUS.md`
+- `AGENTS.md`
 - `ORIGINAL-WORDPRESS.md`
 - `MEDIA-MAPPING.md`
+- `PHOTO-REPLACEMENT-GUIDE.md`
 
-Then continue from the OPEN items in `PROJECT_STATUS.md`. The immediate task is photography replacement preparation and live verification, not a broad redesign.
+Then continue from the OPEN items in `PROJECT_STATUS.md`. Do not restart the reconstruction or initiate another broad redesign unless explicitly requested.
