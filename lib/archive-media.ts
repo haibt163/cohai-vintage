@@ -26,7 +26,7 @@ export const archiveSlides: ArchiveSlide[] = [
   { src: media("LV-CONCORDE-2.webp"), alt: "Louis Vuitton Concorde second detail from the recovered collection" },
   { src: media("LV-NEVERFUL-MONO-MM.jpg"), alt: "Louis Vuitton Monogram Neverfull MM from the recovered collection" },
   { src: media("LV-neverfull-MM.jpg"), alt: "Louis Vuitton Neverfull MM detail from the recovered collection" },
-  { src: media("lv-neverfull-mono-1.jpg"), alt: "Louis Vuitton Neverfull MM alternate detail from the recovered collection" },
+  { src: media("lv-mono-neverfull-MM-3.jpg"), alt: "Louis Vuitton Neverfull MM alternate detail from the recovered collection" },
   { src: media("LV-KELLY-MONO.jpg"), alt: "Louis Vuitton Vintage Mono Kelly from the recovered collection" },
   { src: media("LV-KELLY-LOCK.jpg"), alt: "Louis Vuitton Vintage Mono Kelly lock detail" },
 ];
