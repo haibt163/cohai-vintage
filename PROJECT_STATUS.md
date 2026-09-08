@@ -4,16 +4,15 @@
 
 The modern Cô Hai Vintage reconstruction is running well on `main` and satisfies the large majority of the agreed functional and visual requirements. `main` remains the authoritative code source.
 
-Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, but the remaining visual/live verification items are intentionally carried forward.
+Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, with the remaining visual/live verification items intentionally carried forward.
 
 ## Phase 3 — COMPLETE
 
-- Recovered genuine editorial photography integrated from `public/assets/original/`.
+- Genuine recovered editorial photography integrated from `public/assets/original/`.
 - Recovered editorial subjects restored, including Flea Market, Akoya Pearl / Mikimoto, Have the Right Outfit, Bernard Arnault and Coco Chanel.
 - Three Louis Vuitton product routes restored with supporting galleries.
 - Product copy remains conservative: no unsupported pricing, condition, provenance or authenticity claims.
-- Canonical media location remains `public/assets/original/`.
-- Verified product galleries currently use only the recovered Louis Vuitton assets mapped in `lib/content.ts`.
+- Verified product galleries use the recovered Louis Vuitton assets mapped in `lib/content.ts`.
 
 ## Phase 4 — COMPLETE
 
@@ -21,12 +20,13 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 - Distinctive Cô Hai Vintage header/navigation and bilingual EN/VI switcher.
 - Magnetic navigation interactions.
 - Visible mouse parallax on editorial photography.
-- Restrained image rendering and framing intended to avoid unnecessary enlargement of archival photographs.
 - Homepage archive slideshow using the verified recovered archive set, with slow automatic rotation and manual controls.
-- About page founder archive slideshow focused on the four verified `CO-HAI-VINTAGE` founder portrait assets.
+- About founder archive slideshow focused on the four verified `CO-HAI-VINTAGE` portraits.
 - Shop, product, Contact and About routes visually integrated.
 - Responsive mobile/tablet layouts and reduced-motion support.
-- Vietnamese typography/spacing refinements are present, but final cross-device review remains open.
+- Final visual polish now includes a roughly 50/50 desktop homepage hero image/text composition, stronger pointer parallax, and a more generous editorial type hierarchy.
+- Headline typography uses a Bodoni/Didot-style serif stack to create a high-end fashion-editorial feel without copying proprietary branding.
+- Supporting/dek/body typography was deliberately enlarged so paragraphs are proportionate to the editorial headlines on desktop and iOS/mobile.
 
 ## Phase 5 — SUBSTANTIALLY COMPLETE
 
@@ -39,7 +39,7 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 - `/shop` collection.
 - `/shop/[slug]` product detail routes.
 - `/contact` contact flow.
-- Legacy `/portfolio` routes redirect to the canonical Journal routes.
+- Legacy `/portfolio` routes redirect to canonical Journal routes.
 - Branded `not-found` page added.
 
 ### Image/reference state
@@ -53,9 +53,17 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 
 - Scroll reveal reinitialises on Next.js client-side route changes.
 - In-view content is made visible immediately after navigation.
-- Mouse parallax is applied directly to image media and remains restrained.
+- Homepage archive mouse parallax is intentionally stronger than the earlier version; shared parallax defaults were also increased while preserving restrained motion.
 - Slideshow controls are keyboard-accessible and automatic motion respects `prefers-reduced-motion`.
 - Mobile removes desktop-only pointer effects while preserving touch-friendly controls.
+
+### Typography hierarchy
+
+- Editorial headings use the Bodoni/Didot-style serif stack.
+- Hero and page introductory/dek copy is larger and easier to read.
+- Supporting editorial paragraphs are approximately 18px on normal layouts, with larger article body typography.
+- Small metadata, navigation and caption text remains intentionally compact.
+- The hierarchy is designed to avoid an excessive gap between very large headlines and tiny supporting paragraphs.
 
 ### Accessibility / metadata
 
@@ -65,49 +73,40 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 - Site metadata, Open Graph defaults, Apple web-app metadata, theme colour and installable manifest configured.
 - Custom Cô Hai Vintage icon generation is implemented.
 
-### Validation
+### Validation / deployment
 
-The latest automated validation has been kept as a required gate:
+The required local validation gate remains:
 
 - `npm run lint`
 - `npm run typecheck`
 - `npm run build`
 
-The latest known green validation remains the baseline to preserve while working on the open visual items. Always re-run all three after meaningful changes.
+The latest visual-polish commit `7497eae840510022989686985cf5c4a33d9e2beb` has a successful Vercel status. This confirms the GitHub-side deployment check, but local lint/typecheck/build and final device review should still be run after future local media changes.
 
-## Newly confirmed photography finding — OPEN / PRIORITY
+## Photography source finding — OPEN / PRIORITY
 
-The owner has now confirmed the root cause of a major portion of the perceived softness: some of the recovered old-WordPress images are actually screenshots rather than the original uploaded photographs.
+Some recovered old-WordPress images are screenshots rather than the original uploaded photographs. This is the primary explanation for much of the remaining softness.
 
-This changes the remediation strategy:
-
-- Do **not** attempt to solve screenshot softness primarily through CSS enlargement, sharpening filters, aggressive `quality`, or fake upscaling.
-- Preserve the existing filenames/paths where possible so the site code does not need to change.
-- The preferred replacement workflow is to keep the current filename and manually replace the low-quality screenshot with the genuine original photograph in the same path.
-- Before replacement, audit each currently used image and record its exact path, page/section usage, and required target orientation/aspect.
-- After replacement, re-test desktop and iPhone presentation at realistic rendered sizes.
+Do **not** solve screenshot softness primarily through CSS enlargement, sharpening filters, aggressive `quality`, fake upscaling, or stock substitutions. Prefer obtaining the genuine original and replacing the existing file while preserving its filename/path.
 
 ## Pending issues / next-audit items
 
 1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
-   - Some currently used recovered files are screenshots of old web content rather than original uploads.
-   - This is now the primary explanation for much of the blur.
-   - A page-grouped staging map has now been added at `manual-photo-replacements/` with `landing/`, `about/`, `journal/`, and `shop/` groups plus a complete manifest.
-   - The staging folders identify every current image by its exact filename; the canonical active files remain unchanged under `public/assets/original/2025/03/`.
-   - Because the current GitHub file-writing interface is text-oriented, the actual binary copies are intentionally prepared locally rather than fabricated as text placeholders. `scripts/stage-current-photos.ps1` copies the exact current binaries into the staging folders after `git pull`.
-   - `scripts/apply-photo-replacements.ps1` can copy verified staged originals back to the canonical media directory before commit/push.
-   - Keep current code paths stable unless a replacement cannot safely preserve the filename.
+   - Use the page-grouped staging set under `manual-photo-replacements/`.
+   - The canonical active images remain under `public/assets/original/2025/03/`.
+   - `scripts/stage-current-photos.ps1` creates a fresh page-grouped staging set from the canonical files.
+   - `scripts/apply-photo-replacements.ps1` contains the safeguard gate before applying staged replacements: approved filenames only, complete set required, and duplicate staged copies must have identical SHA-256 contents.
+   - Follow `PHOTO-REPLACEMENT-GUIDE.md` for the reusable workflow and safeguard rules.
 
 2. **Favicon / iOS icon live verification — OPEN**
-   - Custom Cô Hai Vintage icon generation is implemented.
-   - Verify on the deployed production site, including browser tab/favicon and iOS Home Screen behaviour after removing/re-adding an installed shortcut.
+   - Verify the custom icon on the deployed production site and on an actual iPhone after removing/re-adding the Home Screen shortcut if necessary.
 
 3. **Final cross-device visual audit — OPEN**
    - Recheck desktop, tablet and iPhone after the next media replacements.
-   - Pay attention to Vietnamese typography/line wrapping, hero framing, About portraits, Shop image scale and any broken image/network request.
+   - Pay attention to Vietnamese typography/line wrapping, hero framing, About portraits, Shop image scale, console errors and broken network requests.
 
 4. **Shop image presentation — OPEN FOR VISUAL RECHECK**
-   - Verify the currently mapped product images and their framing/loading on desktop and iPhone before changing mappings.
+   - Verify current product mappings, framing and loading on desktop and iPhone before changing mappings.
 
 5. **Production deployment verification — OPEN**
    - Confirm the latest `main` commit is the one actually served in production before closing Phase 5.
@@ -116,52 +115,47 @@ This changes the remediation strategy:
 
 - Keep genuine recovered WordPress media as the source of truth.
 - Keep stable filenames/paths where possible so manual photo replacement does not require code mapping changes.
-- Keep the current layout restrained; do not compensate for low-resolution source images by making them larger.
+- Do not compensate for soft source images by enlarging them unnecessarily.
 - Keep the About slideshow focused on the four founder archive portraits.
 - Keep product gallery mappings stable unless a source audit proves otherwise.
 - Keep motion subtle and respect reduced-motion preferences.
 - Keep the bilingual EN/VI experience and Vietnamese typography refinements.
 - Do not reintroduce Astra starter/demo imagery where genuine Cô Hai media exists.
+- Preserve the enlarged supporting-copy hierarchy unless later device testing demonstrates a readability or composition problem.
 
 ## Manual photo-replacement workflow
 
-After pulling `main`, run once:
+After pulling `main`, run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\stage-current-photos.ps1
 ```
 
-This populates:
-
-```text
-manual-photo-replacements/
-  landing/
-  about/
-  journal/
-  shop/
-```
-
-Replace the staged files with genuine originals while preserving their exact filenames. Then run:
+Replace the staged files with genuine originals using the exact approved filenames. Then run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
 ```
 
-Inspect locally, then run the normal validation commands and commit/push the verified binary replacements.
+The apply script must finish with its validation message before the canonical files are overwritten. If it stops on an unexpected filename, missing file, or duplicate-content mismatch, fix the staging set rather than bypassing the safeguard.
+
+Then inspect locally and run:
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Commit/push only the verified binary replacements.
+
+For the reusable detailed procedure, see `PHOTO-REPLACEMENT-GUIDE.md`.
 
 ## Local workflow
 
 ```bash
 git pull origin main
 npm run dev
-```
-
-Before committing local changes:
-
-```bash
-npm run lint
-npm run typecheck
-npm run build
 ```
 
 ## Security rules
@@ -174,4 +168,4 @@ Do not commit SQL dumps, `wp-config.php`, passwords, API keys, `.env` files, Blu
 
 ## Next-conversation handoff
 
-Start the next conversation by reading this file together with `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, and `MEDIA-MAPPING.md`. The immediate priority is **photography replacement and live verification**, not another broad redesign.
+Start the next conversation by reading `PROJECT_STATUS.md`, `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md`. The immediate priority remains **photography replacement and live verification**, not another broad redesign.
