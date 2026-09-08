@@ -2,7 +2,8 @@ name: Stage current photo replacement set
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -12,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Copy the exact current image files into page-grouped replacement folders
         shell: bash
@@ -90,7 +91,7 @@ jobs:
           cat > "$root/README.md" <<'EOF'
 # Cô Hai Vintage — Manual Photo Replacement Set
 
-These folders contain copies of the **exact current image files used by the live application**, grouped by page/experience so the genuine high-resolution originals can be manually substituted without guessing which photograph is which.
+These folders contain copies of the **exact current image files used by the application**, grouped by page/experience so the genuine high-resolution originals can be manually substituted without guessing which photograph is which.
 
 ## Folders
 
@@ -101,18 +102,7 @@ These folders contain copies of the **exact current image files used by the live
 
 The same filename is deliberately preserved. Replace a screenshot/low-resolution file with the genuine original using the **exact same filename and extension**.
 
-## Important
-
-These are staging copies for manual source replacement. The active application currently continues to use `public/assets/original/2025/03/` so the site remains unchanged while replacements are prepared.
-
-After selecting a genuine original:
-
-1. Replace the corresponding file in this folder with the genuine original, keeping the exact filename.
-2. Copy the verified replacement over the matching file under `public/assets/original/2025/03/`.
-3. Commit/push the replacement to GitHub.
-4. Recheck desktop and iPhone rendering.
-
-Do not rename files or change application mappings unless a replacement genuinely cannot preserve the existing path.
+The active application continues to use `public/assets/original/2025/03/` for now. After selecting a genuine original, copy it over the matching file under that canonical source directory, then commit/push the replacement and recheck desktop and iPhone rendering.
 EOF
 
           cat > "$root/landing/README.md" <<'EOF'
@@ -139,7 +129,7 @@ EOF
 Contains the 8 exact product/gallery images currently used by the Shop and product-detail routes. Keep every filename unchanged when replacing a screenshot with the genuine original.
 EOF
 
-      - name: Commit the staged replacement set and remove this one-shot workflow
+      - name: Commit staged replacement set and remove this one-shot workflow
         shell: bash
         run: |
           set -euo pipefail
