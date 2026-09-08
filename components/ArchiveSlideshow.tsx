@@ -34,8 +34,8 @@ export function ArchiveSlideshow({ slides, interval = 7000 }: ArchiveSlideshowPr
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
-    event.currentTarget.style.setProperty("--archive-x", `${x * 14}px`);
-    event.currentTarget.style.setProperty("--archive-y", `${y * 10}px`);
+    event.currentTarget.style.setProperty("--archive-x", `${x * 28}px`);
+    event.currentTarget.style.setProperty("--archive-y", `${y * 20}px`);
   }
 
   function handlePointerLeave(event: PointerEvent<HTMLDivElement>) {
@@ -65,7 +65,7 @@ export function ArchiveSlideshow({ slides, interval = 7000 }: ArchiveSlideshowPr
             priority={index === 0}
             quality={100}
             unoptimized
-            sizes="(max-width: 900px) 100vw, 47vw"
+            sizes="(max-width: 900px) 100vw, 50vw"
             className="archive-slide-image"
           />
         </div>
