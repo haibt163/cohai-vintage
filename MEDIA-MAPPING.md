@@ -54,9 +54,7 @@ The current verified set is:
 
 Primary family: `CO-HAI-VINTAGE*`
 
-Use for the founder/story, identity, and brand-history sections.
-
-The About page currently uses the four verified founder archive portraits only, selected from the `CO-HAI-VINTAGE*` family.
+Use for founder/story, identity, and brand-history sections. The About page currently uses the four verified founder archive portraits only.
 
 ### Flea Market
 
@@ -111,7 +109,7 @@ The owner has confirmed that some files recovered from the old WordPress site ar
 
 ### Page-grouped replacement set
 
-A dedicated staging map now exists at:
+A dedicated staging map exists at:
 
 ```text
 manual-photo-replacements/
@@ -123,16 +121,18 @@ manual-photo-replacements/
   shop/
 ```
 
-The manifest identifies every current image by its exact filename and page usage. The canonical active images remain unchanged under `public/assets/original/2025/03/` until a genuine replacement is verified.
+The manifest identifies current images by exact filename and page usage. Canonical active images remain under `public/assets/original/2025/03/` until a genuine replacement is verified.
 
-Because binary media should not be fabricated as text through the repository file-writing interface, the repository includes local helpers:
+### Replacement helper scripts
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\stage-current-photos.ps1
 powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
 ```
 
-The first copies the exact current binaries into the page-grouped staging folders after a local `git pull`. The second copies verified staged replacements back to the canonical media directory.
+The staging script copies the current canonical binaries into the page groups. The apply script is fail-closed and validates the complete approved filename set plus SHA-256 consistency for duplicate filenames across page groups before copying anything into the canonical directory.
+
+See `PHOTO-REPLACEMENT-GUIDE.md` for the reusable procedure and safeguard rationale.
 
 ### Replacement strategy
 
@@ -140,16 +140,18 @@ The preferred low-churn solution is:
 
 1. keep the existing application filename/path;
 2. obtain the genuine original photograph manually;
-3. rename the genuine file to exactly match the existing filename;
-4. replace the staged/canonical screenshot file locally;
-5. run the site at realistic desktop/iPhone rendered sizes and visually verify it;
-6. commit/push the binary replacement without changing application code where the path is unchanged.
+3. rename the genuine file to exactly match the approved filename;
+4. replace the staged copy;
+5. run the safeguard/apply script;
+6. inspect realistic desktop and iPhone rendering;
+7. run lint, typecheck and build;
+8. commit/push the verified binary replacement.
 
 Do not replace a file merely because it looks soft until its page usage has been confirmed.
 
 ## Current image-quality issue — OPEN
 
-The code/rendering side has been restrained so that the site does not deliberately enlarge soft archival imagery. Remaining blur should now be investigated primarily as a **source-quality problem**, while still checking:
+The code/rendering side has been restrained so that the site does not deliberately enlarge soft archival imagery to hide source problems. Remaining blur should now be investigated primarily as a **source-quality problem**, while still checking:
 
 - original source pixel dimensions and file quality;
 - actual rendered dimensions in each route;
