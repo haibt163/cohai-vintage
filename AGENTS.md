@@ -34,7 +34,9 @@ Before using an asset, inspect its actual subject and use the documented WordPre
 
 ### Image-quality rule
 
-The recovered photographs are currently the correct source assets, but some still appear somewhat blurry/soft in the live site. This is an OPEN audit item. Do not silently substitute stock imagery, upscale-and-pretend it is original, or invent missing source variants. First audit source resolution, actual rendered dimensions, Next image delivery, CSS scaling/cropping, and device/browser behaviour.
+Some recovered photographs are screenshots of the old web presentation rather than the original uploaded photos. This is now an OPEN source-quality finding. Do not try to hide the problem with aggressive CSS enlargement, sharpening filters, fake upscaling, or stock replacements.
+
+Preferred remediation: obtain the genuine original photograph and manually replace the corresponding file **using the same filename/path** wherever practical. This preserves the existing code references and minimizes token/code churn. Audit and record each replacement before copying it into `public/assets/original/`.
 
 ## Editorial source material
 
@@ -67,7 +69,7 @@ Future phases should prioritize:
 - original WordPress photography
 - strong editorial typography and hierarchy
 - sophisticated spacing and composition
-- immersive image presentation
+- immersive image presentation without over-enlarging soft sources
 - subtle hover/motion treatments
 - tasteful mouse/pointer parallax where it improves the experience
 - responsive mobile behaviour
@@ -107,7 +109,7 @@ Completed:
 
 Still open:
 
-- recovered-photo sharpness/source-resolution audit
+- recovered-photo source-resolution/replacement audit
 - live favicon and iOS Home Screen icon verification
 - final desktop/tablet/iPhone visual audit
 - final Shop image/crop/loading recheck
@@ -119,13 +121,33 @@ Do not mark Phase 5 fully closed merely because CI is green; the remaining items
 
 Before major changes, inspect the existing implementation and the relevant recovered source material.
 
+For photography replacement work, prefer this low-churn workflow:
+
+1. identify the exact existing filename/path used by a page or component;
+2. place the genuine replacement in a local page-grouped staging folder;
+3. rename it to the exact existing filename;
+4. visually compare the replacement at the site's real rendered dimensions;
+5. copy it over the existing file under `public/assets/original/`;
+6. avoid source-code changes when the path can remain identical;
+7. run the normal validation commands.
+
+Suggested local staging structure:
+
+```text
+manual-photo-replacements/
+  landing/
+  about/
+  journal/
+  shop/
+```
+
 After meaningful changes, run:
 
 - `npm run lint`
 - `npm run typecheck`
 - `npm run build`
 
-The latest validation for the current visual fixes is green. Preserve that state while addressing the remaining audit items.
+The known-good green validation state should be preserved while resolving the remaining audit items.
 
 Do not commit generated secrets or hosting recovery material.
 
@@ -147,4 +169,4 @@ At the beginning of a new conversation, read this file together with:
 - `ORIGINAL-WORDPRESS.md`
 - `MEDIA-MAPPING.md`
 
-Then continue from the OPEN items in `PROJECT_STATUS.md`. The immediate next task is an audit/fix pass, not a broad redesign.
+Then continue from the OPEN items in `PROJECT_STATUS.md`. The immediate next task is photography replacement preparation and live verification, not a broad redesign.
