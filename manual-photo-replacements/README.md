@@ -1,8 +1,10 @@
 # Cô Hai Vintage — Manual Photo Replacement Set
 
-This directory is the page-grouped staging map for every current photograph used by the website.
+This directory is the page-grouped staging map for current photographs used by the website.
 
 Some files recovered from the old WordPress site turned out to be screenshots of the old web presentation rather than the original uploaded photographs. The application filenames/paths are therefore being preserved while genuine originals can be substituted manually.
+
+For the reusable procedure, see the root `PHOTO-REPLACEMENT-GUIDE.md`.
 
 ## Page groups
 
@@ -19,8 +21,24 @@ Keep the exact existing filename and extension whenever possible. The canonical 
 
 `public/assets/original/2025/03/`
 
-After replacing a staging image with the genuine original locally, copy the verified replacement over the matching canonical file, then commit/push. No application-code change is required when the path remains unchanged.
+After replacing a staging image with the genuine original locally, use:
 
-The repository's existing canonical images are deliberately not renamed or moved by this staging setup. This keeps the live site stable while the photographic originals are being recovered.
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
+```
 
-See `PHOTO-REPLACEMENT-MANIFEST.md` for the complete filename-to-page mapping.
+The apply script validates the complete approved filename set before copying into the canonical directory.
+
+## Safeguards
+
+The apply script is intentionally fail-closed. It stops when:
+
+1. a staged image has an unexpected filename;
+2. an approved filename is missing;
+3. the same filename appears in multiple groups with different SHA-256 contents.
+
+Do not bypass these checks. If a duplicate filename has different contents, make the intended replacement identical in every page group before applying it.
+
+The staging setup does not rename or move canonical images. This keeps the live site stable while photographic originals are being recovered.
+
+See `PHOTO-REPLACEMENT-MANIFEST.md` for the exact filename-to-page mapping.
