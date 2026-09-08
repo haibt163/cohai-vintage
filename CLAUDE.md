@@ -10,10 +10,13 @@ Read `AGENTS.md`, `PROJECT_STATUS.md`, `ORIGINAL-WORDPRESS.md`, and `MEDIA-MAPPI
 
 The site is currently running well for most agreed requirements. Do not start another broad redesign by default. Continue from the OPEN items in `PROJECT_STATUS.md`, especially:
 
-1. photography sharpness/source-resolution audit;
-2. live favicon and iOS Home Screen icon verification;
-3. final cross-device visual audit;
-4. Shop image/crop/loading recheck;
-5. final production deployment verification.
+1. prepare the manual replacement set for screenshot-based photographs;
+2. verify replacement images at real desktop and iPhone rendered sizes;
+3. live favicon and iOS Home Screen icon verification;
+4. final cross-device visual audit;
+5. Shop image/crop/loading recheck;
+6. final production deployment verification.
 
-Preserve the recovered genuine media and the current green lint/typecheck/build state while resolving these items.
+The owner plans to manually replace photographs using existing filenames/paths and then push them to GitHub. Preserve that low-churn workflow whenever practical.
+
+Preserve recovered genuine media and the known-good lint/typecheck/build state while resolving these items.
