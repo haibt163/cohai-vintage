@@ -90,11 +90,13 @@ This changes the remediation strategy:
 ## Pending issues / next-audit items
 
 1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
-   - Some currently used recovered files are screenshots of old web content rather than the original uploaded photos.
+   - Some currently used recovered files are screenshots of old web content rather than original uploads.
    - This is now the primary explanation for much of the blur.
-   - The practical next step is to produce a clearly organised replacement manifest grouped by page/section. The owner can manually overwrite the existing files with genuine originals using the **same filenames** where possible.
-   - Keep the current code paths stable unless a replacement cannot safely preserve the filename.
-   - Continue to distinguish source-resolution problems from CSS/rendering problems.
+   - A page-grouped staging map has now been added at `manual-photo-replacements/` with `landing/`, `about/`, `journal/`, and `shop/` groups plus a complete manifest.
+   - The staging folders identify every current image by its exact filename; the canonical active files remain unchanged under `public/assets/original/2025/03/`.
+   - Because the current GitHub file-writing interface is text-oriented, the actual binary copies are intentionally prepared locally rather than fabricated as text placeholders. `scripts/stage-current-photos.ps1` copies the exact current binaries into the staging folders after `git pull`.
+   - `scripts/apply-photo-replacements.ps1` can copy verified staged originals back to the canonical media directory before commit/push.
+   - Keep current code paths stable unless a replacement cannot safely preserve the filename.
 
 2. **Favicon / iOS icon live verification — OPEN**
    - Custom Cô Hai Vintage icon generation is implemented.
@@ -113,7 +115,7 @@ This changes the remediation strategy:
 ## Known-good decisions — preserve these
 
 - Keep genuine recovered WordPress media as the source of truth.
-- Keep stable filenames/paths where possible so manual photo replacement does not require script changes.
+- Keep stable filenames/paths where possible so manual photo replacement does not require code mapping changes.
 - Keep the current layout restrained; do not compensate for low-resolution source images by making them larger.
 - Keep the About slideshow focused on the four founder archive portraits.
 - Keep product gallery mappings stable unless a source audit proves otherwise.
@@ -121,9 +123,15 @@ This changes the remediation strategy:
 - Keep the bilingual EN/VI experience and Vietnamese typography refinements.
 - Do not reintroduce Astra starter/demo imagery where genuine Cô Hai media exists.
 
-## Recommended manual photo-replacement workflow
+## Manual photo-replacement workflow
 
-Create a local folder structure such as:
+After pulling `main`, run once:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\stage-current-photos.ps1
+```
+
+This populates:
 
 ```text
 manual-photo-replacements/
@@ -133,9 +141,13 @@ manual-photo-replacements/
   shop/
 ```
 
-Copy the genuine original photo into the appropriate folder and rename it to exactly match the filename used by the site. After visual approval, copy it over the corresponding file under `public/assets/original/`.
+Replace the staged files with genuine originals while preserving their exact filenames. Then run:
 
-Do not alter code solely because an image has been replaced at the same path.
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
+```
+
+Inspect locally, then run the normal validation commands and commit/push the verified binary replacements.
 
 ## Local workflow
 
@@ -162,4 +174,4 @@ Do not commit SQL dumps, `wp-config.php`, passwords, API keys, `.env` files, Blu
 
 ## Next-conversation handoff
 
-Start the next conversation by reading this file together with `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, and `MEDIA-MAPPING.md`. The immediate priority is **photography replacement preparation and live verification**, not another broad redesign.
+Start the next conversation by reading this file together with `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, and `MEDIA-MAPPING.md`. The immediate priority is **photography replacement and live verification**, not another broad redesign.
