@@ -17,14 +17,74 @@
   line-height: 1.18;
 }
 
-/* Do not stretch recovered portrait photography into a wide hero crop. */
+/* Editorial direction: larger photography, generous type, fashion-magazine serif headlines. */
+.hero {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.hero-copy {
+  padding: 8vw 6vw 8vw 7vw;
+}
+
+.hero h1,
+.intro h2,
+.section-heading h2,
+.feature-copy h2,
+.closing-inner h2,
+.page-hero h1,
+.journal-row h2,
+.shop-feature-copy h2,
+.article-header h1,
+.product-info h1,
+.editorial-card h3,
+.product-card h2 {
+  font-family: "Bodoni 72", Didot, "Bodoni MT", "Times New Roman", serif;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+.hero h1 {
+  font-size: clamp(58px, 7.5vw, 118px);
+}
+
+.hero-text,
+.page-dek {
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.eyebrow,
+.card-category,
+.text-link,
+.button,
+.desktop-nav,
+.language-switcher,
+.mobile-nav summary,
+.mobile-nav nav a,
+.contact-form label {
+  font-size: 10px;
+}
+
+.editorial-card h3 {
+  font-size: clamp(26px, 2vw, 32px);
+  line-height: 1;
+}
+
+.editorial-card>p:not(.card-category),
+.product-card>p:not(.card-category),
+.intro>p:last-child,
+.large-copy {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* Larger hero photography: approximately half of the desktop viewport, like the original composition. */
 .hero-image-wrap {
-  width: min(34vw, 560px);
-  min-height: min(68vh, 700px);
-  aspect-ratio: 0.82;
-  justify-self: center;
-  align-self: center;
-  background: var(--paper-deep);
+  width: 100%;
+  min-height: calc(100svh - 59px);
+  aspect-ratio: auto;
+  justify-self: stretch;
+  align-self: stretch;
 }
 
 .hero-image-wrap .archive-slideshow {
@@ -37,16 +97,23 @@
   object-position: center center;
 }
 
-/* Keep the image visually quieter than the editorial copy. */
+/* The new parallax has enough image overscan to move visibly without revealing edges. */
 .archive-slide-image {
-  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.001);
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.065);
+  transition: transform 0.75s cubic-bezier(.2,.7,.2,1);
+  will-change: transform;
 }
 
 .archive-slide.is-active .archive-slide-image {
-  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.004);
+  transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.065);
 }
 
-/* About: portrait editorial treatment, not a full-width archive wall. */
+/* Strengthen the shared image parallax while keeping the motion refined rather than gimmicky. */
+.parallax-image {
+  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(1.065);
+}
+
+/* About: portrait editorial treatment. */
 .about-grid .portrait {
   aspect-ratio: 0.82;
   max-height: 700px;
@@ -57,17 +124,17 @@
   height: 100%;
 }
 
-/* Shop: make the product image support the information instead of dominating it. */
+/* Shop: larger supporting photography. */
 .shop-feature {
-  grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.72fr);
-  gap: 7vw;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  gap: 6vw;
 }
 
 .shop-feature-image {
   aspect-ratio: 0.92;
-  max-height: 610px;
-  justify-self: center;
-  width: min(100%, 560px);
+  max-height: 720px;
+  justify-self: stretch;
+  width: 100%;
 }
 
 .product-image {
@@ -78,16 +145,49 @@
   aspect-ratio: 0.88;
 }
 
+.article-body p {
+  font-size: 20px;
+}
+
+.article-body .article-lead {
+  font-size: 29px;
+}
+
 @media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    padding: 78px 24px 64px;
+  }
+
+  .hero h1 {
+    font-size: clamp(54px, 14vw, 88px);
+  }
+
+  .hero-text,
+  .page-dek {
+    font-size: 17px;
+  }
+
   .hero-image-wrap {
-    width: min(82vw, 520px);
-    min-height: 0;
-    aspect-ratio: 0.82;
-    margin: 0 auto 24px;
+    width: 100%;
+    min-height: 78svh;
+    aspect-ratio: auto;
+    margin: 0;
   }
 
   .hero-image-wrap .archive-slideshow {
     min-height: 0;
+  }
+
+  .archive-slide-image {
+    transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.055);
+  }
+
+  .archive-slide.is-active .archive-slide-image {
+    transform: translate3d(var(--archive-x, 0px), var(--archive-y, 0px), 0) scale(1.055);
   }
 
   .about-grid .portrait {
@@ -95,7 +195,31 @@
   }
 
   .shop-feature-image {
-    width: min(88vw, 520px);
+    width: 100%;
     max-height: 620px;
+  }
+
+  .editorial-card h3 {
+    font-size: 29px;
+  }
+
+  .editorial-card>p:not(.card-category),
+  .product-card>p:not(.card-category),
+  .intro>p:last-child,
+  .large-copy {
+    font-size: 16px;
+  }
+
+  .article-body p {
+    font-size: 19px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-slide-image,
+  .archive-slide.is-active .archive-slide-image,
+  .parallax-image {
+    transform: scale(1.02);
+    transition: none;
   }
 }
