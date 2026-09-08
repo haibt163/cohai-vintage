@@ -42,8 +42,6 @@ This is the exact current media set to use when sourcing genuine original photog
 - `221215140542-bernard-arnault.jpg`
 - `COCO-CHANEL.jpg`
 
-These cover the current Journal archive/article presentation. Individual article routes reuse their mapped editorial image rather than introducing a separate untracked source.
-
 ## Shop — 8 current product/gallery images
 
 - `LV-vintage-Concorde.webp`
@@ -63,13 +61,28 @@ These cover the three current product galleries:
 
 ## Replacement procedure
 
-1. Pull the repository locally.
-2. Use the page-grouped folders as the visual replacement checklist.
-3. Obtain the genuine original photograph.
-4. Rename it to the exact filename above, preserving the extension where practical.
-5. Replace the corresponding file under `public/assets/original/2025/03/`.
-6. Run the site locally and inspect desktop and iPhone-sized rendering.
-7. Run `npm run lint`, `npm run typecheck`, and `npm run build`.
-8. Commit and push the verified binary replacements.
+1. Pull the latest repository `main`.
+2. Run `scripts/stage-current-photos.ps1`.
+3. Use these page-grouped folders as the replacement checklist.
+4. Obtain the genuine original photograph and confirm its page/section usage.
+5. Rename it to the exact filename above, preserving the extension where practical.
+6. Replace the staged file.
+7. Run `scripts/apply-photo-replacements.ps1`.
+8. If the safeguard stops, fix the staging set; do not bypass it.
+9. Run the site locally and inspect desktop and iPhone-sized rendering.
+10. Run `npm run lint`, `npm run typecheck`, and `npm run build`.
+11. Commit and push the verified binary replacement.
+
+## Safeguard expectations
+
+The apply script must reject:
+
+- unexpected/renamed staged image filenames;
+- any missing approved filename;
+- duplicate occurrences of the same filename whose SHA-256 contents differ.
+
+When a filename occurs in more than one page group, all staged copies must be byte-for-byte identical. This prevents one page group from silently overwriting another group's intended replacement.
 
 Do not change `lib/content.ts` or component mappings merely because a source photo has been replaced at the same path.
+
+For the full reusable rationale and adaptation notes, see `PHOTO-REPLACEMENT-GUIDE.md`.
