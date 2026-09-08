@@ -47,10 +47,11 @@
   font-size: clamp(58px, 7.5vw, 118px);
 }
 
+/* Raise the supporting copy so the typography reads as one intentional editorial scale. */
 .hero-text,
 .page-dek {
-  font-size: 18px;
-  line-height: 1.65;
+  font-size: 20px;
+  line-height: 1.6;
 }
 
 .eyebrow,
@@ -73,9 +74,19 @@
 .editorial-card>p:not(.card-category),
 .product-card>p:not(.card-category),
 .intro>p:last-child,
-.large-copy {
-  font-size: 16px;
+.large-copy,
+.journal-row>div>p:not(.eyebrow),
+.shop-feature-copy>p:not(.eyebrow),
+.shop-note p:last-child,
+.prose p:not(.lead),
+.contact-grid>div>p:not(.lead) {
+  font-size: 18px;
   line-height: 1.65;
+}
+
+/* Keep the main reading measure comfortable as the supporting type gets larger. */
+.intro>p:last-child {
+  max-width: 780px;
 }
 
 /* Larger hero photography: approximately half of the desktop viewport, like the original composition. */
@@ -153,6 +164,16 @@
   font-size: 29px;
 }
 
+.contact-form input,
+.contact-form textarea {
+  font-size: 17px;
+}
+
+.footer-inner p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -168,7 +189,7 @@
 
   .hero-text,
   .page-dek {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .hero-image-wrap {
@@ -206,12 +227,26 @@
   .editorial-card>p:not(.card-category),
   .product-card>p:not(.card-category),
   .intro>p:last-child,
-  .large-copy {
-    font-size: 16px;
+  .large-copy,
+  .journal-row>div>p:not(.eyebrow),
+  .shop-feature-copy>p:not(.eyebrow),
+  .shop-note p:last-child,
+  .prose p:not(.lead),
+  .contact-grid>div>p:not(.lead) {
+    font-size: 18px;
   }
 
   .article-body p {
     font-size: 19px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 17px;
+  }
+
+  .footer-inner p {
+    font-size: 14px;
   }
 }
 
