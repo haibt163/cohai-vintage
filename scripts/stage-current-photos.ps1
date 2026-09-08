@@ -10,11 +10,11 @@ $groups = @{
     'CO-HAI-VINTAGE-2.jpg','CO-HAI-VINTAGE-3.jpg','FLEA-MARKET.jpg','MIKIMOTO-1.jpg',
     'COCO-CHANEL.jpg','221215140542-bernard-arnault.jpg','LV-vintage-Concorde.webp',
     'lv-concorde-1.jpg','LV-CONCORDE-2.webp','LV-NEVERFUL-MONO-MM.jpg','LV-neverfull-MM.jpg',
-    'lv-neverfull-mm.webp','LV-KELLY-MONO.jpg','LV-KELLY-LOCK.jpg'
+    'lv-neverfull-mono-1.jpg','LV-KELLY-MONO.jpg','LV-KELLY-LOCK.jpg'
   )
   about = @('CO-HAI-VINTAGE.jpg','CO-HAI-VINTAGE-1.jpg','CO-HAI-VINTAGE-2.jpg','CO-HAI-VINTAGE-3.jpg')
   journal = @('FLEA-MARKET.jpg','MIKIMOTO-1.jpg','STREET-STYLE-3.jpg','221215140542-bernard-arnault.jpg','COCO-CHANEL.jpg')
-  shop = @('LV-vintage-Concorde.webp','lv-concorde-1.jpg','LV-CONCORDE-2.webp','LV-NEVERFUL-MONO-MM.jpg','LV-neverfull-MM.jpg','lv-neverfull-mm.webp','LV-KELLY-MONO.jpg','LV-KELLY-LOCK.jpg')
+  shop = @('LV-vintage-Concorde.webp','lv-concorde-1.jpg','LV-CONCORDE-2.webp','LV-NEVERFUL-MONO-MM.jpg','LV-neverfull-MM.jpg','lv-neverfull-mono-1.jpg','LV-KELLY-MONO.jpg','LV-KELLY-LOCK.jpg')
 }
 
 foreach ($group in $groups.Keys) {
