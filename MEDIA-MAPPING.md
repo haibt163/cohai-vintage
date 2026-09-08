@@ -109,6 +109,31 @@ Current verified product gallery counts:
 
 The owner has confirmed that some files recovered from the old WordPress site are **screenshots rather than the original uploaded photographs**. This explains a significant portion of the remaining softness/blurriness.
 
+### Page-grouped replacement set
+
+A dedicated staging map now exists at:
+
+```text
+manual-photo-replacements/
+  README.md
+  PHOTO-REPLACEMENT-MANIFEST.md
+  landing/
+  about/
+  journal/
+  shop/
+```
+
+The manifest identifies every current image by its exact filename and page usage. The canonical active images remain unchanged under `public/assets/original/2025/03/` until a genuine replacement is verified.
+
+Because binary media should not be fabricated as text through the repository file-writing interface, the repository includes local helpers:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\stage-current-photos.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
+```
+
+The first copies the exact current binaries into the page-grouped staging folders after a local `git pull`. The second copies verified staged replacements back to the canonical media directory.
+
 ### Replacement strategy
 
 The preferred low-churn solution is:
@@ -116,32 +141,9 @@ The preferred low-churn solution is:
 1. keep the existing application filename/path;
 2. obtain the genuine original photograph manually;
 3. rename the genuine file to exactly match the existing filename;
-4. replace the screenshot file under `public/assets/original/` locally;
+4. replace the staged/canonical screenshot file locally;
 5. run the site at realistic desktop/iPhone rendered sizes and visually verify it;
 6. commit/push the binary replacement without changing application code where the path is unchanged.
-
-Recommended local staging folders:
-
-```text
-manual-photo-replacements/
-  landing/
-  about/
-  journal/
-  shop/
-```
-
-The owner plans to perform this replacement and push manually to GitHub, which is the preferred workflow for this binary-media pass.
-
-### Required audit manifest
-
-Before replacing each file, record:
-
-- exact current filename/path;
-- page and section where it is used;
-- whether it is currently a screenshot/low-resolution source;
-- replacement source filename;
-- replacement pixel dimensions;
-- desired orientation/aspect ratio at render time.
 
 Do not replace a file merely because it looks soft until its page usage has been confirmed.
 
