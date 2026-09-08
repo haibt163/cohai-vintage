@@ -44,7 +44,7 @@ The current verified set is:
 13. `LV-CONCORDE-2.webp`
 14. `LV-NEVERFUL-MONO-MM.jpg`
 15. `LV-neverfull-MM.jpg`
-16. `lv-neverfull-mm.webp`
+16. `lv-neverfull-mono-1.jpg`
 17. `LV-KELLY-MONO.jpg`
 18. `LV-KELLY-LOCK.jpg`
 
@@ -102,7 +102,7 @@ Use the relevant recovered Louis Vuitton/history imagery identified from the ori
 Current verified product gallery counts:
 
 - Concorde: 3 recovered assets
-- Neverfull MM: 3 recovered assets
+- Neverfull MM: 3 recovered assets (`LV-NEVERFUL-MONO-MM.jpg`, `LV-neverfull-MM.jpg`, `lv-neverfull-mono-1.jpg`)
 - Mono Kelly: 2 recovered assets
 
 ## Current photography-source finding — OPEN / PRIORITY
