@@ -1,0 +1,152 @@
+name: Stage current photo replacement set
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Copy the exact current image files into page-grouped replacement folders
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          source_dir="public/assets/original/2025/03"
+          root="manual-photo-replacements"
+
+          landing=(
+            STREET-STYLE-3.jpg
+            STREET-STYLE-1.jpg
+            CO-HAI-VINTAGE.jpg
+            CO-HAI-VINTAGE-1.jpg
+            CO-HAI-VINTAGE-2.jpg
+            CO-HAI-VINTAGE-3.jpg
+            FLEA-MARKET.jpg
+            MIKIMOTO-1.jpg
+            COCO-CHANEL.jpg
+            221215140542-bernard-arnault.jpg
+            LV-vintage-Concorde.webp
+            lv-concorde-1.jpg
+            LV-CONCORDE-2.webp
+            LV-NEVERFUL-MONO-MM.jpg
+            LV-neverfull-MM.jpg
+            lv-neverfull-mm.webp
+            LV-KELLY-MONO.jpg
+            LV-KELLY-LOCK.jpg
+          )
+
+          about=(
+            CO-HAI-VINTAGE.jpg
+            CO-HAI-VINTAGE-1.jpg
+            CO-HAI-VINTAGE-2.jpg
+            CO-HAI-VINTAGE-3.jpg
+          )
+
+          journal=(
+            FLEA-MARKET.jpg
+            MIKIMOTO-1.jpg
+            STREET-STYLE-3.jpg
+            221215140542-bernard-arnault.jpg
+            COCO-CHANEL.jpg
+          )
+
+          shop=(
+            LV-vintage-Concorde.webp
+            lv-concorde-1.jpg
+            LV-CONCORDE-2.webp
+            LV-NEVERFUL-MONO-MM.jpg
+            LV-neverfull-MM.jpg
+            lv-neverfull-mm.webp
+            LV-KELLY-MONO.jpg
+            LV-KELLY-LOCK.jpg
+          )
+
+          for group in landing about journal shop; do
+            mkdir -p "$root/$group"
+          done
+
+          copy_group() {
+            local group="$1"
+            shift
+            for file in "$@"; do
+              test -f "$source_dir/$file"
+              cp -f "$source_dir/$file" "$root/$group/$file"
+            done
+          }
+
+          copy_group landing "${landing[@]}"
+          copy_group about "${about[@]}"
+          copy_group journal "${journal[@]}"
+          copy_group shop "${shop[@]}"
+
+          cat > "$root/README.md" <<'EOF'
+# Cô Hai Vintage — Manual Photo Replacement Set
+
+These folders contain copies of the **exact current image files used by the live application**, grouped by page/experience so the genuine high-resolution originals can be manually substituted without guessing which photograph is which.
+
+## Folders
+
+- `landing/` — all 18 current homepage archive slideshow images.
+- `about/` — the 4 founder portraits currently used by the About slideshow.
+- `journal/` — the 5 current Journal card/article images.
+- `shop/` — the 8 current Shop/product gallery images.
+
+The same filename is deliberately preserved. Replace a screenshot/low-resolution file with the genuine original using the **exact same filename and extension**.
+
+## Important
+
+These are staging copies for manual source replacement. The active application currently continues to use `public/assets/original/2025/03/` so the site remains unchanged while replacements are prepared.
+
+After selecting a genuine original:
+
+1. Replace the corresponding file in this folder with the genuine original, keeping the exact filename.
+2. Copy the verified replacement over the matching file under `public/assets/original/2025/03/`.
+3. Commit/push the replacement to GitHub.
+4. Recheck desktop and iPhone rendering.
+
+Do not rename files or change application mappings unless a replacement genuinely cannot preserve the existing path.
+EOF
+
+          cat > "$root/landing/README.md" <<'EOF'
+# Landing page photo replacements
+
+Contains the 18 exact images currently used by the homepage archive slideshow. Keep every filename unchanged when replacing a screenshot with the genuine original.
+EOF
+
+          cat > "$root/about/README.md" <<'EOF'
+# About page photo replacements
+
+Contains the 4 exact founder portrait images currently used by the About slideshow. Keep every filename unchanged when replacing a screenshot with the genuine original.
+EOF
+
+          cat > "$root/journal/README.md" <<'EOF'
+# Journal photo replacements
+
+Contains the 5 exact editorial images currently used by the Journal archive and article routes. Keep every filename unchanged when replacing a screenshot with the genuine original.
+EOF
+
+          cat > "$root/shop/README.md" <<'EOF'
+# Shop photo replacements
+
+Contains the 8 exact product/gallery images currently used by the Shop and product-detail routes. Keep every filename unchanged when replacing a screenshot with the genuine original.
+EOF
+
+      - name: Commit the staged replacement set and remove this one-shot workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/stage-current-photo-set.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manual-photo-replacements .github/workflows/stage-current-photo-set.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Stage current photos for manual replacement"
+          git push origin HEAD:main
