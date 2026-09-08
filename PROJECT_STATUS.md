@@ -1,10 +1,10 @@
 # Cô Hai Vintage — Project Status
 
-## Current state — 7 September 2026
+## Current state — 8 September 2026
 
-The modern Cô Hai Vintage reconstruction is running well on `main` and satisfies the large majority of the agreed functional and visual requirements. `main` remains the authoritative, deployable source.
+The modern Cô Hai Vintage reconstruction is running well on `main` and satisfies the large majority of the agreed functional and visual requirements. `main` remains the authoritative code source.
 
-Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, but a small number of visual verification items remain intentionally open for the next conversation.
+Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, but the remaining visual/live verification items are intentionally carried forward.
 
 ## Phase 3 — COMPLETE
 
@@ -21,13 +21,12 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 - Distinctive Cô Hai Vintage header/navigation and bilingual EN/VI switcher.
 - Magnetic navigation interactions.
 - Visible mouse parallax on editorial photography.
-- High-quality image rendering with `quality={100}` on image-led experiences.
-- Homepage archive slideshow using the 18 verified recovered archive images, with slow automatic rotation and manual controls.
-- About page founder archive slideshow focused on the four verified `CO-HAI-VINTAGE` founder portrait assets rather than mixing unrelated editorial/product imagery.
+- Restrained image rendering and framing intended to avoid unnecessary enlargement of archival photographs.
+- Homepage archive slideshow using the verified recovered archive set, with slow automatic rotation and manual controls.
+- About page founder archive slideshow focused on the four verified `CO-HAI-VINTAGE` founder portrait assets.
 - Shop, product, Contact and About routes visually integrated.
 - Responsive mobile/tablet layouts and reduced-motion support.
-- Vietnamese typography/spacing refinements added to address visible word-spacing and diacritic rendering issues.
-- Hero and Shop image geometry restrained so recovered portrait photography is not unnecessarily stretched into wide crops.
+- Vietnamese typography/spacing refinements are present, but final cross-device review remains open.
 
 ## Phase 5 — SUBSTANTIALLY COMPLETE
 
@@ -43,19 +42,18 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 - Legacy `/portfolio` routes redirect to the canonical Journal routes.
 - Branded `not-found` page added.
 
-### Image-reference audit
+### Image/reference state
 
 - Primary image-led routes use verified recovered Cô Hai media.
 - Homepage and About use genuine archive assets rather than repeatedly enlarging one image.
-- Product/editorial images use the recovered source paths and full-quality Next image delivery.
-- The three product galleries have been checked against the recovered filenames; no broken product image path is currently known.
-- No guessed Louis Vuitton Patent filename was introduced.
+- Product/editorial images use recovered source paths.
+- Product gallery mappings are documented in `MEDIA-MAPPING.md`.
 
-### Interaction / responsive audit
+### Interaction / responsive state
 
 - Scroll reveal reinitialises on Next.js client-side route changes.
-- In-view content is made visible immediately after navigation, preventing the previous refresh-only behaviour.
-- Mouse parallax is applied directly to image media rather than only to the ambient pointer layer.
+- In-view content is made visible immediately after navigation.
+- Mouse parallax is applied directly to image media and remains restrained.
 - Slideshow controls are keyboard-accessible and automatic motion respects `prefers-reduced-motion`.
 - Mobile removes desktop-only pointer effects while preserving touch-friendly controls.
 
@@ -65,53 +63,79 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 - Carousel controls have accessible labels and pressed state.
 - Missing routes use a branded 404 experience.
 - Site metadata, Open Graph defaults, Apple web-app metadata, theme colour and installable manifest configured.
-- Custom Cô Hai Vintage generated icon routes are implemented for the browser icon and Apple/iOS icon.
+- Custom Cô Hai Vintage icon generation is implemented.
 
 ### Validation
 
-The latest GitHub Actions validation run for the current visual fixes is green:
+The latest automated validation has been kept as a required gate:
 
-- `npm run lint` — PASS
-- `npm run typecheck` — PASS
-- `npm run build` — PASS
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+
+The latest known green validation remains the baseline to preserve while working on the open visual items. Always re-run all three after meaningful changes.
+
+## Newly confirmed photography finding — OPEN / PRIORITY
+
+The owner has now confirmed the root cause of a major portion of the perceived softness: some of the recovered old-WordPress images are actually screenshots rather than the original uploaded photographs.
+
+This changes the remediation strategy:
+
+- Do **not** attempt to solve screenshot softness primarily through CSS enlargement, sharpening filters, aggressive `quality`, or fake upscaling.
+- Preserve the existing filenames/paths where possible so the site code does not need to change.
+- The preferred replacement workflow is to keep the current filename and manually replace the low-quality screenshot with the genuine original photograph in the same path.
+- Before replacement, audit each currently used image and record its exact path, page/section usage, and required target orientation/aspect.
+- After replacement, re-test desktop and iPhone presentation at realistic rendered sizes.
 
 ## Pending issues / next-audit items
 
-These items are deliberately recorded as OPEN rather than treated as finished:
-
-1. **Recovered photography sharpness — OPEN / PRIORITY**
-   - The site is using the correct recovered photographs, but the photos still look somewhat blurry/soft in the live presentation.
-   - Do not replace them with stock imagery or invent higher-resolution variants.
-   - Next audit should determine whether the softness comes from the recovered source resolution, browser/device rendering, Next image delivery, CSS cropping/scaling, or a combination.
-   - Keep the current image sources intact until that audit is completed.
+1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
+   - Some currently used recovered files are screenshots of old web content rather than the original uploaded photos.
+   - This is now the primary explanation for much of the blur.
+   - The practical next step is to produce a clearly organised replacement manifest grouped by page/section. The owner can manually overwrite the existing files with genuine originals using the **same filenames** where possible.
+   - Keep the current code paths stable unless a replacement cannot safely preserve the filename.
+   - Continue to distinguish source-resolution problems from CSS/rendering problems.
 
 2. **Favicon / iOS icon live verification — OPEN**
-   - Custom generated Cô Hai Vintage icon routes have been implemented and the production build passes.
-   - Live deployment still needs browser verification because the previous Vercel/default icon and iOS missing-icon behaviour may be affected by deployment state and aggressive browser/Home Screen caching.
-   - Verify desktop browser tab/favicon and iOS Home Screen icon after the latest deployment; if necessary clear/re-add the Home Screen shortcut before judging the icon.
+   - Custom Cô Hai Vintage icon generation is implemented.
+   - Verify on the deployed production site, including browser tab/favicon and iOS Home Screen behaviour after removing/re-adding an installed shortcut.
 
 3. **Final cross-device visual audit — OPEN**
-   - Recheck the live site on desktop, tablet and iPhone after deployment.
-   - Pay particular attention to Vietnamese line wrapping/diacritics, hero image framing, About portraits, Shop image scale, and any perceived missing/incorrect image.
-   - Confirm there are no console errors, broken network requests, unexpected layout shifts, or browser-specific rendering regressions.
+   - Recheck desktop, tablet and iPhone after the next media replacements.
+   - Pay attention to Vietnamese typography/line wrapping, hero framing, About portraits, Shop image scale and any broken image/network request.
 
-4. **Shop image perception — OPEN FOR VISUAL RECHECK**
-   - The recovered product gallery filenames/paths are present and mapped correctly.
-   - The earlier concern that a Shop image appeared missing may be a presentation/crop/loading issue rather than a missing source file. Recheck the live gallery visually before changing the source mapping.
+4. **Shop image presentation — OPEN FOR VISUAL RECHECK**
+   - Verify the currently mapped product images and their framing/loading on desktop and iPhone before changing mappings.
 
 5. **Production deployment verification — OPEN**
-   - GitHub `main` is validated and deployable, but the final production URL should be checked after the latest commit is deployed.
-   - Do not mark the above visual items closed solely because CI is green; they require real browser/device verification.
+   - Confirm the latest `main` commit is the one actually served in production before closing Phase 5.
 
-## Known good decisions — preserve these
+## Known-good decisions — preserve these
 
 - Keep genuine recovered WordPress media as the source of truth.
-- Keep the 18 verified archive images; do not fabricate two additional images just to reach a larger slideshow count.
+- Keep stable filenames/paths where possible so manual photo replacement does not require script changes.
+- Keep the current layout restrained; do not compensate for low-resolution source images by making them larger.
 - Keep the About slideshow focused on the four founder archive portraits.
-- Keep product gallery mappings as currently defined in `lib/content.ts` unless a source audit proves otherwise.
+- Keep product gallery mappings stable unless a source audit proves otherwise.
 - Keep motion subtle and respect reduced-motion preferences.
 - Keep the bilingual EN/VI experience and Vietnamese typography refinements.
 - Do not reintroduce Astra starter/demo imagery where genuine Cô Hai media exists.
+
+## Recommended manual photo-replacement workflow
+
+Create a local folder structure such as:
+
+```text
+manual-photo-replacements/
+  landing/
+  about/
+  journal/
+  shop/
+```
+
+Copy the genuine original photo into the appropriate folder and rename it to exactly match the filename used by the site. After visual approval, copy it over the corresponding file under `public/assets/original/`.
+
+Do not alter code solely because an image has been replaced at the same path.
 
 ## Local workflow
 
@@ -134,8 +158,8 @@ Do not commit SQL dumps, `wp-config.php`, passwords, API keys, `.env` files, Blu
 
 ## Deployment rule
 
-`main` is the authoritative reconstruction branch. Keep it clean and deployable; make future changes through the same documented workflow and preserve recovered genuine media as the source of truth.
+`main` is the authoritative reconstruction branch. Keep it clean and deployable; preserve recovered genuine media as the source of truth.
 
 ## Next-conversation handoff
 
-Start the next conversation by reading this file together with `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, and `MEDIA-MAPPING.md`. The immediate priority is **not** another broad redesign. Begin with the OPEN items above, especially the photography sharpness/source-resolution audit and live favicon/iOS verification, then perform the final cross-device visual audit before declaring Phase 5 fully closed.
+Start the next conversation by reading this file together with `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, and `MEDIA-MAPPING.md`. The immediate priority is **photography replacement preparation and live verification**, not another broad redesign.
