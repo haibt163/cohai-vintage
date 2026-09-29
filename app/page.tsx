@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { editorialPosts, products } from "@/lib/content";
-import { archiveSlides } from "@/lib/archive-media";
-import { getLocale, localizedPost, localizedProduct, ui } from "@/lib/i18n";
+import { getArchiveSlides } from "@/lib/archive-media";
+import { getLocale, localizedPost, localizedProduct, slideshowLabels, ui } from "@/lib/i18n";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 
@@ -28,7 +28,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="hero-image-wrap hero-parallax-wrap">
-          <ArchiveSlideshow slides={archiveSlides} interval={7200} />
+          <ArchiveSlideshow slides={getArchiveSlides(locale)} interval={7200} labels={slideshowLabels(locale)} />
         </div>
       </section>
 

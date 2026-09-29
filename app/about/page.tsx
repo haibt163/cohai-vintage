@@ -1,8 +1,6 @@
-import { getLocale, ui } from "@/lib/i18n";
-import { archiveSlides } from "@/lib/archive-media";
+import { getLocale, slideshowLabels, ui } from "@/lib/i18n";
+import { getArchiveSlides } from "@/lib/archive-media";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
-
-const founderSlides = archiveSlides.filter((slide) => slide.alt.toLowerCase().includes("founder archive portrait"));
 
 export default async function About() {
   const locale = await getLocale();
@@ -15,7 +13,7 @@ export default async function About() {
       </section>
       <section className="about-grid section-narrow reveal">
         <div className="portrait founder-archive">
-          <ArchiveSlideshow slides={founderSlides} interval={7600} />
+          <ArchiveSlideshow slides={getArchiveSlides(locale, "founder")} interval={7600} labels={slideshowLabels(locale)} />
         </div>
         <div className="prose">
           <p className="lead">{labels.aboutLead}</p>

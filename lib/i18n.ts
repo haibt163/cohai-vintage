@@ -32,6 +32,11 @@ export const ui = {
     enquire: "Enquire about this piece", backJournal: "← Back to Journal", backCollection: "← Back to collection",
     confirm: "Individual condition, provenance, availability and pricing should be confirmed before purchase.",
     footer: "Vintage fashion, objects, jewellery and stories with a sense of history.", rights: "All rights reserved.",
+    skip: "Skip to content", view: "view", openJournal: "Open Journal", backHome: "Back home",
+    notFoundTitle: "This page has moved.", notFoundDek: "Return to the archive or explore the collection.",
+    carouselRegion: "Cô Hai Vintage image archive", carouselPrev: "Previous image", carouselNext: "Next image",
+    carouselPause: "Pause slideshow", carouselPlay: "Play slideshow", carouselChoose: "Choose archive image", carouselShow: "Show image {n}", carouselCaption: "CÔ HAI ARCHIVE",
+    contactSuccess: "Your email app should now open with your message. If it does not, please write to us directly at", contactPiece: "I would like to enquire about {piece}.", instagramLink: "Instagram",
   },
   vi: {
     home: "Trang chủ", about: "Về Cô Hai", journal: "Tạp chí", contact: "Liên hệ", shop: "Bộ sưu tập",
@@ -54,8 +59,21 @@ export const ui = {
     enquire: "Hỏi về sản phẩm này", backJournal: "← Quay lại Tạp chí", backCollection: "← Quay lại bộ sưu tập",
     confirm: "Tình trạng, nguồn gốc, khả năng sẵn có và giá cần được xác nhận trước khi mua.",
     footer: "Thời trang vintage, đồ vật, trang sức và những câu chuyện mang theo dấu vết của thời gian.", rights: "Bảo lưu mọi quyền.",
+    skip: "Chuyển đến nội dung", view: "góc nhìn", openJournal: "Xem Tạp chí", backHome: "Về trang chủ",
+    notFoundTitle: "Trang này không còn ở đây.", notFoundDek: "Hãy quay về kho lưu trữ hoặc khám phá bộ sưu tập.",
+    carouselRegion: "Kho ảnh Cô Hai Vintage", carouselPrev: "Ảnh trước", carouselNext: "Ảnh tiếp theo",
+    carouselPause: "Tạm dừng trình chiếu", carouselPlay: "Phát trình chiếu", carouselChoose: "Chọn ảnh trong kho lưu trữ", carouselShow: "Xem ảnh {n}", carouselCaption: "KHO LƯU TRỮ CÔ HAI",
+    contactSuccess: "Ứng dụng email của bạn sẽ mở ra cùng lời nhắn. Nếu không, vui lòng viết trực tiếp cho chúng tôi tại", contactPiece: "Tôi muốn hỏi về {piece}.", instagramLink: "Instagram",
   },
 } as const;
+
+export function slideshowLabels(locale: Locale) {
+  const l = ui[locale];
+  return {
+    region: l.carouselRegion, previous: l.carouselPrev, next: l.carouselNext, pause: l.carouselPause,
+    play: l.carouselPlay, choose: l.carouselChoose, show: l.carouselShow, caption: l.carouselCaption,
+  };
+}
 
 export function localizedPost(post: EditorialPost, locale: Locale): EditorialPost {
   if (locale === "en") return post;
