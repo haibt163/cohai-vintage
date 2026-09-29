@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {localized.details.map((detail) => <li key={detail}>{detail}</li>)}
         </ul>
         <p className="muted">{labels.confirm}</p>
-        <Link className="button button-dark" href="/contact">{labels.enquire}</Link>
+        <Link className="button button-dark" href={`/contact?piece=${product.slug}`}>{labels.enquire}</Link>
         <Link className="text-link product-back" href="/shop">{labels.backCollection}</Link>
       </div>
     </div>

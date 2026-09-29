@@ -36,7 +36,7 @@ export const ui = {
     notFoundTitle: "This page has moved.", notFoundDek: "Return to the archive or explore the collection.",
     carouselRegion: "Cô Hai Vintage image archive", carouselPrev: "Previous image", carouselNext: "Next image",
     carouselPause: "Pause slideshow", carouselPlay: "Play slideshow", carouselChoose: "Choose archive image", carouselShow: "Show image {n}", carouselCaption: "CÔ HAI ARCHIVE",
-    contactSuccess: "Your email app should now open with your message. If it does not, please write to us directly at", contactPiece: "I would like to enquire about {piece}.", instagramLink: "Instagram",
+    contactPiece: "I would like to enquire about {piece}.",
   },
   vi: {
     home: "Trang chủ", about: "Về Cô Hai", journal: "Tạp chí", contact: "Liên hệ", shop: "Bộ sưu tập",
@@ -63,7 +63,7 @@ export const ui = {
     notFoundTitle: "Trang này không còn ở đây.", notFoundDek: "Hãy quay về kho lưu trữ hoặc khám phá bộ sưu tập.",
     carouselRegion: "Kho ảnh Cô Hai Vintage", carouselPrev: "Ảnh trước", carouselNext: "Ảnh tiếp theo",
     carouselPause: "Tạm dừng trình chiếu", carouselPlay: "Phát trình chiếu", carouselChoose: "Chọn ảnh trong kho lưu trữ", carouselShow: "Xem ảnh {n}", carouselCaption: "KHO LƯU TRỮ CÔ HAI",
-    contactSuccess: "Ứng dụng email của bạn sẽ mở ra cùng lời nhắn. Nếu không, vui lòng viết trực tiếp cho chúng tôi tại", contactPiece: "Tôi muốn hỏi về {piece}.", instagramLink: "Instagram",
+    contactPiece: "Tôi muốn hỏi về {piece}.",
   },
 } as const;
 
