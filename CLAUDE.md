@@ -18,10 +18,11 @@ Do not undo these changes by reverting supporting copy to very small website tex
 
 ## Next-conversation priority
 
-Read `AGENTS.md`, `PROJECT_STATUS.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md` before making changes.
+Read `AGENTS.md`, `PROJECT_STATUS.md`, `AUDIT-2026-09-29.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md` before making changes.
 
 The site is currently running well for most agreed requirements. Do not start another broad redesign by default. Continue from the OPEN items in `PROJECT_STATUS.md`, especially:
 
+0. review/verify the audit remediation branch (`AUDIT-2026-09-29.md`) — lint/typecheck/build and the preview checklist are still UNVERIFIED;
 1. replace remaining screenshot-based photographs with genuine originals;
 2. verify replacements at real desktop and iPhone rendered sizes;
 3. live favicon and iOS Home Screen icon verification;

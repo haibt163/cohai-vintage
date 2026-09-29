@@ -105,3 +105,7 @@ Phase 5: final route, asset, accessibility, performance, and production audit â€
 ## Security
 
 Raw SQL exports, `wp-config.php`, hosting backups, credentials, passwords, API keys, `.env` secrets, and other sensitive recovery files stay outside GitHub.
+
+## Where the recovered files live now
+
+Files the site uses are in `public/assets/original/2025/03/`. The rest of the recovered uploads and theme images were moved to `archive/wordpress-recovery/` (not served). WooCommerce logs and plugin caches (Astra, Spectra, WPForms, WooCommerce imports/uploads) were deleted from the working tree on 29 September 2026 because they have no site value and were publicly reachable; they remain in Git history. See `AUDIT-2026-09-29.md`.

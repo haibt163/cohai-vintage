@@ -32,6 +32,8 @@ Do not choose generic stock imagery merely because it looks cleaner.
 
 Before using an asset, inspect its actual subject and use the documented WordPress mapping in `MEDIA-MAPPING.md` and `ORIGINAL-WORDPRESS.md`.
 
+**Served vs archived media:** only files referenced by the application live in `public/assets/original/2025/03/` (the canonical, served location). Recovered-but-unused WordPress media lives in `archive/wordpress-recovery/` and is not served; copy a file from there into `public/` with its exact expected filename only when it is deliberately used. `npm run check:media` fails CI if a referenced file is missing or if logs/plugin caches appear under `public/`.
+
 ### Image-quality rule
 
 Some recovered photographs are screenshots of the old web presentation rather than the original uploaded photos. This is an OPEN source-quality finding. Do not try to hide the problem with aggressive CSS enlargement, sharpening filters, fake upscaling, or stock replacements.
@@ -148,6 +150,7 @@ Before major changes, inspect the existing implementation and the relevant recov
 
 After meaningful code or media changes, run:
 
+- `npm run check:media`
 - `npm run lint`
 - `npm run typecheck`
 - `npm run build`
@@ -163,12 +166,14 @@ Preserve the known-good validation state while addressing the remaining audit it
 - `.env` secrets
 - Bluehost/cPanel backup archives
 - credentials or other sensitive recovery files
+- WordPress/WooCommerce logs, plugin caches or `.htaccess`/`index.php` stubs (never under `public/`)
 
 ## Continuity instruction
 
 At the beginning of a new conversation, read:
 
 - `PROJECT_STATUS.md`
+- `AUDIT-2026-09-29.md` (audit findings, status and Owner decisions)
 - `AGENTS.md`
 - `ORIGINAL-WORDPRESS.md`
 - `MEDIA-MAPPING.md`

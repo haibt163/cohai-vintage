@@ -2,9 +2,11 @@
 
 ## Canonical media location
 
-Recovered genuine media belongs under:
+Recovered genuine media **in use by the site** belongs under:
 
-`public/assets/original/`
+`public/assets/original/2025/03/`
+
+Recovered media that is not used lives in `archive/wordpress-recovery/` (same relative structure, not served). See `archive/README.md`.
 
 The old WordPress upload structure is preserved sufficiently to trace filenames back to the recovered source material.
 
