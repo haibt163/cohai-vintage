@@ -3,11 +3,12 @@ import "./globals.css";
 import "./motion.css";
 import "./quality-motion.css";
 import "./audit-fixes.css";
+import "./a11y.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PointerAtmosphere } from "@/components/PointerAtmosphere";
 import { RevealObserver } from "@/components/RevealObserver";
-import { getLocale } from "@/lib/i18n";
+import { getLocale, ui } from "@/lib/i18n";
 import { JsonLd } from "@/components/JsonLd";
 import { contact, siteUrl } from "@/lib/site";
 
@@ -45,11 +46,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang={locale}>
       <body>
+        <a className="skip-link" href="#main">{ui[locale].skip}</a>
         <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: "Cô Hai Vintage", url: siteUrl, email: contact.email, sameAs: [contact.instagramUrl] }} />
         <PointerAtmosphere />
         <Header />
         <RevealObserver />
-        <main>{children}</main>
+        <main id="main" tabIndex={-1}>{children}</main>
         <Footer />
       </body>
     </html>

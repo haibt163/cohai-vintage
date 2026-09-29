@@ -2,6 +2,7 @@ import { navigation } from "@/lib/content";
 import { getLocale, ui } from "@/lib/i18n";
 import { MagneticLink } from "@/components/MagneticLink";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { MobileNav } from "@/components/MobileNav";
 
 export async function Header() {
   const locale = await getLocale();
@@ -18,12 +19,11 @@ export async function Header() {
         <div className="header-mobile-language">
           <LanguageSwitcher locale={locale} />
         </div>
-        <details className="mobile-nav">
-          <summary>{labels.menu}</summary>
+        <MobileNav label={labels.menu}>
           <nav aria-label="Mobile navigation">
             {navigation.map((item) => <MagneticLink key={item.href} href={item.href}>{labels[item.key as keyof typeof labels]}</MagneticLink>)}
           </nav>
-        </details>
+        </MobileNav>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navigation.map((item) => <MagneticLink key={item.href} href={item.href}>{labels[item.key as keyof typeof labels]}</MagneticLink>)}
           <LanguageSwitcher locale={locale} />
