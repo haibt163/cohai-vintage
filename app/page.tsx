@@ -1,10 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { editorialPosts, products } from "@/lib/content";
-import { archiveSlides } from "@/lib/archive-media";
-import { getLocale, localizedPost, localizedProduct, ui } from "@/lib/i18n";
+import { getArchiveSlides } from "@/lib/archive-media";
+import { getLocale, localizedPost, localizedProduct, slideshowLabels, ui } from "@/lib/i18n";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default async function Home() {
   const locale = await getLocale();
@@ -28,7 +31,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="hero-image-wrap hero-parallax-wrap">
-          <ArchiveSlideshow slides={archiveSlides} interval={7200} />
+          <ArchiveSlideshow slides={getArchiveSlides(locale)} interval={7200} labels={slideshowLabels(locale)} />
         </div>
       </section>
 
@@ -69,7 +72,7 @@ export default async function Home() {
           {pieces.map((product, index) => (
             <Link className={`mini-product reveal reveal-delay-${index + 1}`} href={`/shop/${product.slug}`} key={product.slug}>
               <div className="mini-product-image">
-                <Image src={product.image} alt={product.name} fill quality={100} unoptimized sizes="(max-width: 800px) 33vw, 20vw" />
+                <Image src={product.image} alt={product.name} fill sizes="(max-width: 800px) 33vw, 20vw" />
               </div>
               <span>{product.name}</span>
             </Link>

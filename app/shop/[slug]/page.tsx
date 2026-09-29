@@ -11,11 +11,13 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
-  if (!product) return {};
+  const found = getProduct(slug);
+  if (!found) return {};
+  const product = localizedProduct(found, await getLocale());
   return {
     title: product.name,
     description: product.description,
+    alternates: { canonical: `/shop/${slug}` },
     openGraph: { title: product.name, description: product.description, images: [{ url: product.image }] },
   };
 }
@@ -33,7 +35,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="product-gallery">
         {localized.gallery.map((image, index) => (
           <div className="product-gallery-image" key={image}>
-            <ParallaxMedia src={image} alt={`${localized.name} view ${index + 1}`} fill quality={100} sizes="(max-width: 800px) 100vw, 55vw" priority={index === 0} strength={6} />
+            <ParallaxMedia src={image} alt={`${localized.name} — ${labels.view} ${index + 1}`} fill sizes="(max-width: 800px) 100vw, 55vw" priority={index === 0} strength={6} />
             <span className="gallery-number">0{index + 1}</span>
           </div>
         ))}
@@ -46,7 +48,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {localized.details.map((detail) => <li key={detail}>{detail}</li>)}
         </ul>
         <p className="muted">{labels.confirm}</p>
-        <Link className="button button-dark" href="/contact">{labels.enquire}</Link>
+        <Link className="button button-dark" href={`/contact?piece=${product.slug}`}>{labels.enquire}</Link>
         <Link className="text-link product-back" href="/shop">{labels.backCollection}</Link>
       </div>
     </div>

@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { products } from "@/lib/content";
 import { getLocale, localizedProduct, ui } from "@/lib/i18n";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const labels = ui[await getLocale()];
+  return { title: labels.shop, description: labels.shopDek, alternates: { canonical: "/shop" } };
+}
 
 export default async function Shop() {
   const locale = await getLocale();

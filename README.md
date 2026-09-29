@@ -81,19 +81,28 @@ manual-photo-replacements/
   shop/
 ```
 
-The canonical active media remains under `public/assets/original/2025/03/`. Preserve existing filenames/paths whenever possible so application code does not need to change.
+The canonical active media remains under `public/assets/original/2025/03/` (only files the site actually uses; everything in `public/` is served). Preserve existing filenames/paths whenever possible so application code does not need to change. Unused recovered media is kept in `archive/wordpress-recovery/` (not served).
 
 ## Source material
 
 The recovered WordPress source is documented in:
 
 - `ORIGINAL-WORDPRESS.md`
+- `ENGINEERING-GOVERNANCE.md` (roles, review, merge authority, evidence)
+- `WORKFLOWS.md` (procedures and prompt templates)
+- `AGENTS.project.md` (project-specific agent instructions)
 - `MEDIA-MAPPING.md`
 - `PROJECT_STATUS.md`
 - `AGENTS.md`
 - `PHOTO-REPLACEMENT-GUIDE.md`
 
-Genuine recovered media is under `public/assets/original/`.
+Genuine recovered media in use is under `public/assets/original/2025/03/`; the rest of the recovery set is under `archive/` (see `archive/README.md`).
+
+## Configuration
+
+- `NEXT_PUBLIC_SITE_URL` — public origin (e.g. `https://your-domain`). Set in Vercel for Production; used for canonical URLs, sitemap and Open Graph. Falls back to `VERCEL_PROJECT_PRODUCTION_URL`, then `http://localhost:3000`.
+- `npm run check:media` — verifies media references and `public/` hygiene (also run in CI).
+- Audit/remediation status: `AUDIT-2026-09-29.md`.
 
 ## Phase roadmap
 

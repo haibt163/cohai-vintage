@@ -6,6 +6,21 @@ The modern Cô Hai Vintage reconstruction is running well on `main` and satisfie
 
 Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, with the remaining visual/live verification items intentionally carried forward.
 
+## Audit remediation — 29 September 2026 (branch `chore/audit-2026-09-hardening`, NOT YET MERGED)
+
+A full audit and a patch set are tracked in [`AUDIT-2026-09-29.md`](AUDIT-2026-09-29.md) (finding IDs, status, evidence, Owner decisions,
+verification checklist). Summary of what the branch changes: `public/` reduced from ~184 MB to the 18 referenced photos (rest moved to
+`archive/`), image optimiser enabled, lazy/pausable slideshow, canonical/sitemap/robots/OG/JSON-LD, customer-facing copy, contact prefill,
+accessibility layer, `check:media` CI step. **Lint, typecheck and build have not been run on this branch (UNVERIFIED)** — run them and the
+preview checklist in the audit doc before review. After merge, move the closed items below into the relevant Phase 5 sections.
+
+## Engineering operating model — added (branch `docs/omp2-governance-workflows`, stacked on the audit branch)
+
+Instruction files were reorganised to the OMP 2.0 model used by CoHai Travel: `AGENTS.md` (universal rules), `AGENTS.project.md`
+(Cô Hai Vintage specifics — the old `AGENTS.md` content moved here, unchanged in substance), `CLAUDE.md` (thin, imports the others),
+`ENGINEERING-GOVERNANCE.md` (lanes, review, merge authority, evidence) and `WORKFLOWS.md` (procedures and prompt templates).
+Reconcile wording with the CoHai Travel reference documents (see the adaptation notes at the end of `ENGINEERING-GOVERNANCE.md`).
+
 ## Phase 3 — COMPLETE
 
 - Genuine recovered editorial photography integrated from `public/assets/original/`.
@@ -91,6 +106,9 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
 
 ## Pending issues / next-audit items
 
+0. **Audit remediation review — OPEN / PRIORITY** — review and verify branch `chore/audit-2026-09-hardening` per `AUDIT-2026-09-29.md`
+   (Owner decisions: copy approval, production domain env var, Instagram URL, contact delivery, archive/history policy).
+
 1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
    - Use the page-grouped staging set under `manual-photo-replacements/`.
    - The canonical active images remain under `public/assets/original/2025/03/`.
@@ -162,10 +180,12 @@ npm run dev
 
 Do not commit SQL dumps, `wp-config.php`, passwords, API keys, `.env` files, Bluehost/cPanel backups or other secrets.
 
+Do not place WordPress/WooCommerce logs, plugin caches (Astra, Spectra, WPForms, WooCommerce imports/uploads), `.htaccess`/`index.php` stubs or any other recovery artefacts under `public/`: everything in `public/` is served to the internet. `npm run check:media` (run in CI) enforces this.
+
 ## Deployment rule
 
 `main` is the authoritative reconstruction branch. Keep it clean and deployable; preserve recovered genuine media as the source of truth.
 
 ## Next-conversation handoff
 
-Start the next conversation by reading `PROJECT_STATUS.md`, `AGENTS.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md`. The immediate priority remains **photography replacement and live verification**, not another broad redesign.
+Start the next conversation by following `WORKFLOWS.md` §1: read `ENGINEERING-GOVERNANCE.md`, `AGENTS.md`, `AGENTS.project.md`, `PROJECT_STATUS.md`, `AUDIT-2026-09-29.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md`. The immediate priority remains **photography replacement and live verification**, not another broad redesign.

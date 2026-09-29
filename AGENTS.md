@@ -1,177 +1,67 @@
-# Cô Hai Vintage — Agent Instructions
+# Cô Hai Vintage — Agent Instructions (universal)
 
-## Project
+These rules apply to **every** lane — engineering (Claude Code, Codex CLI/App, OMP CLI, future) and review (Claude Chat, ChatGPT).
+They are model-agnostic: models and tools change, these rules do not.
 
-This repository is the authoritative source for the modern Cô Hai Vintage website rebuild.
+Precedence: Project Owner's explicit instruction → `ENGINEERING-GOVERNANCE.md` → `AGENTS.project.md` → this file → tool-specific files.
 
-The project is a clean, modern Next.js implementation. Do NOT reproduce the old WordPress/Elementor/Astra implementation literally.
+## 1. Document map
 
-## Stack
+| Read | For |
+|---|---|
+| `ENGINEERING-GOVERNANCE.md` | roles, lanes, review, merge authority, evidence standards |
+| `WORKFLOWS.md` | step-by-step procedures and prompt templates |
+| `AGENTS.project.md` | Cô Hai Vintage facts: stack, architecture, media/content/design rules, open work |
+| `PROJECT_STATUS.md` | current state and open items (the handover) |
+| `AUDIT-2026-09-29.md` | latest audit/remediation tracker (finding IDs, Owner decisions) |
+| `MEDIA-MAPPING.md`, `ORIGINAL-WORDPRESS.md`, `PHOTO-REPLACEMENT-GUIDE.md` | recovered-source provenance and photo replacement |
 
-- Next.js 16
-- React 19
-- TypeScript
-- App Router
-- Tailwind/CSS as already configured in the repository
+## 2. Session start
 
-## Source of truth
+Follow `WORKFLOWS.md` §1: governance → handover → live Git state → relevant code → independently verify important prior claims →
+continue from evidence. State whether the task is **implementation** or **read-only audit** (`NO APPLICATION CODE CHANGES.`).
+Do not restart the reconstruction or begin a broad redesign unless explicitly asked.
 
-The recovered WordPress installation is the source for genuine Cô Hai Vintage editorial content, product information, image assets, and historical context.
+## 3. Source of truth
 
-Genuine recovered media is under:
+`main` on GitHub is authoritative. Repository files, Git history, PRs, tests, CI/Vercel evidence and Owner decisions are durable truth.
+Conversation history is context only. If they disagree, trust the repository and correct the record.
 
-`public/assets/original/`
+## 4. Working principles
 
-GitHub `main` is the authoritative code source.
+1. **Think before coding.** State assumptions and success criteria. If the request is ambiguous or a gate in Governance §8 applies, ask
+   rather than guess. Surface trade-offs; push back when a simpler path exists. Read the existing code and the recovered source first.
+2. **Simplicity first.** The minimum change that meets the criteria. No speculative features, abstractions, config or dependencies.
+   If 30 lines do it, do not write 200.
+3. **Surgical changes.** Touch only what the task requires; match existing style and patterns. Do not refactor or "improve" adjacent code.
+   Mention unrelated problems or dead code instead of silently changing them. Clean up only what *your* change made unused.
+4. **Goal-driven execution.** Turn the task into checkable outcomes (e.g. "`/portfolio` returns 308 to `/journal`"), then loop — change,
+   run, observe — until the evidence shows it is met. Report what you actually verified.
 
-## Critical media rule
+## 5. Evidence rules
 
-The current site must progressively replace all remaining Astra starter/demo/stock imagery with genuine recovered WordPress media whenever a genuine source asset exists.
+`VERIFIED` (direct evidence) · `UNVERIFIED` (proposal/inference/claim without evidence) · `FAILED` (confirmed failure). Do not call
+anything fixed, working, passing, complete or production-ready without relevant evidence. Keep layers distinct: ZIP = project state, Git
+output = history, command/deployment output = execution evidence. Visual work needs a rendered look at desktop and iPhone width.
 
-Do not choose generic stock imagery merely because it looks cleaner.
+## 6. Hard boundaries
 
-Before using an asset, inspect its actual subject and use the documented WordPress mapping in `MEDIA-MAPPING.md` and `ORIGINAL-WORDPRESS.md`.
+- Never commit to `main` directly; work on a feature branch/worktree. Never let two agents edit one worktree.
+- Never merge your own unreviewed work. OMP and chat lanes never execute merges. Merge only after an on-record APPROVE (Governance §4).
+- Never bypass a failed safeguard (photo apply script, CI, `check:media`).
+- Never invent business facts: prices, stock, condition, provenance, authenticity, measurements, dates (`AGENTS.project.md` §4).
+- Never commit secrets or recovery artefacts (`AGENTS.project.md` §9). Everything under `public/` is served to the internet.
+- Never hide image-quality problems with CSS tricks; fix the source file (`AGENTS.project.md` §3).
+- Ask the Owner before the actions listed in Governance §8.
 
-### Image-quality rule
+## 7. Definition of done
 
-Some recovered photographs are screenshots of the old web presentation rather than the original uploaded photos. This is an OPEN source-quality finding. Do not try to hide the problem with aggressive CSS enlargement, sharpening filters, fake upscaling, or stock replacements.
+Success criteria met **and** the standard verification set run with output attached (`WORKFLOWS.md` §0) **and** user-visible changes checked on a
+preview deployment **and** a handoff/PR note listing scope, evidence, risks and `UNVERIFIED` items. Update `PROJECT_STATUS.md` when state changes.
 
-Preferred remediation: obtain the genuine original photograph and manually replace the corresponding file **using the same filename/path** wherever practical. This preserves the existing code references and minimizes code churn.
+## 8. Continuity
 
-The reusable staging and safeguard procedure is documented in `PHOTO-REPLACEMENT-GUIDE.md`.
+Leave durable, repository-visible handoffs (`WORKFLOWS.md` §7) rather than relying on chat memory. Any lane must be able to pick up the work
+from the repository alone.
 
-## Editorial source material
-
-Important genuine subjects include:
-
-- Cô Hai Vintage founder/story
-- Flea Market
-- Akoya Pearl / Mikimoto
-- Bernard Arnault / LVMH
-- Coco Chanel
-- Louis Vuitton's Patent/history
-- Have the Right Outfit / style
-
-## Product source material
-
-Confirmed recovered vintage Louis Vuitton examples include:
-
-- Louis Vuitton Vintage Concorde
-- Louis Vuitton Monogram Neverfull MM
-- Louis Vuitton Vintage Mono Kelly
-
-Do not invent prices, stock status, condition grades, provenance, authenticity claims, measurements, or product facts that are not supported by the recovered source material.
-
-## Design direction
-
-The target is a premium vintage-fashion/editorial experience: elegant, restrained, image-led, contemporary, and distinctive rather than a generic template.
-
-The current approved visual direction includes:
-
-- roughly 50/50 desktop homepage hero image/text composition;
-- larger, immersive photography without hiding poor source quality through fake enlargement;
-- Bodoni/Didot-style editorial serif headlines;
-- larger supporting/dek/body copy so the typographic hierarchy remains readable and balanced;
-- subtle magnetic navigation and tasteful mouse/pointer parallax;
-- responsive mobile behaviour;
-- accessibility and reduced-motion support.
-
-The larger supporting-copy treatment is intentional. Do not reduce normal editorial paragraphs back to tiny 13–15px website copy without a demonstrated device/layout reason.
-
-Motion must remain refined. Avoid excessive animation, gimmicks, or motion that harms readability/performance.
-
-## Phase roadmap
-
-### Phase 3 — Authentic content and media
-
-- Replace generic/demo media with genuine recovered WordPress imagery.
-- Build editorial pages from the recovered articles.
-- Build the vintage product catalogue and product detail views.
-- Verify image-to-article/product mappings.
-
-### Phase 4 — Premium visual experience
-
-- Redesign the current generic layouts into a more distinctive Cô Hai Vintage visual system.
-- Improve typography, composition, navigation, image galleries, cards, and responsive layouts.
-- Add subtle mouse/pointer parallax and hover interactions.
-- Respect `prefers-reduced-motion`.
-
-### Phase 5 — Final polish and production readiness
-
-Phase 5 is substantially complete but remains OPEN until the documented visual verification items are closed.
-
-Completed:
-
-- route and asset-reference audit
-- responsive layout work
-- accessibility and metadata work
-- branded 404
-- custom browser/Apple icon implementation
-- premium visual typography and composition pass
-- stronger homepage hero/parallax treatment
-- enlarged supporting-copy hierarchy
-- lint/typecheck/build validation baseline
-
-Still open:
-
-- recovered-photo source-resolution/replacement audit
-- live favicon and iOS Home Screen icon verification
-- final desktop/tablet/iPhone visual audit
-- final Shop image/crop/loading recheck
-- final production deployment/browser verification
-
-Do not mark Phase 5 fully closed merely because CI is green; the remaining items require visual/live verification.
-
-## Photography replacement workflow
-
-For the current handoff, the owner may manually replace screenshot-based photos and push the replacements to GitHub. Use this low-churn method whenever possible:
-
-1. Pull the latest `main`.
-2. Run `scripts/stage-current-photos.ps1` to create a fresh page-grouped staging set.
-3. Identify the exact filename/path and page usage from `manual-photo-replacements/PHOTO-REPLACEMENT-MANIFEST.md`.
-4. Obtain the genuine original photograph.
-5. Rename it to exactly match the approved filename and extension.
-6. Replace the staged copy; do not rename the canonical application asset merely to accommodate the source.
-7. Run `scripts/apply-photo-replacements.ps1`.
-8. **Never bypass a failed safeguard.** The apply script rejects unexpected filenames, missing approved filenames, and inconsistent duplicate copies across page groups using SHA-256 comparison.
-9. Inspect desktop and iPhone-sized rendering.
-10. Run `npm run lint`, `npm run typecheck`, and `npm run build`.
-11. Commit/push only the verified binary replacements.
-
-The complete reusable procedure is in `PHOTO-REPLACEMENT-GUIDE.md`.
-
-Do not add the local staging binaries to GitHub as a separate media source. The canonical source remains `public/assets/original/2025/03/`.
-
-## Workflow
-
-Before major changes, inspect the existing implementation and the relevant recovered source material.
-
-After meaningful code or media changes, run:
-
-- `npm run lint`
-- `npm run typecheck`
-- `npm run build`
-
-Preserve the known-good validation state while addressing the remaining audit items.
-
-## Never commit
-
-- SQL database dumps
-- `wp-config.php`
-- passwords
-- API keys
-- `.env` secrets
-- Bluehost/cPanel backup archives
-- credentials or other sensitive recovery files
-
-## Continuity instruction
-
-At the beginning of a new conversation, read:
-
-- `PROJECT_STATUS.md`
-- `AGENTS.md`
-- `ORIGINAL-WORDPRESS.md`
-- `MEDIA-MAPPING.md`
-- `PHOTO-REPLACEMENT-GUIDE.md`
-
-Then continue from the OPEN items in `PROJECT_STATUS.md`. Do not restart the reconstruction or initiate another broad redesign unless explicitly requested.
+<!-- Working principles in §4 follow the "Karpathy skills" style used in CoHai Travel; replace with that project's verbatim text if it differs. -->

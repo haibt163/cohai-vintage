@@ -13,7 +13,7 @@ export async function Footer() {
         </div>
         <div className="footer-links">
           <MagneticLink href="/about">{labels.about}</MagneticLink>
-          <MagneticLink href="/portfolio">{labels.journal}</MagneticLink>
+          <MagneticLink href="/journal">{labels.journal}</MagneticLink>
           <MagneticLink href="/contact">{labels.contact}</MagneticLink>
           <MagneticLink href="/shop">{labels.shop}</MagneticLink>
         </div>

@@ -196,7 +196,7 @@ Keep the safety principles unchanged:
 
 For this repository:
 
-- canonical media: `public/assets/original/2025/03/`;
+- canonical media: `public/assets/original/2025/03/`; genuine originals that may exist among the unused recovered uploads are in `archive/wordpress-recovery/2025/03/` (search there before requesting new files);
 - staging root: `manual-photo-replacements/`;
 - current page groups: `landing/`, `about/`, `journal/`, `shop/`;
 - current approved set: 18 unique homepage/archive filenames, with intentional reuse across groups;

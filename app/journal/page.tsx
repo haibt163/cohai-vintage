@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { editorialPosts } from "@/lib/content";
 import { getLocale, localizedPost, ui } from "@/lib/i18n";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const labels = ui[await getLocale()];
+  return { title: labels.journal, description: labels.journalTitle, alternates: { canonical: "/journal" } };
+}
 
 export default async function Journal() {
   const locale = await getLocale();
@@ -23,7 +29,7 @@ export default async function Journal() {
         {posts.map((post, index) => (
           <article className={`journal-row reveal reveal-delay-${(index % 3) + 1}`} key={post.slug}>
             <Link href={`/journal/${post.slug}`} className="journal-image">
-              <ParallaxMedia src={post.image} alt={post.title} fill quality={100} sizes="(max-width: 800px) 100vw, 42vw" strength={10} />
+              <ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 42vw" strength={10} />
               <span className="journal-index">{String(index + 1).padStart(2, "0")}</span>
             </Link>
             <div>

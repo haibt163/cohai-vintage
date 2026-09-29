@@ -1,38 +1,31 @@
 @AGENTS.md
+@AGENTS.project.md
+@ENGINEERING-GOVERNANCE.md
+@WORKFLOWS.md
 
-# Continuity
+# Claude-specific notes
 
-Use `AGENTS.md` as the primary project instruction set. It contains the Phase 3–5 roadmap, media rules, current visual direction, security rules, workflow requirements, and OPEN audit items for the Cô Hai Vintage rebuild.
+The imported files above are the full instruction set; this file only adds what is specific to Claude lanes. If anything here conflicts
+with them, they win.
 
-## Latest approved visual state
+## Which Claude lane am I?
 
-The latest visual polish is intentionally preserved:
+- **Claude Code** — a Main Engineer lane. Implements on a feature branch, runs the verification set, opens a PR. May **execute** a merge only
+  after an on-record APPROVE from Claude Chat, ChatGPT or the Project Owner, and never for its own unreviewed work.
+- **Claude Chat** — a Chief Engineer review lane (peer to ChatGPT). Reviews packages, gives `APPROVE` / `REQUEST CORRECTION`, may also author
+  read-only audits. Does not execute merges. If Claude Chat authored a change, a different lane must approve it.
 
-- approximately 50/50 desktop homepage hero image/text composition;
-- stronger homepage mouse/pointer parallax;
-- Bodoni/Didot-style editorial serif headlines;
-- larger supporting/dek/body typography for a more balanced high-end editorial hierarchy;
-- responsive mobile/iOS readability and reduced-motion support.
+## Working habits in Claude Code
 
-Do not undo these changes by reverting supporting copy to very small website text or by broadly redesigning the layout without an explicit request.
+- Plan first for anything non-trivial; state success criteria; keep diffs small and reviewable.
+- Run `npm run check:media`, `npm run lint`, `npm run typecheck`, `npm run build` and paste real output; do not summarise it from memory.
+- On Windows, keep LF in source files (`.gitattributes`); do not reformat whole files.
+- Use a separate worktree if another agent is active. Commit logically; push the branch; never push to `main`.
+- After a lane switch or rate limit, refresh the handoff (`WORKFLOWS.md` §7) before stopping.
 
-## Next-conversation priority
+## Continuity
 
-Read `AGENTS.md`, `PROJECT_STATUS.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md` before making changes.
-
-The site is currently running well for most agreed requirements. Do not start another broad redesign by default. Continue from the OPEN items in `PROJECT_STATUS.md`, especially:
-
-1. replace remaining screenshot-based photographs with genuine originals;
-2. verify replacements at real desktop and iPhone rendered sizes;
-3. live favicon and iOS Home Screen icon verification;
-4. final cross-device visual audit;
-5. Shop image/crop/loading recheck;
-6. final production deployment verification.
-
-## Photo replacement continuity
-
-The owner may use the manual replacement workflow on this and other projects. Preserve the low-churn filename/path strategy whenever practical.
-
-Use `PHOTO-REPLACEMENT-GUIDE.md` as the reusable procedure. The current apply script is fail-closed: unexpected filenames, missing approved filenames, or inconsistent SHA-256 contents for duplicate staged filenames must stop the process. Never bypass those safeguards.
-
-Preserve recovered genuine media and the known-good lint/typecheck/build state while resolving these items.
+Latest approved visual state and open items are in `AGENTS.project.md` §5–§6 and `PROJECT_STATUS.md`. Immediate priorities: (0) review and verify
+the audit remediation branch (`AUDIT-2026-09-29.md` — lint/typecheck/build and the preview checklist are still UNVERIFIED); (1) replace
+screenshot-based photographs with genuine originals; (2) verify replacements at real desktop/iPhone sizes; (3) favicon and iOS icon
+verification; (4) final cross-device visual audit; (5) Shop image recheck; (6) production deployment verification.
