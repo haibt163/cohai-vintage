@@ -38,15 +38,15 @@ export function ArchiveSlideshow({ slides, interval = 7000, labels = defaultLabe
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [focusWithin, setFocusWithin] = useState(false);
- const reducedMotion = useSyncExternalStore(
-  (onStoreChange) => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    mediaQuery.addEventListener("change", onStoreChange);
-    return () => mediaQuery.removeEventListener("change", onStoreChange);
-  },
-  () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  () => false,
-);
+  const reducedMotion = useSyncExternalStore(
+    (onStoreChange) => {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mediaQuery.addEventListener("change", onStoreChange);
+      return () => mediaQuery.removeEventListener("change", onStoreChange);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false,
+  );
 
   // Autoplay stops for reduced-motion users, when the user pauses it (WCAG 2.2.2),
   // and while keyboard focus is inside the carousel. Mouse hover does NOT pause it,
