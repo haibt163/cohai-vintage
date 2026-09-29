@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { getLocale, ui } from "@/lib/i18n";
 import { ContactForm } from "@/components/ContactForm";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const labels = ui[await getLocale()];
+  return { title: labels.contact, description: labels.contactLead, alternates: { canonical: "/contact" } };
+}
 
 export default async function Contact() {
   const locale = await getLocale();

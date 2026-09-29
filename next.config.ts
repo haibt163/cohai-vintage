@@ -22,7 +22,9 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    // Vercel preview deployments must never be indexed; production is unaffected.
+    const previewHeaders = process.env.VERCEL_ENV === "preview" ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] : [];
+    return [{ source: "/:path*", headers: [...securityHeaders, ...previewHeaders] }];
   },
 };
 

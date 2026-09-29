@@ -11,11 +11,13 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
-  if (!product) return {};
+  const found = getProduct(slug);
+  if (!found) return {};
+  const product = localizedProduct(found, await getLocale());
   return {
     title: product.name,
     description: product.description,
+    alternates: { canonical: `/shop/${slug}` },
     openGraph: { title: product.name, description: product.description, images: [{ url: product.image }] },
   };
 }

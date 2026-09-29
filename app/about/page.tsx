@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { getLocale, slideshowLabels, ui } from "@/lib/i18n";
 import { getArchiveSlides } from "@/lib/archive-media";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const labels = ui[await getLocale()];
+  return { title: labels.about, description: labels.aboutLead, alternates: { canonical: "/about" } };
+}
 
 export default async function About() {
   const locale = await getLocale();

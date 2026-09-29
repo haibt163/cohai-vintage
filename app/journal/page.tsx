@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { editorialPosts } from "@/lib/content";
 import { getLocale, localizedPost, ui } from "@/lib/i18n";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const labels = ui[await getLocale()];
+  return { title: labels.journal, description: labels.journalTitle, alternates: { canonical: "/journal" } };
+}
 
 export default async function Journal() {
   const locale = await getLocale();

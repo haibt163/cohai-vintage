@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { editorialPosts, products } from "@/lib/content";
@@ -5,6 +6,8 @@ import { getArchiveSlides } from "@/lib/archive-media";
 import { getLocale, localizedPost, localizedProduct, slideshowLabels, ui } from "@/lib/i18n";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default async function Home() {
   const locale = await getLocale();
