@@ -88,8 +88,8 @@ The canonical active media remains under `public/assets/original/2025/03/` (only
 The recovered WordPress source is documented in:
 
 - `ORIGINAL-WORDPRESS.md`
-- `ENGINEERING-GOVERNANCE.md` (roles, review, merge authority, evidence)
-- `WORKFLOWS.md` (procedures and prompt templates)
+- `docs/ENGINEERING_GOVERNANCE.md` (roles, review, merge authority, evidence — CoHai Travel master, adapted)
+- `docs/AI_ENGINEERING_WORKFLOW.md` (workflow, handoff templates, project procedures)
 - `AGENTS.project.md` (project-specific agent instructions)
 - `MEDIA-MAPPING.md`
 - `PROJECT_STATUS.md`

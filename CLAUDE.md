@@ -1,7 +1,7 @@
 @AGENTS.md
 @AGENTS.project.md
-@ENGINEERING-GOVERNANCE.md
-@WORKFLOWS.md
+@docs/ENGINEERING_GOVERNANCE.md
+@docs/AI_ENGINEERING_WORKFLOW.md
 
 # Claude-specific notes
 
@@ -21,7 +21,7 @@ with them, they win.
 - Run `npm run check:media`, `npm run lint`, `npm run typecheck`, `npm run build` and paste real output; do not summarise it from memory.
 - On Windows, keep LF in source files (`.gitattributes`); do not reformat whole files.
 - Use a separate worktree if another agent is active. Commit logically; push the branch; never push to `main`.
-- After a lane switch or rate limit, refresh the handoff (`WORKFLOWS.md` §7) before stopping.
+- After a lane switch or rate limit, refresh the handoff (`docs/AI_ENGINEERING_WORKFLOW.md` §8) before stopping.
 
 ## Continuity
 

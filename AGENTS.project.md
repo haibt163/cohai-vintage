@@ -1,7 +1,7 @@
 # Cô Hai Vintage — Project Instructions
 
-Project-specific facts and rules. Universal rules are in `AGENTS.md`; governance in `ENGINEERING-GOVERNANCE.md`; procedures in
-`WORKFLOWS.md`. This file may adapt names/paths but never weakens governance.
+Project-specific facts and rules. Universal rules are in `AGENTS.md`; governance in `docs/ENGINEERING_GOVERNANCE.md`; procedures in
+`docs/AI_ENGINEERING_WORKFLOW.md`. This file may adapt names/paths but never weakens governance.
 
 ## 1. Project and stack
 
@@ -80,13 +80,15 @@ The 29 Sep 2026 audit remediation branch and its open Owner decisions are tracke
 `manual-photo-replacements/PHOTO-REPLACEMENT-MANIFEST.md`. 4. Get the genuine original (check `archive/` first). 5. Rename to exactly match the
 approved filename and extension. 6. Replace the staged copy; never rename the canonical app asset. 7. Run `scripts/apply-photo-replacements.ps1`.
 8. **Never bypass a failed safeguard** (rejects unexpected names, missing approved names, and inconsistent duplicate copies via SHA-256).
-9. Inspect desktop and iPhone rendering. 10. Run the standard verification set (`WORKFLOWS.md` §0). 11. Commit only the verified binary replacements.
+9. Inspect desktop and iPhone rendering. 10. Run the standard verification set (`docs/AI_ENGINEERING_WORKFLOW.md` §12). 11. Commit only the verified binary replacements.
 Do not commit staging binaries as a separate media source.
 
-## 8. Project-specific validation
+## 8. Verification commands and project-specific validation
 
-Standard set is `WORKFLOWS.md` §0. Additionally, for user-visible changes verify on a Vercel preview: EN and VI, desktop and iPhone width,
+Standard set is `docs/AI_ENGINEERING_WORKFLOW.md` §12. Additionally, for user-visible changes verify on a Vercel preview: EN and VI, desktop and iPhone width,
 console/network clean, images sharp, `/portfolio` redirects, `/sitemap.xml`, `/robots.txt`, contact prefill (`/contact?piece=<product-slug>`).
+After a production deploy run `node scripts/verify-deployment.mjs https://cohaivintage.com` and paste the output. For review handoffs run
+`create-project-zip-universal.ps1` (includes `.git`; excludes `node_modules`, `.next`, `.env*`, and `archive/`).
 
 ## 9. Never commit
 
