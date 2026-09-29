@@ -79,7 +79,8 @@ $excludedDirectoryNames = @(
     'bin',
     'obj',
     'tmp',
-    '.tmp'
+    '.tmp',
+    'archive'               # Cô Hai Vintage: unused recovered WordPress media (~160 MB); see archive/README.md
 )
 
 if ($IncludeGitMetadata) {
