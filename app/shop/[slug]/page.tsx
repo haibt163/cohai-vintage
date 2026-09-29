@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="product-gallery">
         {localized.gallery.map((image, index) => (
           <div className="product-gallery-image" key={image}>
-            <ParallaxMedia src={image} alt={`${localized.name} view ${index + 1}`} fill quality={100} sizes="(max-width: 800px) 100vw, 55vw" priority={index === 0} strength={6} />
+            <ParallaxMedia src={image} alt={`${localized.name} view ${index + 1}`} fill sizes="(max-width: 800px) 100vw, 55vw" priority={index === 0} strength={6} />
             <span className="gallery-number">0{index + 1}</span>
           </div>
         ))}

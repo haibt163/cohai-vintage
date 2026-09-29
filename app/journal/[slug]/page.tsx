@@ -36,7 +36,7 @@ export default async function EditorialPage({ params }: { params: Promise<{ slug
         <p className="article-intro">{localized.intro}</p>
       </header>
       <div className="article-hero">
-        <ParallaxMedia src={localized.image} alt={localized.title} fill priority quality={100} sizes="100vw" strength={9} />
+        <ParallaxMedia src={localized.image} alt={localized.title} fill priority sizes="100vw" strength={9} />
       </div>
       <div className="article-body">
         {localized.paragraphs.map((paragraph, index) => (

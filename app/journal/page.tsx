@@ -23,7 +23,7 @@ export default async function Journal() {
         {posts.map((post, index) => (
           <article className={`journal-row reveal reveal-delay-${(index % 3) + 1}`} key={post.slug}>
             <Link href={`/journal/${post.slug}`} className="journal-image">
-              <ParallaxMedia src={post.image} alt={post.title} fill quality={100} sizes="(max-width: 800px) 100vw, 42vw" strength={10} />
+              <ParallaxMedia src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 42vw" strength={10} />
               <span className="journal-index">{String(index + 1).padStart(2, "0")}</span>
             </Link>
             <div>
