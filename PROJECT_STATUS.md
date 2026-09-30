@@ -6,20 +6,27 @@ The modern Cô Hai Vintage reconstruction is running well on `main` and satisfie
 
 Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, with the remaining visual/live verification items intentionally carried forward.
 
-## Audit remediation — 29 September 2026 (branch `chore/audit-2026-09-hardening`, NOT YET MERGED)
+## Audit remediation — 29 September 2026 (MERGED to `main` via PR #1, 29 Sep 2026)
 
 A full audit and a patch set are tracked in [`AUDIT-2026-09-29.md`](AUDIT-2026-09-29.md) (finding IDs, status, evidence, Owner decisions,
 verification checklist). Summary of what the branch changes: `public/` reduced from ~184 MB to the 18 referenced photos (rest moved to
 `archive/`), image optimiser enabled, lazy/pausable slideshow, canonical/sitemap/robots/OG/JSON-LD, customer-facing copy, contact prefill,
-accessibility layer, `check:media` CI step. **Lint, typecheck and build have not been run on this branch (UNVERIFIED)** — run them and the
-preview checklist in the audit doc before review. After merge, move the closed items below into the relevant Phase 5 sections.
+accessibility layer, `check:media` CI step. PR #1 was reviewed and approved by ChatGPT and the Project Owner, then merged.
 
-## Engineering operating model — added (branch `docs/omp2-governance-workflows`, stacked on the audit branch)
+Post-merge evidence: **lint FAILED once** on the slideshow (`react-hooks` rule against `setState` in an effect) and was fixed in `169d22e`
+(`useSyncExternalStore`); Vercel production deployment `8c506f9` (merge of PR #1) is **READY** and is the current `main` head (VERIFIED via the
+Vercel connector). **Live-site behaviour is still UNVERIFIED** — run `node scripts/verify-deployment.mjs https://cohaivintage.com` and the
+remaining preview/production checklist in `AUDIT-2026-09-29.md` §4.
 
-Instruction files were reorganised to the OMP 2.0 model used by CoHai Travel: `AGENTS.md` (universal rules), `AGENTS.project.md`
-(Cô Hai Vintage specifics — the old `AGENTS.md` content moved here, unchanged in substance), `CLAUDE.md` (thin, imports the others),
-`ENGINEERING-GOVERNANCE.md` (lanes, review, merge authority, evidence) and `WORKFLOWS.md` (procedures and prompt templates).
-Reconcile wording with the CoHai Travel reference documents (see the adaptation notes at the end of `ENGINEERING-GOVERNANCE.md`).
+## Engineering operating model — aligned to the CoHai Travel masters (30 Sep 2026)
+
+The governance files follow the CoHai Travel master set, which the Project Owner has declared the standard for all current and future projects:
+`AGENTS.md` (contract, incl. the Karpathy-derived working principles), `AGENTS.project.md` (project specifics), `CLAUDE.md`, `.omp/AGENTS.md`,
+`.omp/RULES.md`, `docs/ENGINEERING_GOVERNANCE.md` and `docs/AI_ENGINEERING_WORKFLOW.md` (same names and numbering as Travel, plus Cô Hai Vintage
+additions in Governance §13 and Workflow Part B). Key rules: **the author of a change never approves it**; three-lane mode (Main Engineer → Chief
+Engineer → Project Owner) and two-lane mode (a chat lane authors, the other chat lane reviews) for audits and small tasks; the Project Owner may
+override any rule. `create-project-zip-universal.ps1` is the review-ZIP script (includes `.git`, excludes `archive/`). Re-diff against the Travel
+masters when they change.
 
 ## Phase 3 — COMPLETE
 
@@ -106,8 +113,9 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
 
 ## Pending issues / next-audit items
 
-0. **Audit remediation review — OPEN / PRIORITY** — review and verify branch `chore/audit-2026-09-hardening` per `AUDIT-2026-09-29.md`
-   (Owner decisions: copy approval, production domain env var, Instagram URL, contact delivery, archive/history policy).
+0. **Post-merge verification and Owner decisions — OPEN / PRIORITY** — run `scripts/verify-deployment.mjs` against production and complete the
+   checklist in `AUDIT-2026-09-29.md` §4; Owner decisions: copy approval, Instagram URL, contact delivery, archive/history policy, price/availability, legal
+   pages. Next engineering phase (after verification): path-based locales, see `docs/PLAN-locale-routing.md`.
 
 1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
    - Use the page-grouped staging set under `manual-photo-replacements/`.
@@ -188,4 +196,4 @@ Do not place WordPress/WooCommerce logs, plugin caches (Astra, Spectra, WPForms,
 
 ## Next-conversation handoff
 
-Start the next conversation by following `WORKFLOWS.md` §1: read `ENGINEERING-GOVERNANCE.md`, `AGENTS.md`, `AGENTS.project.md`, `PROJECT_STATUS.md`, `AUDIT-2026-09-29.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md`. The immediate priority remains **photography replacement and live verification**, not another broad redesign.
+Start the next conversation by following `docs/AI_ENGINEERING_WORKFLOW.md` §10: read `docs/ENGINEERING_GOVERNANCE.md`, `AGENTS.md`, `AGENTS.project.md`, `PROJECT_STATUS.md`, `AUDIT-2026-09-29.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md`. The immediate priority remains **photography replacement and live verification**, not another broad redesign.
