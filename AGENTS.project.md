@@ -71,7 +71,7 @@ Preserve these approved decisions unless the Owner asks otherwise:
 ## 6. Phase roadmap and open work
 
 Phases 3 (authentic content/media) and 4 (premium visual experience) are complete. Phase 5 is substantially complete but stays OPEN until
-these are verified on a live deployment: photo source-resolution replacement audit · favicon and iOS Home Screen icon · desktop/tablet/iPhone
+these are verified on a live deployment: photo source-resolution replacement audit · favicon and home-screen icons (fixed in `chore/branded-icons`, live check pending) · desktop/tablet/iPhone
 visual audit · Shop image/crop/loading recheck · production deployment/browser verification. **CI green does not close Phase 5.**
 
 The 29 Sep 2026 audit remediation branch and its open Owner decisions are tracked in `AUDIT-2026-09-29.md`. Current status lives in
