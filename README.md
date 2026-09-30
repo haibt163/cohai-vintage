@@ -91,6 +91,7 @@ The recovered WordPress source is documented in:
 - `docs/ENGINEERING_GOVERNANCE.md` (roles, review, merge authority, evidence — CoHai Travel master, adapted)
 - `docs/AI_ENGINEERING_WORKFLOW.md` (workflow, handoff templates, project procedures)
 - `AGENTS.project.md` (project-specific agent instructions)
+- `.omp/AGENTS.md` and `.omp/RULES.md` (OMP harness instructions and hard rules)
 - `MEDIA-MAPPING.md`
 - `PROJECT_STATUS.md`
 - `AGENTS.md`

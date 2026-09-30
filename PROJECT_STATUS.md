@@ -18,13 +18,15 @@ Post-merge evidence: **lint FAILED once** on the slideshow (`react-hooks` rule a
 Vercel connector). **Live-site behaviour is still UNVERIFIED** — run `node scripts/verify-deployment.mjs https://cohaivintage.com` and the
 remaining preview/production checklist in `AUDIT-2026-09-29.md` §4.
 
-## Engineering operating model — merged (PR #1); aligned to the CoHai Travel masters on 30 Sep 2026
+## Engineering operating model — aligned to the CoHai Travel masters (30 Sep 2026)
 
-Instruction files were reorganised to the OMP 2.0 model used by CoHai Travel: `AGENTS.md` (universal rules), `AGENTS.project.md`
-(Cô Hai Vintage specifics — the old `AGENTS.md` content moved here, unchanged in substance), `CLAUDE.md` (thin, imports the others),
-`docs/ENGINEERING_GOVERNANCE.md` and `docs/AI_ENGINEERING_WORKFLOW.md` (same names, numbering and rules as the CoHai Travel master files, plus
-Cô Hai Vintage additions in Governance §13 and Workflow Part B). `create-project-zip-universal.ps1` is the review-ZIP script (includes `.git`).
-Re-diff against the CoHai Travel masters if they change (see Governance §14).
+The governance files follow the CoHai Travel master set, which the Project Owner has declared the standard for all current and future projects:
+`AGENTS.md` (contract, incl. the Karpathy-derived working principles), `AGENTS.project.md` (project specifics), `CLAUDE.md`, `.omp/AGENTS.md`,
+`.omp/RULES.md`, `docs/ENGINEERING_GOVERNANCE.md` and `docs/AI_ENGINEERING_WORKFLOW.md` (same names and numbering as Travel, plus Cô Hai Vintage
+additions in Governance §13 and Workflow Part B). Key rules: **the author of a change never approves it**; three-lane mode (Main Engineer → Chief
+Engineer → Project Owner) and two-lane mode (a chat lane authors, the other chat lane reviews) for audits and small tasks; the Project Owner may
+override any rule. `create-project-zip-universal.ps1` is the review-ZIP script (includes `.git`, excludes `archive/`). Re-diff against the Travel
+masters when they change.
 
 ## Phase 3 — COMPLETE
 
