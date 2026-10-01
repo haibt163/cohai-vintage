@@ -15,8 +15,9 @@ accessibility layer, `check:media` CI step. PR #1 was reviewed and approved by C
 
 Post-merge evidence: **lint FAILED once** on the slideshow (`react-hooks` rule against `setState` in an effect) and was fixed in `169d22e`
 (`useSyncExternalStore`); Vercel production deployment `8c506f9` (merge of PR #1) is **READY** and is the current `main` head (VERIFIED via the
-Vercel connector). **Live-site behaviour is still UNVERIFIED** — run `node scripts/verify-deployment.mjs https://cohaivintage.com` and the
-remaining preview/production checklist in `AUDIT-2026-09-29.md` §4.
+Vercel connector). **Live-site behaviour: VERIFIED 30 Sep 2026** — the Project Owner ran `node scripts/verify-deployment.mjs https://cohaivintage.com`
+(37/37 checks passed, including canonical/og:image/sitemap host, robots → sitemap, headers, redirects, JSON-LD, optimiser) and confirmed the
+visual check on device; the Instagram URL is also confirmed. Not re-listed elsewhere.
 
 ## Engineering operating model — aligned to the CoHai Travel masters (30 Sep 2026)
 
@@ -124,8 +125,10 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
    - `scripts/apply-photo-replacements.ps1` contains the safeguard gate before applying staged replacements: approved filenames only, complete set required, and duplicate staged copies must have identical SHA-256 contents.
    - Follow `PHOTO-REPLACEMENT-GUIDE.md` for the reusable workflow and safeguard rules.
 
-2. **Favicon / iOS icon live verification — OPEN**
-   - Verify the custom icon on the deployed production site and on an actual iPhone after removing/re-adding the Home Screen shortcut if necessary.
+2. **Favicon / home-screen icons — FIXED IN BRANCH `chore/branded-icons`, live verification OPEN**
+   - Root cause (VERIFIED from the repo): `app/favicon.ico` was still the untouched create-next-app starter icon (25,931 bytes, history: "Initial commit from Create Next App") and outranked the branded dynamic icon.
+   - Fix: branded `app/favicon.ico` (16/32/48), `app/icon.svg`, `app/apple-icon.png` (180), manifest icons 192/512 + 512 maskable in `public/icons/`; the old dynamic `app/icon.tsx` / `app/apple-icon.tsx` were removed. `scripts/icons/generate-icons.py` regenerates all of them.
+   - After merge and deploy: run `node scripts/verify-deployment.mjs https://cohaivintage.com` (now includes icon checks), then look at the tab icon (hard refresh; browsers cache favicons for a long time) and re-add the iPhone Home Screen shortcut.
 
 3. **Final cross-device visual audit — OPEN**
    - Recheck desktop, tablet and iPhone after the next media replacements.

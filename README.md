@@ -13,7 +13,7 @@ The latest visual polish includes a roughly 50/50 desktop homepage hero, stronge
 ### OPEN items
 
 - **Photography sharpness / source replacement:** confirmed that some recovered WordPress images are screenshots rather than original uploaded photographs. Replace those files manually with genuine originals while keeping the same filenames/paths where possible. Do not solve this by fake upscaling or stock substitutions.
-- **Favicon / iOS icon:** custom Cô Hai icon routes are implemented; verify on the deployed production site and on an actual iPhone after re-adding the Home Screen shortcut if necessary.
+- **Favicon / home-screen icons:** the starter favicon was replaced with a branded icon set (see `PROJECT_STATUS.md` pending item 2); verify on the deployed site and on an actual iPhone after re-adding the Home Screen shortcut.
 - **Final cross-device visual audit:** desktop/tablet/iPhone check for Vietnamese typography, image framing, Shop presentation, console errors and broken network requests.
 - **Shop image recheck:** visually verify the current product mappings and framing after source-photo replacement before changing mappings.
 - **Production deployment verification:** confirm the latest `main` build is what is actually served in production before closing Phase 5.

@@ -61,6 +61,29 @@ async function main() {
   const nf = await get("/this-page-does-not-exist-xyz");
   record(nf.status === 404, "unknown route returns 404", `status ${nf.status}`);
 
+  // Icons: favicon, SVG tab icon, iOS home-screen icon, Android manifest icons
+  const links = [...html.matchAll(/<link\b[^>]*>/g)].map((m) => m[0]);
+  const attr = (tag, name) => tag.match(new RegExp(`${name}="([^"]*)"`))?.[1];
+  const iconLinks = links.filter((l) => /rel="(?:shortcut )?icon"/.test(l)).map((l) => ({ href: attr(l, "href"), type: attr(l, "type"), sizes: attr(l, "sizes") }));
+  const appleLinks = links.filter((l) => /rel="apple-touch-icon"/.test(l)).map((l) => attr(l, "href"));
+  const fetchImage = async (href) => { const r = await get(new URL(href.replace(/&amp;/g, "&"), origin + "/").pathname + new URL(href.replace(/&amp;/g, "&"), origin + "/").search); const buf = Buffer.from(await r.arrayBuffer()); return { status: r.status, type: r.headers.get("content-type") ?? "", buf }; };
+  record(iconLinks.length > 0, "page declares <link rel=icon>", iconLinks.map((i) => i.href).join(", "));
+  for (const icon of iconLinks) {
+    const img = await fetchImage(icon.href);
+    record(img.status === 200 && /image\//.test(img.type), `icon ${icon.href} loads`, `${img.status} ${img.type} ${img.buf.length} B`);
+    if (/favicon\.ico/.test(icon.href)) {
+      const sha1 = (await import("node:crypto")).createHash("sha1").update(img.buf).digest("hex");
+      record(sha1 !== "9ecfcc8f0ead0bf3d2d7c39e084b88f41cc89a2e", "favicon.ico is NOT the Next.js starter default", sha1.slice(0, 12));
+    }
+  }
+  record(appleLinks.length > 0, "page declares apple-touch-icon", appleLinks.join(", "));
+  for (const href of appleLinks) { const img = await fetchImage(href); record(img.status === 200 && /image\/png/.test(img.type), `apple-touch-icon ${href} loads`, `${img.status} ${img.type} ${img.buf.length} B`); }
+  const manifest = await (await get("/manifest.webmanifest")).json().catch(() => ({ icons: [] }));
+  const sizesOf = (p) => (manifest.icons ?? []).filter((i) => (i.purpose ?? "any").split(" ").includes(p)).map((i) => i.sizes);
+  record(sizesOf("any").includes("192x192") && sizesOf("any").includes("512x512"), "manifest has 192 and 512 icons (purpose any)", sizesOf("any").join(", "));
+  record(sizesOf("maskable").includes("512x512"), "manifest has a 512 maskable icon", sizesOf("maskable").join(", "));
+  for (const icon of manifest.icons ?? []) { const img = await fetchImage(icon.src); record(img.status === 200 && /image\/png/.test(img.type), `manifest icon ${icon.src} loads`, `${img.status} ${img.type}`); }
+
   // Every sitemap page renders
   for (const loc of locs) {
     const path = new URL(loc).pathname;
