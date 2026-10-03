@@ -21,6 +21,8 @@ jobs:
         run: npm ci
       - name: Media references and public/ hygiene
         run: npm run check:media
+      - name: Translation parity
+        run: npm run check:i18n
       - name: Lint
         run: npm run lint
       - name: Typecheck

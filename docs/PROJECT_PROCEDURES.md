@@ -14,6 +14,7 @@ Commands assume Windows PowerShell from the repository root (they also work in b
 ```bash
 npm ci                 # fresh clone or dependency change
 npm run check:media    # media references exist; no logs/plugin caches under public/
+npm run check:i18n     # EN/VI UI keys, values and placeholders stay in sync
 npm run lint
 npm run typecheck
 npm run build
