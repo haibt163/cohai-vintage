@@ -1,252 +1,161 @@
-# Cô Hai Vintage — Agent Contract
+# Agent Contract (universal master)
 
-## Purpose
+This file is identical in every project. Project facts, sensitive boundaries
+and verification commands live in `AGENTS.project.md`, never here. Do not
+edit this file per project.
 
-This file defines the repository-wide contract for AI and human engineering
-agents working on Cô Hai Vintage.
-
-It is harness-neutral.
-
-Project-specific engineering rules belong in `AGENTS.project.md`.
-Harness-specific operating rules belong in the relevant harness directory.
-`CLAUDE.md` provides Claude Code-specific operating guidance. A map of the
-project documents is in `AGENTS.project.md` §15. Claude Code and
-Codex CLI/App are peer, equally higher-trust, merge-capable Main Engineer
-lanes — neither is primary and neither is the other's fallback; OMP remains
-a Main Engineer lane without merge authority. Likewise, Claude Chat and
-ChatGPT are peer Chief Engineer lanes with identical review authority.
-Detailed procedures and historical evidence remain under `docs/`.
+It is harness-neutral. Claude Code reads `CLAUDE.md` too; OMP reads
+`.omp/RULES.md` and `.omp/AGENTS.md` too. Nothing in those files overrides
+this one.
 
 ---
 
-## 1. Read Before Substantive Work
+## 1. Read before substantive work
 
-Before substantive work:
+**Always read:** this file, `AGENTS.project.md`, the current status/handoff
+document if the project has one, and the live Git state. Then read the code
+and tests for the area you are touching.
 
-1. inspect the current Git state;
-2. read `AGENTS.project.md`;
-3. read the relevant governance/workflow documents;
-4. inspect the relevant implementation;
-5. inspect relevant tests;
-6. inspect historical/provenance material when applicable.
+**Read only when the task needs them:**
 
-Do not treat prior conversation, model reports, or handoffs as authoritative
-when the repository can provide direct evidence.
+- `docs/ENGINEERING_GOVERNANCE.md` — when you merge, review, approve, or
+  need to know who is allowed to do something.
+- `docs/AI_ENGINEERING_WORKFLOW.md` — when you write a handoff, request a
+  review, switch lanes, or hand steps to the Project Owner.
 
----
+Do not read them for ordinary implementation or audit work; the rules you
+need for that are here.
 
-## 2. Task Modes
-
-### Read-only audit / investigation
-
-Inspect and report findings without modifying application code unless explicitly
-authorized.
-
-State:
-
-`NO APPLICATION CODE CHANGES.`
-
-### Implementation
-
-Modify only the files and surfaces necessary for the authorized task.
-
-Use an isolated feature branch or worktree when parallel development could
-conflict.
+A previous agent's report or chat is context, not proof. Check important
+claims against the repository.
 
 ---
 
-## 3. Think Before Coding
+## 2. Task modes
 
-Do not silently pick an interpretation when a task is ambiguous and run with
-it. This applies before implementation starts — it is about surfacing
-confusion early, distinct from the after-the-fact evidence reporting in §8.
+**Read-only audit / investigation.** Inspect and report. Change nothing in
+the application. State `NO APPLICATION CODE CHANGES.` in the report.
 
-- State assumptions explicitly before implementing on top of them.
-- When more than one reasonable interpretation exists, present the
-  interpretations and the tradeoff between them rather than choosing quietly.
-- If a simpler approach than the one implied by the task exists, say so
-  before building the more complex one.
-- If something in the task or the existing code is unclear, name what's
-  unclear and ask, rather than guessing and proceeding.
+**Implementation.** Change only what the authorized task needs, on a
+dedicated feature branch or worktree. Never edit the same worktree as
+another agent at the same time.
 
 ---
 
-## 4. Scope Discipline
+## 3. Working principles
 
-Prefer the smallest correct change.
+**Think before coding.** If the task is ambiguous, say what is unclear and
+the options with their trade-offs; do not silently pick one. State your
+assumptions before building on them. If a simpler approach exists, say so
+first.
 
-Do not add unrelated refactors, dependency upgrades, aesthetic rewrites, or
-architecture changes to a scoped task unless required or explicitly
-authorized.
+**Simplicity first.** Write the minimum that solves the task: no extra
+features, no abstraction for single-use code, no unrequested
+configurability, no handling of cases that cannot occur. If a reviewer would
+call it overcomplicated, simplify before handing off.
 
-When an existing project mechanism already solves the need, prefer it over
-introducing a parallel mechanism.
+**Surgical changes.** Touch only what the task requires. Match surrounding
+style. Do not "improve" adjacent code or refactor what is not broken. Report
+unrelated problems in the handoff instead of fixing them. Do remove imports
+or functions that your own change made unused. Every changed line should
+trace back to the task. For a trivial change (a typo), use judgment.
 
-**Simplicity first.** Write the minimum code that solves the authorized
-task — nothing speculative:
-
-- No features beyond what was asked.
-- No abstraction introduced for what is currently single-use code.
-- No "configurability" or "flexibility" that wasn't requested.
-- No error handling for scenarios that cannot occur given the current
-  callers and data.
-- If a change could reasonably be written in a fifth of the lines, rewrite
-  it rather than submit the bloated version.
-
-The test: would a reviewer reasonably call this overcomplicated for what
-was asked? If yes, simplify before handing it off.
-
-**Surgical changes.** When editing existing code, touch only what the task
-requires:
-
-- Do not "improve" adjacent code, comments, or formatting while passing
-  through it.
-- Do not refactor something that isn't broken just because you're already
-  in the file.
-- Match the existing style in the surrounding code, even where you would
-  have written it differently.
-- If you notice unrelated dead code or pre-existing problems, report them
-  in your handoff — do not delete or fix them as part of this task unless
-  asked.
-- Do remove imports, variables, or functions that your own change made
-  unused — that cleanup is part of finishing your change correctly, not an
-  unrelated refactor.
-
-The test: every changed line should trace directly back to the authorized
-task. If it doesn't, it's out of scope.
-
-This is a bias toward caution over speed. For genuinely trivial changes
-(a typo, an obvious one-line fix), use judgment rather than forcing the
-full weight of this section — the point is avoiding costly mistakes on
-non-trivial work, not slowing down the trivial kind.
-
----
-
-## 5. Goal-Driven Execution
-
-Prefer verifiable success criteria over imperative instructions followed
-blindly. Where practical, translate the task into a form that can be
-checked rather than merely asserted:
-
-| Instead of...     | Do this...                                                    |
-| ------------------ | -------------------------------------------------------------- |
-| "Add validation"    | Write tests for the invalid-input cases, then make them pass  |
-| "Fix the bug"       | Write a test that reproduces it, then make it pass             |
-| "Refactor X"         | Confirm tests pass before the change and still pass after      |
-
-For a multi-step task, state a brief plan before starting, with a
-verification check against each step:
+**Goal-driven execution.** Turn the task into something checkable: a bug fix
+starts with a test that reproduces it; validation starts with tests for the
+invalid cases; a refactor must pass before and after. For multi-step work,
+state a short plan first, each step with its check:
 
 ```
 1. [step] → verify: [check]
-2. [step] → verify: [check]
-3. [step] → verify: [check]
 ```
 
-A vague goal ("make it work") invites guessing and back-and-forth. A
-concrete, checkable goal lets an agent work independently and lets the
-result be judged on evidence rather than the agent's own confidence — see
-§8 for how that evidence is reported.
+Prefer the project's existing mechanism over a new parallel one. If you
+think the existing one is wrong, say so explicitly.
 
 ---
 
-## 6. Security, Data, Content, and Provenance
+## 4. Stop and ask
 
-Treat secrets, customer contact details, business claims (price, stock,
-condition, provenance, authenticity, measurements), recovered-media
-provenance, and production configuration as sensitive boundaries.
-Everything under `public/` is served to the internet.
+Stop and ask the Project Owner (do not guess and continue) when:
 
-Never:
+- the task needs files, dependencies, services or secrets outside the stated
+  scope, or an action listed under the owner gates in `AGENTS.project.md`;
+- a check fails and the cause is not your change;
+- the instructions conflict with each other or with what the repository
+  shows;
+- you cannot verify something the task depends on.
 
-- commit credentials or secrets;
-- commit WordPress/WooCommerce logs, plugin caches, dumps, or other recovery
-  artefacts;
-- invent business facts that the recovered sources or the Project Owner do
-  not support;
-- hide poor image sources with CSS tricks, or present stock imagery as
-  recovered brand material;
-- bypass a failed safeguard (`npm run check:media`, the photo-apply script,
-  CI);
-- discard source provenance for convenience.
+Say plainly what you tried and what is blocked.
 
 ---
 
-## 7. Documentation
+## 5. Boundaries
 
-Keep durable project knowledge in repository-visible documentation.
+Treat as sensitive the boundaries listed in `AGENTS.project.md`. Everywhere:
 
-When current behavior changes:
-
-- update current documentation where useful;
-- preserve historical audits and reports;
-- do not rewrite historical evidence merely to match later conclusions;
-- avoid duplicating detailed procedures unnecessarily.
+- never commit credentials or secrets;
+- never bypass authorization, validation, or a failed safeguard to get a
+  passing result;
+- never discard source provenance or present synthetic data as real;
+- never expose sensitive data unnecessarily.
 
 ---
 
-## 8. Evidence Standard
+## 6. Evidence
 
-Use these statuses consistently:
+Classify every result as exactly one of:
 
-- **VERIFIED** — supported by direct repository, command, test, CI, or
-  runtime evidence.
-- **UNVERIFIED** — inference, proposal, or claim without sufficient evidence.
+- **VERIFIED** — direct repository, command, test, CI or runtime evidence.
 - **FAILED** — confirmed execution failure.
+- **UNVERIFIED** — inference, proposal, or claim without enough evidence.
+- **Owner decision** — a choice only the Project Owner can make (scope,
+  priority, risk acceptance, product or business question). It is not an
+  evidence status: never use it to avoid verifying something you could check.
 
-Never claim that work is implemented, tested, passing, verified, complete, or
-production-ready without the relevant evidence.
-
-Report verification limitations explicitly. In particular, state whether
-the evidence came from direct local execution (a lane with real shell
-access, such as Claude Code, Codex CLI, or OMP) or from inspecting
-material handed over into a chat session with no independent repository
-access. These are not equivalent and should not be described as if they were.
+Never call work done, passing, fixed, working or production-ready without
+the evidence. A command counts only after it has actually run in this
+session; paste its real output. State where the evidence came from: direct
+local execution, or material handed over into a chat with no repository
+access. They are not equivalent.
 
 ---
 
-## 9. Git and Review Boundary
+## 7. Git and review boundary
 
-`main` is the protected canonical integration branch.
+- `main` is protected. Work on a feature branch; never commit to `main`.
+- Passing tests, silence, a prior approval, or another agent's report is not
+  approval.
+- The author of a change never approves it.
+- OMP lanes never merge to `main`.
+- A merge needs an APPROVE on record for the current head commit.
 
-Normal implementation work should use a dedicated feature branch or worktree.
+Who may approve and who may execute a merge is defined only in
+`docs/ENGINEERING_GOVERNANCE.md` §6a. Do not restate it elsewhere.
 
-Implementation agents must not bypass the project's review and approval
-process, regardless of which lane or harness they run under.
+---
 
-Passing tests do not by themselves authorize a merge.
+## 8. Documentation
 
-**Approval to merge is held by the active Chief Engineer chat lane
-(Claude Chat or ChatGPT — either is independently sufficient) or the
-Project Owner. Execution of the merge is held equally by the Project Owner,
-Claude Code, or Codex CLI/App.** Claude Chat and ChatGPT have the same Chief
-Engineer role, as peers rather than a primary lane and a backup; Claude Code
-and Codex CLI/App have the same Main Engineer role and the same
-higher-trust, merge-capable standing, likewise as peers with no default or
-preferred lane between them. OMP is a Main Engineer lane but does not hold
-merge authority. The authoritative definition is
-`docs/ENGINEERING_GOVERNANCE.md` §6a.
+When behavior changes, update the current documentation. Preserve historical
+audits and reports; never rewrite historical evidence to match later
+conclusions. Record new evidence and status only. Do not duplicate detailed
+procedures that already have a home.
 
-**The author of a change never approves it.** Work may run with three lanes
-(Main Engineer → Chief Engineer → Project Owner) or, for audits, small
-revisions and ad hoc tasks, two lanes (one chat lane authors, the other chat
-lane reviews). The Project Owner may override any rule when it benefits the
-project. See `docs/ENGINEERING_GOVERNANCE.md` §2a–§2b.
+---
 
-## 10. Completion
+## 9. Completion report
 
-Every substantive task must leave a factual evidence trail.
+A substantive task ends with a report containing:
 
-A completion report should state:
-
-- task;
-- mode;
-- implementation or findings;
-- tests / verification;
-- evidence;
+- task and mode;
+- what was done or found;
+- verification run and its actual output;
 - files changed;
-- remaining risks / limitations;
-- Git state;
-- handoff.
+- remaining risks, limitations and UNVERIFIED items;
+- Git state (branch, commit, PR if any);
+- handoff, including author lane and reviewer lane (they must differ).
 
-Do not report more certainty than the evidence supports.
+The task is done when the authorized scope is complete, the diff is focused,
+claims are evidence-backed, and the work is ready for the required review.
+Do not report more certainty than the evidence supports. Do not add sections
+the task did not ask for.
