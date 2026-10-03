@@ -1,7 +1,8 @@
 # Cô Hai Vintage — Project Instructions
 
-Project-specific facts and rules. Universal rules are in `AGENTS.md`; governance in `docs/ENGINEERING_GOVERNANCE.md`; procedures in
-`docs/AI_ENGINEERING_WORKFLOW.md`. This file may adapt names/paths but never weakens governance.
+Project-specific facts and rules. Universal rules are in `AGENTS.md`; roles and merge authority in `docs/ENGINEERING_GOVERNANCE.md`; report and review
+formats in `docs/AI_ENGINEERING_WORKFLOW.md`; project commands and steps in `docs/PROJECT_PROCEDURES.md`. This file adds project facts and gates; it never
+weakens the universal rules.
 
 ## 1. Project and stack
 
@@ -14,6 +15,8 @@ vintage Louis Vuitton collection). It is a clean Next.js implementation. Do NOT 
 - Next.js 16 (App Router), React 19, TypeScript, plain CSS layers (Tailwind is installed but currently unused — see audit D-01).
 - Deployed on Vercel. `main` is the authoritative code source. Node 22.
 - Bilingual EN/VI. Cookie-based locale (`cohai-locale`; default `vi`). Path-based locales are a deferred phase (audit A-02).
+- **Vietnamese is the source of truth.** About 90% of target customers are Vietnamese. All Vietnamese text is written by the Project Owner and stays
+  exactly as written. English is the secondary, machine-assisted version and may be improved when asked.
 
 ## 2. Architecture map
 
@@ -83,12 +86,12 @@ The 29 Sep 2026 audit remediation branch and its open Owner decisions are tracke
 `manual-photo-replacements/PHOTO-REPLACEMENT-MANIFEST.md`. 4. Get the genuine original (check `archive/` first). 5. Rename to exactly match the
 approved filename and extension. 6. Replace the staged copy; never rename the canonical app asset. 7. Run `scripts/apply-photo-replacements.ps1`.
 8. **Never bypass a failed safeguard** (rejects unexpected names, missing approved names, and inconsistent duplicate copies via SHA-256).
-9. Inspect desktop and iPhone rendering. 10. Run the standard verification set (`docs/AI_ENGINEERING_WORKFLOW.md` §12). 11. Commit only the verified binary replacements.
+9. Inspect desktop and iPhone rendering. 10. Run the standard verification set (`docs/PROJECT_PROCEDURES.md` §12). 11. Commit only the verified binary replacements.
 Do not commit staging binaries as a separate media source.
 
 ## 8. Verification commands and project-specific validation
 
-Standard set is `docs/AI_ENGINEERING_WORKFLOW.md` §12. Additionally, for user-visible changes verify on a Vercel preview: EN and VI, desktop and iPhone width,
+Standard set is `docs/PROJECT_PROCEDURES.md` §12. Additionally, for user-visible changes verify on a Vercel preview: EN and VI, desktop and iPhone width,
 console/network clean, images sharp, `/portfolio` redirects, `/sitemap.xml`, `/robots.txt`, contact prefill (`/contact?piece=<product-slug>`).
 After a production deploy run `node scripts/verify-deployment.mjs https://cohaivintage.com` and paste the output. For review handoffs run
 `create-project-zip-universal.ps1` (includes `.git`; excludes `node_modules`, `.next`, `.env*`, and `archive/`).
@@ -103,39 +106,33 @@ WordPress/WooCommerce logs, plugin caches, `.htaccess`/`index.php` stubs (never 
 Copy approval · production domain env var · Instagram URL · contact delivery method · Git-history purge policy · `archive/` retention ·
 price/availability/buy path · legal pages. Details: `AUDIT-2026-09-29.md` §3.
 
-## 11. Multi-harness engineering model
+## 11. Sensitive boundaries and never-list
 
-Current implementation lanes: Claude Code (`CLAUDE.md`), Codex CLI/App, OMP CLI (`.omp/AGENTS.md`, `.omp/RULES.md`). Claude Code and Codex CLI/App are
-peers with the same merge-capable standing; OMP is a full implementation lane without merge authority. Review lanes: Claude Chat and ChatGPT, peers
-with identical authority. Harness choice never changes scope, verification, Git rules, review or approval boundaries, or the Project Owner's authority.
-The repository must stay portable across harnesses.
+Treat as sensitive: secrets; customer contact details; business claims (price, stock, condition, provenance, authenticity, measurements);
+recovered-media provenance and image quality; anything under `public/` (served to the internet); production configuration and environment variables.
 
-## 12. Approval boundary
+Never: edit, correct, retranslate, reformat, reorder or delete any Vietnamese text unless the Project Owner explicitly says so in the task (if a task needs a new
+Vietnamese string, ask the Project Owner for it; do not write or machine-translate Vietnamese) · place logs, plugin caches or dumps under `public/` · invent business facts the recovered sources or the Project Owner do not support ·
+hide poor image sources with CSS tricks or present stock imagery as recovered brand material · bypass a failed safeguard (`npm run check:media`,
+the photo-apply script, CI) · discard source provenance for convenience. (Never-commit items: §9.)
 
-Project Owner defines task → implementation/investigation → tests + evidence + handoff → Chief Engineer review → APPROVE from the active Chief Engineer
-chat lane (either is sufficient) or the Project Owner → merge executed by the Project Owner, Claude Code or Codex CLI/App → protected `main`.
+## 12. Owner gates
 
-- **The author of a change never approves it** — in three-lane mode (Main Engineer → Chief Engineer → Project Owner) or two-lane mode (for audits,
-  small revisions and ad hoc tasks, one chat lane authors and the other reviews). The Project Owner may override any rule when it benefits the project
-  and may commit, open PRs and merge personally. See `docs/ENGINEERING_GOVERNANCE.md` §2a–§2b and §6a.
-- Claude Chat currently cannot commit or open PRs itself: it hands over a Git bundle (commits keep its identity) and the Project Owner or ChatGPT pushes
-  and opens the PR (`docs/AI_ENGINEERING_WORKFLOW.md` §19). Every PR states its author lane and reviewer lane.
+Ask the Project Owner before: changing any Vietnamese text (see §11) · publishing customer-facing copy that makes a business commitment · changing the production domain or
+`NEXT_PUBLIC_SITE_URL` · adding third-party services, secrets or dependencies · purging Git history · deleting `archive/` (old WordPress photos;
+copies are also kept outside the repository) · replacing approved photography · changing the approved visual direction (§5).
 
-## 13. Scope control
+## 13. Project evidence rules
 
-A task should produce the smallest correct change that meets its requirements. Do not combine unrelated refactors, dependency changes, visual redesign,
-content rewriting or architecture replacement with a scoped task unless explicitly authorised. Record newly discovered unrelated issues separately
-(`AUDIT-*.md` or the PR description).
+- Visual claims need desktop and iPhone-width renders of a Vercel preview or production. CI green is not visually verified.
+- Photo changes need before/after rendering and must pass the `apply-photo-replacements.ps1` SHA-256 safeguard.
+- Production claims need the deployed commit SHA matched to `main` and an observation on the live URL (`scripts/verify-deployment.mjs`).
+- Business and content claims need Owner-supplied or recovered-source evidence.
+- SEO/metadata claims need the rendered output (view-source, `/sitemap.xml`, `/robots.txt`, schema validator), not just code.
 
-## 14. Definition of done
+## 14. Documents
 
-Scope implemented or investigated · relevant verification run with output attached · important claims evidence-backed · security, data and provenance
-considered · diff focused and reviewable · documentation accurate where behaviour changed · limitations explicit · Git state understood · ready for the
-required review (author lane and reviewer lane named, and different).
-
-## 15. Documentation structure
-
-`AGENTS.md` (contract) · `AGENTS.project.md` (this file) · `CLAUDE.md` · `.omp/AGENTS.md`, `.omp/RULES.md` · `docs/ENGINEERING_GOVERNANCE.md` ·
-`docs/AI_ENGINEERING_WORKFLOW.md` · `docs/PLAN-locale-routing.md` · `PROJECT_STATUS.md` (current handover) · `AUDIT-2026-09-29.md` (audit tracker) ·
-`MEDIA-MAPPING.md`, `ORIGINAL-WORDPRESS.md`, `PHOTO-REPLACEMENT-GUIDE.md` (provenance and photography). Historical audits stay as evidence; do not rewrite
-them to look continuous. `AGENTS.project.md` stays a concise project contract, not a duplicate of these documents.
+`AGENTS.md` (universal contract) · `AGENTS.project.md` (this file) · `CLAUDE.md` · `.omp/AGENTS.md`, `.omp/RULES.md` · `docs/ENGINEERING_GOVERNANCE.md` ·
+`docs/AI_ENGINEERING_WORKFLOW.md` · `docs/PROJECT_PROCEDURES.md` · `docs/PLAN-locale-routing.md` · `PROJECT_STATUS.md` (current handover) ·
+`AUDIT-2026-09-29.md` (audit tracker) · `MEDIA-MAPPING.md`, `ORIGINAL-WORDPRESS.md`, `PHOTO-REPLACEMENT-GUIDE.md` (provenance and photography).
+Historical audits stay as evidence; do not rewrite them to look continuous. This file stays a concise project contract, not a copy of those documents.
