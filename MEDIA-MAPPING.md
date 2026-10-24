@@ -10,7 +10,49 @@ Recovered media that is not used lives in `archive/wordpress-recovery/` (same re
 
 The old WordPress upload structure is preserved sufficiently to trace filenames back to the recovered source material.
 
+## Naming convention (current site filenames)
+
+Files in `public/assets/original/2025/03/` are named after the content item that owns the photo, not after the page that happens to show it
+(the homepage archive shows all of them). Lowercase letters, digits and hyphens only; the trailing number counts photos within one item.
+
+| Prefix | Owner | Pattern | Examples |
+|---|---|---|---|
+| `cohai-` | Founder portraits (About page and homepage archive) | `cohai-<n>` | `cohai-1.jpg` |
+| `journal-` | A Journal article | `journal-<article-topic>-<n>` | `journal-flea-market-1.jpg` |
+| `shop-` | A product gallery | `shop-<product>-<n>` | `shop-concorde-2.jpg` |
+| `landing-` | Homepage-only photos (used nowhere else) | `landing-<n>` | `landing-1.jpg` |
+
+The `photo-inbox/` workflow (`scripts/manage-photos.ps1`) enforces this pattern for every new or replacement photo. Display order is defined in
+`lib/content.ts` / `lib/archive-media.ts`, never by the number in the filename.
+
+### Old filename to current filename (one-time rename)
+
+The old names are what you will find in `archive/wordpress-recovery/` and in older documents.
+
+| Old filename | Current filename |
+|---|---|
+| `STREET-STYLE-3.jpg` | `journal-outfit-1.jpg` |
+| `STREET-STYLE-1.jpg` | `landing-1.jpg` |
+| `CO-HAI-VINTAGE.jpg` | `cohai-1.jpg` |
+| `CO-HAI-VINTAGE-1.jpg` | `cohai-2.jpg` |
+| `CO-HAI-VINTAGE-2.jpg` | `cohai-3.jpg` |
+| `CO-HAI-VINTAGE-3.jpg` | `cohai-4.jpg` |
+| `FLEA-MARKET.jpg` | `journal-flea-market-1.jpg` |
+| `MIKIMOTO-1.jpg` | `journal-akoya-pearl-1.jpg` |
+| `COCO-CHANEL.jpg` | `journal-coco-chanel-1.jpg` |
+| `221215140542-bernard-arnault.jpg` | `journal-bernard-arnault-1.jpg` |
+| `LV-vintage-Concorde.webp` | `shop-concorde-1.webp` |
+| `lv-concorde-1.jpg` | `shop-concorde-2.jpg` |
+| `LV-CONCORDE-2.webp` | `shop-concorde-3.webp` |
+| `LV-NEVERFUL-MONO-MM.jpg` | `shop-neverfull-mm-1.jpg` |
+| `LV-neverfull-MM.jpg` | `shop-neverfull-mm-2.jpg` |
+| `lv-mono-neverfull-MM-3.jpg` | `shop-neverfull-mm-3.jpg` |
+| `LV-KELLY-MONO.jpg` | `shop-mono-kelly-1.jpg` |
+| `LV-KELLY-LOCK.jpg` | `shop-mono-kelly-2.jpg` |
+
 ## Confirmed genuine media families
+
+These are the **old WordPress source filenames** (use them to search `archive/wordpress-recovery/`; the table above gives the current site names).
 
 - `CO-HAI-VINTAGE*`
 - `FLEA-MARKET*`
@@ -31,24 +73,24 @@ The current homepage archive slideshow uses **18 verified unique recovered image
 
 The current verified set is:
 
-1. `STREET-STYLE-3.jpg`
-2. `STREET-STYLE-1.jpg`
-3. `CO-HAI-VINTAGE.jpg`
-4. `CO-HAI-VINTAGE-1.jpg`
-5. `CO-HAI-VINTAGE-2.jpg`
-6. `CO-HAI-VINTAGE-3.jpg`
-7. `FLEA-MARKET.jpg`
-8. `MIKIMOTO-1.jpg`
-9. `COCO-CHANEL.jpg`
-10. `221215140542-bernard-arnault.jpg`
-11. `LV-vintage-Concorde.webp`
-12. `lv-concorde-1.jpg`
-13. `LV-CONCORDE-2.webp`
-14. `LV-NEVERFUL-MONO-MM.jpg`
-15. `LV-neverfull-MM.jpg`
-16. `lv-mono-neverfull-MM-3.jpg`
-17. `LV-KELLY-MONO.jpg`
-18. `LV-KELLY-LOCK.jpg`
+1. `journal-outfit-1.jpg`
+2. `landing-1.jpg`
+3. `cohai-1.jpg`
+4. `cohai-2.jpg`
+5. `cohai-3.jpg`
+6. `cohai-4.jpg`
+7. `journal-flea-market-1.jpg`
+8. `journal-akoya-pearl-1.jpg`
+9. `journal-coco-chanel-1.jpg`
+10. `journal-bernard-arnault-1.jpg`
+11. `shop-concorde-1.webp`
+12. `shop-concorde-2.jpg`
+13. `shop-concorde-3.webp`
+14. `shop-neverfull-mm-1.jpg`
+15. `shop-neverfull-mm-2.jpg`
+16. `shop-neverfull-mm-3.jpg`
+17. `shop-mono-kelly-1.jpg`
+18. `shop-mono-kelly-2.jpg`
 
 ## Editorial mappings
 
@@ -102,7 +144,7 @@ Use the relevant recovered Louis Vuitton/history imagery identified from the ori
 Current verified product gallery counts:
 
 - Concorde: 3 recovered assets
-- Neverfull MM: 3 recovered assets (`LV-NEVERFUL-MONO-MM.jpg`, `LV-neverfull-MM.jpg`, `lv-mono-neverfull-MM-3.jpg`)
+- Neverfull MM: 3 recovered assets (`shop-neverfull-mm-1.jpg`, `shop-neverfull-mm-2.jpg`, `shop-neverfull-mm-3.jpg`)
 - Mono Kelly: 2 recovered assets
 
 ## Current photography-source finding — OPEN / PRIORITY
