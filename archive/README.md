@@ -9,9 +9,9 @@ therefore **not served** by the website.
 - `wordpress-recovery/*.png|jpg` — theme/demo images from the old Astra site.
 
 Rules
-- Nothing here is bundled into the site. To use a file, copy it to
-  `public/assets/original/2025/03/` **with the exact filename the code expects**
-  (or add it to `lib/content.ts` / `lib/archive-media.ts` deliberately).
+- Nothing here is bundled into the site. To use a file, save a copy under the right site filename (the name of the photo it replaces, or a new name
+  following the convention in `MEDIA-MAPPING.md`), put it in `photo-inbox/` and run `scripts/manage-photos.ps1`
+  (adding it to `lib/content.ts` / `lib/archive-media.ts` stays a deliberate, reviewed edit).
 - Files that are used by the site stay in `public/assets/original/2025/03/`
   (the canonical location); do not move them here.
 - Do not add logs, plugin caches, SQL dumps, or configuration exports.

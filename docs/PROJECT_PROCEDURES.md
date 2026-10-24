@@ -58,8 +58,9 @@ production deploy run `node scripts/verify-deployment.mjs https://<production-do
 
 ## 17. Photography replacement
 
-Follow `PHOTO-REPLACEMENT-GUIDE.md` exactly (stage → replace with identical filenames → `apply-photo-replacements.ps1` → render on desktop and
-iPhone → §12). Look in `archive/wordpress-recovery/2025/03/` for genuine originals first. Never bypass a failed safeguard.
+Follow `PHOTO-REPLACEMENT-GUIDE.md` exactly (put photos in `photo-inbox/` → `manage-photos.ps1` preview → `-Apply` → render on desktop and
+iPhone → §12). Replace = same filename; add = new filename following the naming convention (`MEDIA-MAPPING.md`). Look in
+`archive/wordpress-recovery/2025/03/` for genuine originals first. Never bypass a failed safeguard.
 
 ## 18. Switching lanes mid-task
 

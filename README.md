@@ -56,32 +56,18 @@ Keep all three checks green after meaningful code changes.
 
 Use the reusable procedure in `PHOTO-REPLACEMENT-GUIDE.md`.
 
-Quick version:
-
-```bash
-git pull origin main
-```
-
-Then in PowerShell:
+Quick version: put replacement or new photos in `photo-inbox/` (see its README for the naming rule), then in PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\stage-current-photos.ps1
-powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\manage-photos.ps1          # preview, changes nothing
+powershell -ExecutionPolicy Bypass -File .\scripts\manage-photos.ps1 -Apply   # apply
 ```
 
-The apply script is deliberately fail-closed. It rejects unexpected filenames, missing approved filenames, and duplicate staged copies with different SHA-256 contents. Never bypass a failed safeguard.
+Same filename as an existing photo = replace; new filename = add. Any problem stops the script before anything changes; never bypass a failed check.
+Showing a newly added photo is a separate, reviewed edit in `lib/content.ts` or `lib/archive-media.ts` (the script prints it).
 
-Recommended staging structure:
-
-```text
-manual-photo-replacements/
-  landing/
-  about/
-  journal/
-  shop/
-```
-
-The canonical active media remains under `public/assets/original/2025/03/` (only files the site actually uses; everything in `public/` is served). Preserve existing filenames/paths whenever possible so application code does not need to change. Unused recovered media is kept in `archive/wordpress-recovery/` (not served).
+The canonical active media lives under `public/assets/original/2025/03/` (only files the site actually uses; everything in `public/` is served). Filenames
+follow the convention in `MEDIA-MAPPING.md`. Unused recovered media is kept in `archive/wordpress-recovery/` (not served).
 
 ## Source material
 
