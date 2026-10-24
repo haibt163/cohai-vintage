@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# photo intake: originals dropped here are copied into public/ by scripts/manage-photos.ps1; only the README is tracked
+/photo-inbox/*
+!/photo-inbox/README.md

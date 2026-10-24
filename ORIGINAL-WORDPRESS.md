@@ -54,7 +54,7 @@ The homepage uses the verified recovered archive set and the About page uses fou
 
 ## Open audit items
 
-1. **Photography replacement / sharpness:** some recovered files are screenshots, not original uploads. Use the page-grouped replacement set and fail-closed apply script documented in `PHOTO-REPLACEMENT-GUIDE.md`.
+1. **Photography replacement / sharpness:** some recovered files are screenshots, not original uploads. Use `photo-inbox/` and `scripts/manage-photos.ps1` as documented in `PHOTO-REPLACEMENT-GUIDE.md`.
 2. Verify the custom browser favicon and Apple/iOS Home Screen icon on the deployed production site. Previous default/missing-icon observations may be affected by deployment and browser/Home Screen caching.
 3. Perform a final desktop/tablet/iPhone visual audit, including Vietnamese typography/line wrapping, hero framing, About portraits, Shop image presentation, console errors and broken network requests.
 4. Recheck the earlier perceived missing Shop image; current recovered product paths are mapped, so visually verify before changing source mapping.
@@ -64,19 +64,9 @@ Do not mark these items complete merely because automated CI passes. They requir
 
 ## Recommended photo replacement workflow
 
-Use:
+Use `photo-inbox/` with `scripts/manage-photos.ps1` (see `PHOTO-REPLACEMENT-GUIDE.md`).
 
-```text
-manual-photo-replacements/
-  README.md
-  PHOTO-REPLACEMENT-MANIFEST.md
-  landing/
-  about/
-  journal/
-  shop/
-```
-
-For every staged image, record the existing site filename/path, page/section usage, replacement source, pixel dimensions, and intended orientation/aspect. Rename the genuine original to match the current site filename wherever possible, then apply it using the safeguard script.
+For every replaced image, record the existing site filename/path, page/section usage, replacement source, pixel dimensions, and intended orientation/aspect. Save the genuine original under the current site filename (same filename = replace), preview, then apply. Current site filenames are purpose-based; the table in `MEDIA-MAPPING.md` maps them to the old WordPress filenames.
 
 ## Design objective
 

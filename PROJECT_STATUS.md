@@ -119,10 +119,9 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
    pages. Next engineering phase (after verification): path-based locales, see `docs/PLAN-locale-routing.md`.
 
 1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
-   - Use the page-grouped staging set under `manual-photo-replacements/`.
-   - The canonical active images remain under `public/assets/original/2025/03/`.
-   - `scripts/stage-current-photos.ps1` creates a fresh page-grouped staging set from the canonical files.
-   - `scripts/apply-photo-replacements.ps1` contains the safeguard gate before applying staged replacements: approved filenames only, complete set required, and duplicate staged copies must have identical SHA-256 contents.
+   - Put genuine originals in `photo-inbox/` and run `scripts/manage-photos.ps1` (preview, then `-Apply`). Replace = same filename as the current photo; add = new filename following the convention in `MEDIA-MAPPING.md`.
+   - The canonical active images remain under `public/assets/original/2025/03/` (renamed to purpose-based names; old-to-current table in `MEDIA-MAPPING.md`).
+   - Any number of photos can be processed at once; the script checks everything first and changes nothing on any problem.
    - Follow `PHOTO-REPLACEMENT-GUIDE.md` for the reusable workflow and safeguard rules.
 
 2. **Favicon / home-screen icons — FIXED IN BRANCH `chore/branded-icons`, live verification OPEN**
@@ -143,7 +142,7 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
 ## Known-good decisions — preserve these
 
 - Keep genuine recovered WordPress media as the source of truth.
-- Keep stable filenames/paths where possible so manual photo replacement does not require code mapping changes.
+- Keep filenames stable: a replacement photo uses the same filename as the photo it replaces, so no code mapping changes (names follow the convention in `MEDIA-MAPPING.md`).
 - Do not compensate for soft source images by enlarging them unnecessarily.
 - Keep the About slideshow focused on the four founder archive portraits.
 - Keep product gallery mappings stable unless a source audit proves otherwise.
@@ -154,19 +153,15 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
 
 ## Manual photo-replacement workflow
 
-After pulling `main`, run:
+Put replacement or new photos in `photo-inbox/` (replacement = exact current filename; new photo = new filename following the convention), then run:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\stage-current-photos.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\manage-photos.ps1          # preview, changes nothing
+powershell -ExecutionPolicy Bypass -File .\scripts\manage-photos.ps1 -Apply   # apply, then runs npm run check:media
 ```
 
-Replace the staged files with genuine originals using the exact approved filenames. Then run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
-```
-
-The apply script must finish with its validation message before the canonical files are overwritten. If it stops on an unexpected filename, missing file, or duplicate-content mismatch, fix the staging set rather than bypassing the safeguard.
+If the script stops (bad name, empty or renamed file, extension mismatch, uncommitted changes to the target), fix the inbox rather than bypassing the safeguard.
+A newly added photo is not shown until a reviewed edit is made in `lib/content.ts` or `lib/archive-media.ts` (the script prints it).
 
 Then inspect locally and run:
 
@@ -176,7 +171,7 @@ npm run typecheck
 npm run build
 ```
 
-Commit/push only the verified binary replacements.
+Commit the photos (and any `lib/` change) on a branch and open a pull request.
 
 For the reusable detailed procedure, see `PHOTO-REPLACEMENT-GUIDE.md`.
 

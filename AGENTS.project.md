@@ -30,12 +30,14 @@ vintage Louis Vuitton collection). It is a clean Next.js implementation. Do NOT 
 | Components | `components/` | Header/MobileNav, Footer, ArchiveSlideshow, ParallaxMedia, PointerAtmosphere, MagneticLink, RevealObserver, ContactForm, JsonLd, LanguageSwitcher. |
 | CSS layers (import order matters) | `app/globals.css` → `motion.css` → `quality-motion.css` → `audit-fixes.css` → `a11y.css` | Later files override earlier. New accessibility overrides go in `a11y.css`. |
 | Config | `next.config.ts` | Image optimiser (`qualities: [75, 90]` — every `quality` used must be listed), redirects, security headers, preview `noindex`. |
-| Scripts | `scripts/` | `check-media.mjs` (CI), `stage-current-photos.ps1`, `apply-photo-replacements.ps1`. |
+| Scripts | `scripts/` | `check-media.mjs` (CI), `manage-photos.ps1` (photo intake, with `photo-inbox/`). |
 
 ## 3. Media rules
 
 - **Served media:** only files the app references live in `public/assets/original/2025/03/` (canonical). Everything in `public/` is
   publicly served.
+- **Filenames:** `<cohai|landing|journal|shop>-<topic>-<number>.<ext>`, lowercase (convention and old-to-current table in `MEDIA-MAPPING.md`).
+  A replacement keeps the exact filename of the photo it replaces; a new photo gets a new conforming filename.
 - **Archived media:** unused recovered WordPress media is in `archive/wordpress-recovery/` (not served). Copy from there into `public/`
   with the exact expected filename only when deliberately used. Never put logs, plugin caches, dumps or `.htaccess`/`index.php`
   under `public/` (`npm run check:media` enforces it).
@@ -82,12 +84,13 @@ The 29 Sep 2026 audit remediation branch and its open Owner decisions are tracke
 
 ## 7. Photography replacement workflow
 
-1. Pull the latest `main`. 2. `scripts/stage-current-photos.ps1` to create a page-grouped staging set. 3. Find exact filename/page usage in
-`manual-photo-replacements/PHOTO-REPLACEMENT-MANIFEST.md`. 4. Get the genuine original (check `archive/` first). 5. Rename to exactly match the
-approved filename and extension. 6. Replace the staged copy; never rename the canonical app asset. 7. Run `scripts/apply-photo-replacements.ps1`.
-8. **Never bypass a failed safeguard** (rejects unexpected names, missing approved names, and inconsistent duplicate copies via SHA-256).
-9. Inspect desktop and iPhone rendering. 10. Run the standard verification set (`docs/PROJECT_PROCEDURES.md` §12). 11. Commit only the verified binary replacements.
-Do not commit staging binaries as a separate media source.
+1. Pull the latest `main` and branch. 2. Get the genuine original (check `archive/` first) and confirm its subject and page usage
+(`scripts/manage-photos.ps1` with an empty `photo-inbox/` lists every current filename and where it is used). 3. Save it under the exact filename of the photo
+it replaces, or under a new conforming filename to add it, and put it in `photo-inbox/`. 4. Run `scripts/manage-photos.ps1` (preview), then with `-Apply`.
+5. **Never bypass a failed safeguard** (it rejects non-conforming names, empty or renamed files, extension mismatches against existing photos, and overwriting
+uncommitted changes; any problem changes nothing). 6. A newly added photo is shown only after a reviewed `lib/content.ts` / `lib/archive-media.ts` edit; Vietnamese
+alt text comes from the Project Owner (§11). 7. Inspect desktop and iPhone rendering. 8. Run the standard verification set (`docs/PROJECT_PROCEDURES.md` §12).
+9. Commit the photos and any `lib/` change on a branch and open a PR. `photo-inbox/` contents are Git-ignored; do not commit them as a separate media source.
 
 ## 8. Verification commands and project-specific validation
 
@@ -114,7 +117,7 @@ recovered-media provenance and image quality; anything under `public/` (served t
 Never: edit, correct, retranslate, reformat, reorder or delete any Vietnamese text unless the Project Owner explicitly says so in the task (if a task needs a new
 Vietnamese string, ask the Project Owner for it; do not write or machine-translate Vietnamese) · place logs, plugin caches or dumps under `public/` · invent business facts the recovered sources or the Project Owner do not support ·
 hide poor image sources with CSS tricks or present stock imagery as recovered brand material · bypass a failed safeguard (`npm run check:media`,
-the photo-apply script, CI) · discard source provenance for convenience. (Never-commit items: §9.)
+`manage-photos.ps1`, CI) · discard source provenance for convenience. (Never-commit items: §9.)
 
 ## 12. Owner gates
 
@@ -125,7 +128,7 @@ copies are also kept outside the repository) · replacing approved photography �
 ## 13. Project evidence rules
 
 - Visual claims need desktop and iPhone-width renders of a Vercel preview or production. CI green is not visually verified.
-- Photo changes need before/after rendering and must pass the `apply-photo-replacements.ps1` SHA-256 safeguard.
+- Photo changes need before/after rendering and must pass the `manage-photos.ps1` checks and `npm run check:media`.
 - Production claims need the deployed commit SHA matched to `main` and an observation on the live URL (`scripts/verify-deployment.mjs`).
 - Business and content claims need Owner-supplied or recovered-source evidence.
 - SEO/metadata claims need the rendered output (view-source, `/sitemap.xml`, `/robots.txt`, schema validator), not just code.

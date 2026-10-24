@@ -151,45 +151,27 @@ Current verified product gallery counts:
 
 The owner has confirmed that some files recovered from the old WordPress site are **screenshots rather than the original uploaded photographs**. This explains a significant portion of the remaining softness/blurriness.
 
-### Page-grouped replacement set
+### Replacement workflow
 
-A dedicated staging map exists at:
-
-```text
-manual-photo-replacements/
-  README.md
-  PHOTO-REPLACEMENT-MANIFEST.md
-  landing/
-  about/
-  journal/
-  shop/
-```
-
-The manifest identifies current images by exact filename and page usage. Canonical active images remain under `public/assets/original/2025/03/` until a genuine replacement is verified.
-
-### Replacement helper scripts
+Photos are replaced or added through `photo-inbox/` and `scripts/manage-photos.ps1`:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\stage-current-photos.ps1
-powershell -ExecutionPolicy Bypass -File .\scripts\apply-photo-replacements.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\manage-photos.ps1          # preview, changes nothing
+powershell -ExecutionPolicy Bypass -File .\scripts\manage-photos.ps1 -Apply   # apply
 ```
 
-The staging script copies the current canonical binaries into the page groups. The apply script is fail-closed and validates the complete approved filename set plus SHA-256 consistency for duplicate filenames across page groups before copying anything into the canonical directory.
-
-See `PHOTO-REPLACEMENT-GUIDE.md` for the reusable procedure and safeguard rationale.
+Replace = same filename as the current photo. Add = new filename following the naming convention above. The script checks everything first and changes
+nothing on any problem. See `PHOTO-REPLACEMENT-GUIDE.md` for the full procedure and safeguard rationale.
 
 ### Replacement strategy
 
-The preferred low-churn solution is:
-
-1. keep the existing application filename/path;
-2. obtain the genuine original photograph manually;
-3. rename the genuine file to exactly match the approved filename;
-4. replace the staged copy;
-5. run the safeguard/apply script;
-6. inspect realistic desktop and iPhone rendering;
-7. run lint, typecheck and build;
-8. commit/push the verified binary replacement.
+1. obtain the genuine original photograph manually (search `archive/wordpress-recovery/` first; old filenames are in the table above);
+2. save it under the exact current filename (replace) or a new conforming filename (add) and put it in `photo-inbox/`;
+3. run the script (preview, then `-Apply`);
+4. for an added photo, make the reviewed `lib/` edit the script prints;
+5. inspect realistic desktop and iPhone rendering;
+6. run lint, typecheck and build;
+7. commit on a branch and open a pull request.
 
 Do not replace a file merely because it looks soft until its page usage has been confirmed.
 
