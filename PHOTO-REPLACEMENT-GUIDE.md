@@ -35,6 +35,19 @@ artificial enlargement.
 The number counts photos within one item. It never sets display order; the code does. A photo shown on several pages keeps one name (the homepage archive
 shows all photos, so a `shop-` photo also appears there).
 
+## Where a photo is shown (the `lib/` edit for an ADDED photo)
+
+| Photo | Edit | Notes |
+|---|---|---|
+| `cohai-<n>` | `lib/archive-media.ts`: new entry, `group: "founder"` | Shows on the About page and the homepage archive |
+| `landing-<n>` | `lib/archive-media.ts`: new entry, `group: "archive"` | Homepage archive only |
+| `shop-<product>-<n>`, existing product | `lib/content.ts`: append to that product's `gallery` | Detail page shows every gallery photo, in order |
+| `shop-<product>-1`, new product | `lib/content.ts`: new entry in `products` | Needs name, category, description, details; Vietnamese text from the Project Owner |
+| `journal-<topic>-1`, new article | `lib/content.ts`: new entry in `editorialPosts` with `image` | `image` is the card photo and the article's top photo; Vietnamese text from the Project Owner |
+| `journal-<topic>-<n>`, n = 2 or more | `lib/content.ts`: append to that article's optional `gallery` | Shown after the article text; do not repeat the top photo |
+
+Replacing a photo (same filename) needs no `lib/` edit.
+
 ## Workflow
 
 1. **Branch from current `main`:** `git pull origin main`, then create a feature branch.
@@ -66,8 +79,6 @@ shows all photos, so a `shop-` photo also appears there).
 - **Removing a photo:** do it as a normal Git change (delete the file and its `lib/` reference). `check:media` catches a dangling reference.
 - **Reusing a photo in another place:** reference the same filename again in `lib/`; nothing is duplicated.
 - **Automatic edits to `lib/*.ts`:** adds extra risk for little gain; the script prints the exact entry instead.
-- **More than one image per Journal article:** the content model has a single `image` field per article. A `journal-<topic>-2` photo cannot be displayed until
-  the code supports it.
 
 ## What not to do
 
