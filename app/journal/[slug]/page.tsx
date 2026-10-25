@@ -31,6 +31,12 @@ export default async function EditorialPage({ params }: { params: Promise<{ slug
   const locale = await getLocale();
   const labels = ui[locale];
   const localized = localizedPost(post, locale);
+  const extraPhotos = localized.gallery ?? [];
+  const backLink = (
+    <div className="article-back">
+      <Link className="text-link" href="/journal">{labels.backJournal}</Link>
+    </div>
+  );
 
   return (
     <article className="article-page">
@@ -56,10 +62,20 @@ export default async function EditorialPage({ params }: { params: Promise<{ slug
         {localized.paragraphs.map((paragraph, index) => (
           <p className={index === 0 ? "article-lead" : ""} key={paragraph}>{paragraph}</p>
         ))}
-        <div className="article-back">
-          <Link className="text-link" href="/journal">{labels.backJournal}</Link>
-        </div>
+        {extraPhotos.length === 0 && backLink}
       </div>
+      {extraPhotos.length > 0 && (
+        <>
+          <div className="article-gallery">
+            {extraPhotos.map((image, index) => (
+              <div className="article-hero" key={image}>
+                <ParallaxMedia src={image} alt={`${localized.title} — ${labels.view} ${index + 2}`} fill sizes="100vw" strength={9} />
+              </div>
+            ))}
+          </div>
+          <div className="article-body article-body-end">{backLink}</div>
+        </>
+      )}
     </article>
   );
 }

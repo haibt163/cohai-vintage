@@ -8,6 +8,8 @@ export const navigation = [
 
 export type EditorialPost = {
   slug: string; title: string; category: string; image: string;
+  /** Optional extra photos shown after the article text. The hero stays `image`; do not repeat it here. */
+  gallery?: string[];
   excerpt: string; intro: string; paragraphs: string[];
 };
 
