@@ -87,16 +87,17 @@ function Show-AddHint([string]$Name) {
     Write-Host ('               { group: "archive", src: media("' + $Name + '"), alt: { en: "<English alt text>", vi: "<Vietnamese alt text from the Project Owner>" } },')
   }
   elseif ($prefix -eq 'shop') {
-    Write-Host '             lib/content.ts - append to the matching product''s gallery array:'
+    Write-Host '             lib/content.ts - existing product: append to its "gallery" array:'
     Write-Host ('               media("' + $Name + '")')
+    Write-Host '             new product: add a full entry to "products" (image + gallery; Vietnamese text comes from the Project Owner).'
   }
   elseif ($Name -cmatch '-1\.[a-z]+$') {
     Write-Host '             lib/content.ts - set the article''s "image" field (a brand-new article also needs its full entry; Vietnamese text comes from the Project Owner):'
     Write-Host ('               image: media("' + $Name + '")')
   }
   else {
-    Write-Host '             A Journal article shows ONE image today, so this extra photo cannot appear until the code supports more.'
-    Write-Host '             Ask for that code change first; the file can stay in the media folder meanwhile (check:media will warn about it).'
+    Write-Host '             lib/content.ts - extra photo for an existing article: append to its "gallery" array (shown after the article text):'
+    Write-Host ('               media("' + $Name + '")')
   }
 }
 
