@@ -7,7 +7,12 @@
 main, .site-footer { position: relative; z-index: 1; }
 .desktop-nav { gap: 17px; white-space: nowrap; }
 .reveal { transform: translate3d(0, 0, 0); }
-.motion-ready .reveal { opacity: 0; transform: translate3d(0, 24px, 0); animation: none !important; transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+/* The hero copy is above the fold and already fades in from the .reveal entrance
+   animation in globals.css. Letting the JS reveal own it cancels that animation
+   mid-flight and restarts it from opacity 0, so text that was already painted
+   disappears and fades in a second time. Keep the hero on its single entrance
+   fade; every other .reveal section keeps the scroll-triggered transition. */
+.motion-ready .reveal:not(.hero-copy) { opacity: 0; transform: translate3d(0, 24px, 0); animation: none !important; transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .motion-ready .reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
 .reveal-delay-1 { transition-delay: 0.08s; }
 .reveal-delay-2 { transition-delay: 0.16s; }
