@@ -36,4 +36,4 @@ Read-only design prepared 30 Sep 2026. Everything about Next 16 behaviour below 
 ## Risks
 - Largest routing change so far; touches every page, layout, header/footer and the sitemap. Keep it to one reviewable branch with logical commits.
 - SEO churn: URL changes need correct 308s and Search Console re-submission of the sitemap.
-- `NEXT_PUBLIC_SITE_URL` must be correct in production before hreflang/canonicals are trusted.
+- Hardcoded origin in `lib/site.ts` must be correct before hreflang/canonicals are trusted.

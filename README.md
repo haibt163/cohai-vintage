@@ -87,7 +87,7 @@ Genuine recovered media in use is under `public/assets/original/2025/03/`; the r
 
 ## Configuration
 
-- `NEXT_PUBLIC_SITE_URL` — public origin (e.g. `https://your-domain`). Set in Vercel for Production; used for canonical URLs, sitemap and Open Graph. Falls back to `VERCEL_PROJECT_PRODUCTION_URL`, then `http://localhost:3000`.
+- Public origin is set in `lib/site.ts` as `https://cohaivintage.com`; it drives canonicals, og:image and the sitemap.
 - `npm run check:media` — verifies media references and `public/` hygiene (also run in CI).
 - Audit/remediation status: `AUDIT-2026-09-29.md`.
 
