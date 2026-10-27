@@ -6,9 +6,40 @@ import { getArchiveSlides } from "@/lib/archive-media";
 import { getLocale, localizedPost, localizedProduct, slideshowLabels, ui } from "@/lib/i18n";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
-import { contact } from "@/lib/site";
+import { absoluteUrl, contact } from "@/lib/site";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const title = locale === "vi"
+    ? "Thời trang vintage, hàng xa xỉ và câu chuyện"
+    : "Vintage Fashion, Luxury Pieces and Stories";
+  const description = locale === "vi"
+    ? "Khám phá Cô Hai Vintage tại Sài Gòn: thời trang vintage, món đồ xa xỉ đã qua sử dụng, trang sức và những câu chuyện về phong cách, nguồn gốc và giá trị của những món đồ được gìn giữ."
+    : "Discover Cô Hai Vintage in Saigon: curated vintage fashion, pre-owned luxury pieces, jewellery and stories about style, provenance and the objects we keep.";
+  const shareTitle = locale === "vi"
+    ? "Cô Hai Vintage | Thời trang vintage và những câu chuyện"
+    : "Cô Hai Vintage | Vintage Fashion and Stories";
+  const image = absoluteUrl("/opengraph-image");
+
+  return {
+    title,
+    description,
+    alternates: { canonical: "/" },
+    openGraph: {
+      title: shareTitle,
+      description,
+      type: "website",
+      url: absoluteUrl("/"),
+      images: [{ url: image, width: 1200, height: 630, alt: "Cô Hai Vintage — vintage fashion, luxury pieces and stories" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: shareTitle,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export default async function Home() {
   const locale = await getLocale();
