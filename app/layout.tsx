@@ -11,7 +11,7 @@ import { PointerAtmosphere } from "@/components/PointerAtmosphere";
 import { RevealObserver } from "@/components/RevealObserver";
 import { getLocale, ui } from "@/lib/i18n";
 import { JsonLd } from "@/components/JsonLd";
-import { contact, siteUrl } from "@/lib/site";
+import { absoluteUrl, contact, siteUrl } from "@/lib/site";
 
 // Headlines only (h1–h3, card/product titles). 400 and 700 are the only weights
 // the headline rules can reach: h1–h3 keep the UA bold default, .mini-product
@@ -29,6 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = locale === "vi"
     ? "Thời trang vintage, những món đồ xa xỉ, trang sức và câu chuyện từ Cô Hai Vintage, Sài Gòn."
     : "Vintage fashion, luxury pieces, jewellery and stories from Cô Hai Vintage, Saigon.";
+  const socialImage = absoluteUrl("/opengraph-image");
   return {
     metadataBase: new URL(siteUrl),
     title: { default: "Cô Hai Vintage", template: "%s — Cô Hai Vintage" },
@@ -42,9 +43,16 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       type: "website",
       siteName: "Cô Hai Vintage",
+      url: siteUrl,
+      images: [{ url: socialImage, width: 1200, height: 630, alt: "Cô Hai Vintage — vintage fashion, luxury pieces and stories" }],
       locale: locale === "vi" ? "vi_VN" : "en_US",
     },
-    twitter: { card: "summary_large_image", title: "Cô Hai Vintage", description },
+    twitter: {
+      card: "summary_large_image",
+      title: "Cô Hai Vintage",
+      description,
+      images: [socialImage],
+    },
   };
 }
 
