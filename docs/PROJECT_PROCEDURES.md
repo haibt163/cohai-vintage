@@ -49,7 +49,7 @@ production deploy run `node scripts/verify-deployment.mjs https://<production-do
 ## 16. Release / deployment verification (Vercel)
 
 - Preview per PR; production deploys from `main`.
-- Confirm environment variables for the target (`NEXT_PUBLIC_SITE_URL`).
+- Confirm the canonical in the built HTML is `https://cohaivintage.com`.
 - Run `node scripts/verify-deployment.mjs <origin>`: checks status codes, redirects, headers, canonical/sitemap/robots host, JSON-LD,
   Open Graph image, locale `<html lang>`, 404 and the image optimiser. It is **necessary but not sufficient**: sharpness, layout, motion
   and mobile behaviour still need a human look at desktop and iPhone widths.

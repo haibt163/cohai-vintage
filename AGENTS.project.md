@@ -25,7 +25,7 @@ vintage Louis Vuitton collection). It is a clean Next.js implementation. Do NOT 
 | Content model | `lib/content.ts` | `products`, `editorialPosts`, `navigation`, `getProduct`, `getEditorialPost`. Images referenced with `media("<filename>")`. |
 | Localisation | `lib/i18n.ts` | `ui` dictionary (EN + VI), `getLocale`, `localizedProduct/Post`, `slideshowLabels`. **Every user-visible string needs both EN and VI.** |
 | Archive imagery | `lib/archive-media.ts` | `getArchiveSlides(locale, group?)`; localised alt text; `group: "archive" \| "founder"`. |
-| Site constants | `lib/site.ts` | `siteUrl` (`NEXT_PUBLIC_SITE_URL`), contact e-mail/Instagram, `absoluteUrl`. |
+| Site constants | `lib/site.ts` | `siteUrl` hardcoded to `https://cohaivintage.com`, contact, `absoluteUrl`. |
 | Routes | `app/` | `/`, `/about`, `/journal`, `/journal/[slug]`, `/shop`, `/shop/[slug]`, `/contact`; `sitemap.ts`, `robots.ts`, `opengraph-image.tsx`, `manifest.ts`, icons, branded 404. `/portfolio*` 308-redirects to `/journal*` (in `next.config.ts`). |
 | Components | `components/` | Header/MobileNav, Footer, ArchiveSlideshow, ParallaxMedia, PointerAtmosphere, MagneticLink, RevealObserver, ContactForm, JsonLd, LanguageSwitcher. |
 | CSS layers (import order matters) | `app/globals.css` → `motion.css` → `quality-motion.css` → `audit-fixes.css` → `a11y.css` | Later files override earlier. New accessibility overrides go in `a11y.css`. |
@@ -121,8 +121,8 @@ hide poor image sources with CSS tricks or present stock imagery as recovered br
 
 ## 12. Owner gates
 
-Ask the Project Owner before: changing any Vietnamese text (see §11) · publishing customer-facing copy that makes a business commitment · changing the production domain or
-`NEXT_PUBLIC_SITE_URL` · adding third-party services, secrets or dependencies · purging Git history · deleting `archive/` (old WordPress photos;
+Ask the Project Owner before: changing any Vietnamese text (see §11) · publishing customer-facing copy that makes a business commitment · changing the public origin in
+`lib/site.ts` · adding third-party services, secrets or dependencies · purging Git history · deleting `archive/` (old WordPress photos;
 copies are also kept outside the repository) · replacing approved photography · changing the approved visual direction (§5).
 
 ## 13. Project evidence rules
