@@ -8,12 +8,12 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 
 ## Brand identity refresh — 27 October 2026 (icon pack generated; review pending)
 
-- **VERIFIED:** The Owner's original square Cô Hai Vintage image is available as `public/instagram.jpg`; the source blob is unchanged from the supplied commit.
+- **VERIFIED:** The Owner's original square Cô Hai Vintage image is available as `public/instagram.jpg`; its source blob is unchanged from the supplied commit.
 - **VERIFIED:** The homepage Instagram icon links to the existing shared profile URL.
-- **VERIFIED:** Static assets were generated from the original image with resizing only: `app/favicon.ico` (16/32/48), `app/icon.svg` (self-contained embedded source photo), `app/apple-icon.png` (180×180), and `public/icons/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`.
-- **VERIFIED:** GitHub Actions generation run succeeded: https://github.com/haibt163/cohai-vintage/actions/runs/40451852360.
-- **IMPLEMENTED:** `scripts/icons/generate-icons.py` now uses `public/instagram.jpg` as its sole source, validates square framing, and checks raster output dimensions. The branch-scoped workflow regenerates and commits the static icon files when the source or generator changes.
-- **UNVERIFIED:** Full project lint/typecheck/build and desktop/mobile preview checks remain to be run before merge; no production files have been changed.
+- **VERIFIED:** Static assets were generated from the original image with resizing only: `app/favicon.ico` (16/32/48, RGBA frames), `app/icon.svg` (self-contained embedded source photo), `app/apple-icon.png` (180×180), and `public/icons/icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (512×512).
+- **VERIFIED:** The icon-generation run succeeded: https://github.com/haibt163/cohai-vintage/actions/runs/40452150446. The temporary workflow used for generation was removed; generated static assets and the reusable generator remain.
+- **IMPLEMENTED:** `scripts/icons/generate-icons.py` uses `public/instagram.jpg` as its sole source, validates square framing, and checks raster output dimensions. Next.js discovers the icon files under `app/` automatically; the PWA manifest continues to reference the three self-hosted PNGs.
+- **UNVERIFIED:** A pre-fix production build rejected RGB ICO frames; the generator has since been corrected to output RGBA frames. Full project build and visual device checks still need confirmation on the latest PR commit. No production files have been changed.
 
 ## Audit remediation — 29 September 2026 (MERGED to `main` via PR #1, 29 Sep 2026)
 
