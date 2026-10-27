@@ -12,7 +12,7 @@ work uses a dedicated feature branch or worktree.
 This repository is the authoritative source for the modern Cô Hai Vintage website rebuild (Saigon vintage-fashion/editorial + a small
 vintage Louis Vuitton collection). It is a clean Next.js implementation. Do NOT reproduce the old WordPress/Elementor/Astra site literally.
 
-- Next.js 16 (App Router), React 19, TypeScript, plain CSS layers (Tailwind is installed but currently unused — see audit D-01).
+- Next.js 16 (App Router), React 19, TypeScript, plain CSS layers.
 - Deployed on Vercel. `main` is the authoritative code source. Node 22.
 - Bilingual EN/VI. Cookie-based locale (`cohai-locale`; default `vi`). Path-based locales are a deferred phase (audit A-02).
 - **Vietnamese is the source of truth.** About 90% of target customers are Vietnamese. All Vietnamese text is written by the Project Owner and stays
