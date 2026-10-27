@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import "./motion.css";
 import "./quality-motion.css";
@@ -11,6 +12,17 @@ import { RevealObserver } from "@/components/RevealObserver";
 import { getLocale, ui } from "@/lib/i18n";
 import { JsonLd } from "@/components/JsonLd";
 import { contact, siteUrl } from "@/lib/site";
+
+// Headlines only (h1–h3, card/product titles). 400 and 700 are the only weights
+// the headline rules can reach: h1–h3 keep the UA bold default, .mini-product
+// titles are normal. Roman only — no headline rule sets italic.
+const playfair = Playfair_Display({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "700"],
+  style: ["normal"],
+  display: "swap",
+  variable: "--font-playfair",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -44,7 +56,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
   return (
-    <html lang={locale}>
+    <html lang={locale} className={playfair.variable}>
       <body>
         <a className="skip-link" href="#main">{ui[locale].skip}</a>
         <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: "Cô Hai Vintage", url: siteUrl, email: contact.email, sameAs: [contact.instagramUrl] }} />

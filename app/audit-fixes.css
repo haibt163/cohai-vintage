@@ -38,7 +38,7 @@
 .product-info h1,
 .editorial-card h3,
 .product-card h2 {
-  font-family: "Bodoni 72", Didot, "Bodoni MT", "Times New Roman", serif;
+  font-family: var(--font-playfair), "Bodoni 72", Didot, "Bodoni MT", "Times New Roman", serif;
   font-kerning: normal;
   text-rendering: optimizeLegibility;
 }
