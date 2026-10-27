@@ -6,13 +6,14 @@ The modern Cô Hai Vintage reconstruction is running well on `main` and satisfie
 
 Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, with the remaining visual/live verification items intentionally carried forward.
 
-## Brand identity refresh — 27 October 2026 (icon pack generation in progress)
+## Brand identity refresh — 27 October 2026 (icon pack generated; review pending)
 
-- **VERIFIED:** The Owner's original square Cô Hai Vintage image is available as `public/instagram.jpg` on this branch; its Git blob is copied unchanged from the supplied commit.
-- **VERIFIED:** Branch `feat/instagram-link-and-profile-icons` adds an accessible Instagram icon to the homepage, linked to the existing shared profile URL.
-- **IMPLEMENTED:** `scripts/icons/generate-icons.py` now derives the browser favicon, self-contained SVG icon, Apple home-screen icon and Android/PWA PNGs from the original image. It resizes only and refuses to crop a non-square source.
-- **IMPLEMENTED:** A branch-scoped GitHub Actions workflow generates and commits the static icon files whenever the source or generator changes.
-- **UNVERIFIED:** The first CI generation run, local lint/typecheck/build, and desktop/mobile preview checks still need verification.
+- **VERIFIED:** The Owner's original square Cô Hai Vintage image is available as `public/instagram.jpg`; the source blob is unchanged from the supplied commit.
+- **VERIFIED:** The homepage Instagram icon links to the existing shared profile URL.
+- **VERIFIED:** Static assets were generated from the original image with resizing only: `app/favicon.ico` (16/32/48), `app/icon.svg` (self-contained embedded source photo), `app/apple-icon.png` (180×180), and `public/icons/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`.
+- **VERIFIED:** GitHub Actions generation run succeeded: https://github.com/haibt163/cohai-vintage/actions/runs/40451852360.
+- **IMPLEMENTED:** `scripts/icons/generate-icons.py` now uses `public/instagram.jpg` as its sole source, validates square framing, and checks raster output dimensions. The branch-scoped workflow regenerates and commits the static icon files when the source or generator changes.
+- **UNVERIFIED:** Full project lint/typecheck/build and desktop/mobile preview checks remain to be run before merge; no production files have been changed.
 
 ## Audit remediation — 29 September 2026 (MERGED to `main` via PR #1, 29 Sep 2026)
 
