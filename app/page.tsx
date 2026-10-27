@@ -29,6 +29,8 @@ export async function generateMetadata(): Promise<Metadata> {
       title: shareTitle,
       description,
       type: "website",
+      siteName: "Cô Hai Vintage",
+      locale: locale === "vi" ? "vi_VN" : "en_US",
       url: absoluteUrl("/"),
       images: [{ url: image, width: 1200, height: 630, alt: "Cô Hai Vintage — vintage fashion, luxury pieces and stories" }],
     },
