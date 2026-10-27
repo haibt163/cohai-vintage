@@ -41,3 +41,31 @@ main:focus { outline: none; }
 
 .contact-status { margin: 4px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
 .contact-status a { color: var(--ink); text-underline-offset: 3px; }
+
+
+/* Landing-page Instagram link */
+.instagram-link {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.instagram-link:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.instagram-link svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

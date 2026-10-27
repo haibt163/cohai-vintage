@@ -6,6 +6,7 @@ import { getArchiveSlides } from "@/lib/archive-media";
 import { getLocale, localizedPost, localizedProduct, slideshowLabels, ui } from "@/lib/i18n";
 import { ArchiveSlideshow } from "@/components/ArchiveSlideshow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+import { contact } from "@/lib/site";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
@@ -28,6 +29,19 @@ export default async function Home() {
           <div className="hero-actions">
             <Link className="button button-dark" href="/shop">{labels.explore}</Link>
             <Link className="text-link" href="/about">{labels.meet}</Link>
+            <a
+              className="instagram-link"
+              href={contact.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram @vintagebycohai"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.8" />
+              </svg>
+            </a>
           </div>
         </div>
         <div className="hero-image-wrap hero-parallax-wrap">

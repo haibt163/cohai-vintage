@@ -6,6 +6,16 @@ The modern Cô Hai Vintage reconstruction is running well on `main` and satisfie
 
 Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, with the remaining visual/live verification items intentionally carried forward.
 
+## Brand identity refresh — 27 October 2026 (icon pack generated; review pending)
+
+- **VERIFIED:** The Owner's original square Cô Hai Vintage image is available as `public/instagram.jpg`; its source blob is unchanged from the supplied commit.
+- **VERIFIED:** The homepage Instagram icon links to the existing shared profile URL.
+- **VERIFIED:** Static assets were generated from the original image with resizing only: `app/favicon.ico` (16/32/48, RGBA frames), `app/icon.svg` (self-contained embedded source photo), `app/apple-icon.png` (180×180), and `public/icons/icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (512×512).
+- **VERIFIED:** The icon-generation run succeeded: https://github.com/haibt163/cohai-vintage/actions/runs/40452150446. The temporary workflow used for generation was removed; generated static assets and the reusable generator remain.
+- **IMPLEMENTED:** `scripts/icons/generate-icons.py` uses `public/instagram.jpg` as its sole source, validates square framing, and checks raster output dimensions. Next.js discovers the icon files under `app/` automatically; the PWA manifest continues to reference the three self-hosted PNGs.
+- **VERIFIED:** After the RGBA correction, GitHub Actions PR validation passed lint, typecheck, production build, media checks, translation parity, and the advisory dependency audit on commit `1a7a7ad8a84b920c47fcfd5ac02ed08996f10fc5`: https://github.com/haibt163/cohai-vintage/actions/runs/40452327573.
+- **UNVERIFIED:** Desktop/iPhone/Android visual checks have not been performed. No production files have been changed; review PR #13 before merging.
+
 ## Audit remediation — 29 September 2026 (MERGED to `main` via PR #1, 29 Sep 2026)
 
 A full audit and a patch set are tracked in [`AUDIT-2026-09-29.md`](AUDIT-2026-09-29.md) (finding IDs, status, evidence, Owner decisions,
