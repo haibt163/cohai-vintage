@@ -59,7 +59,7 @@ def main() -> None:
     (ROOT / "app").mkdir(parents=True, exist_ok=True)
 
     # One original image, resized only; each output keeps the full square framing.
-    image.resize((48, 48), Image.Resampling.LANCZOS).save(
+    image.resize((48, 48), Image.Resampling.LANCZOS).convert("RGBA").save(
         FAVICON, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)]
     )
     generate_svg()
