@@ -65,7 +65,7 @@ iPhone → §12). Replace = same filename; add = new filename following the nami
 
 ## 18. Switching lanes mid-task
 
-Commit or stash cleanly, refresh the handoff (`AI_ENGINEERING_WORKFLOW.md` §3) with current Git state and next step, then start the new lane at the fresh-session rule (`AI_ENGINEERING_WORKFLOW.md` §7). Do not let two
+Commit or stash cleanly, refresh the handoff (`AI_ENGINEERING_WORKFLOW.md` §4) with current Git state and next step, then start the new lane at the fresh-session rule (`AI_ENGINEERING_WORKFLOW.md` §2). Do not let two
 agents share a worktree. Approval boundaries are identical in every lane.
 
 ## 19. Applying a chat-authored change (Git bundle) — steps for the Project Owner

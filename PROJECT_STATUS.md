@@ -119,8 +119,7 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
 ## Pending issues / next-audit items
 
 0. **Owner decisions — OPEN / PRIORITY** — Owner decisions: copy approval, contact delivery, archive/history policy, price/availability, legal
-   pages. The 30 September live-site run passed and the Instagram URL is confirmed; complete any remaining checklist items in `AUDIT-2026-09-29.md`
-   §4. Next engineering phase: path-based locales, see `docs/PLAN-locale-routing.md`.
+   pages. The 30 September live-site run passed. Owner decision (22 November 2026): Instagram URL instagram.com/vintagebycohai confirmed. Complete any remaining checklist items in `AUDIT-2026-09-29.md` §4. Next engineering phase: path-based locales, see `docs/PLAN-locale-routing.md`.
 
 1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
    - Put genuine originals in `photo-inbox/` and run `scripts/manage-photos.ps1` (preview, then `-Apply`). Replace = same filename as the current photo; add = new filename following the convention in `MEDIA-MAPPING.md`.
