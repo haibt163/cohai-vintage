@@ -1,127 +1,100 @@
-# AI Engineering Workflow (universal master)
+# Cô Hai Vintage — AI Engineering Workflow
 
-This file is identical in every project. Project commands, deployment steps
-and prompt templates live in `AGENTS.project.md` or, if present, `docs/PROJECT_PROCEDURES.md`.
-Roles and authority are defined only in `docs/ENGINEERING_GOVERNANCE.md`.
-Read this file when you write a handoff, request a review, switch lanes, or
-give the Project Owner steps to follow (`AGENTS.md` §1).
+**Last updated: 22 November 2026.** Roles, operating modes and the merge gate are
+defined only in `docs/ENGINEERING_GOVERNANCE.md`. This file describes the session
+flow and handoff formats; it does not restate governance.
 
 ## 1. Source of truth
 
-Repository state and direct evidence beat chat memory. Durable knowledge
-goes in repository-visible documents: `AGENTS.md`, `AGENTS.project.md`, the
-status/handover document, audits and handoffs. Historical audits are
-evidence; add new evidence and status, never rewrite old findings.
+- GitHub `main` is the canonical source of truth.
+- Local folders and sandboxes are working copies.
+- Repository files, Git history, pull requests, CI/Vercel evidence and Owner
+  decisions outrank session history and prior reports.
+- Current project state is in `PROJECT_STATUS.md`; commands are in
+  `docs/PROJECT_PROCEDURES.md`.
 
-## 2. Lanes in one line each
+## 2. Session start
 
-Governance §2 defines them. Practically: Claude Code and Codex CLI/App
-implement and may execute approved merges; OMP implements and never merges;
-Claude Chat and ChatGPT review (and sometimes author, reduced mode); the
-Project Owner directs and may do anything the others can. Changing model or
-tool never changes the approval boundary.
+1. State which Git / GitHub / shell / network capabilities this session has.
+2. Read `docs/ENGINEERING_GOVERNANCE.md`, `PROJECT_STATUS.md`, `AGENTS.md` and
+   `AGENTS.project.md`.
+3. Inspect live Git state and the relevant code.
+4. Identify the mode (two lanes or three lanes) and the task type
+   (implementation or read-only).
+5. Independently verify important prior claims before relying on them.
 
-## 3. Report formats
-
-**Audit / review result.** Use exactly these four headings, in this order,
-and nothing else unless the task asks:
-
-```
-VERIFIED
-FAILED
-UNVERIFIED
-Owner decision
-```
-
-Each item: one line of finding, then the evidence (file and line, command and
-output, PR or commit). Do not re-list items already known unless they now
-block the current phase or the evidence or priority changed. Read-only work
-ends with `NO APPLICATION CODE CHANGES.`
-
-**Implementation handoff.** Task · scope · what changed · verification run
-with real output · remaining risks · UNVERIFIED items · Git (branch, commit,
-PR, author lane, reviewer lane). Small or exploratory work may use a short
-summary of the same facts.
-
-**Final report to the Project Owner.** Concise, plain language, ordered:
-*Must fix / verify now* · *Owner decision required* · *Future work*.
-
-## 4. Requesting and performing a review
-
-**Author's package for a chat reviewer** (the chat lane cannot see the
-repository):
+## 3. Flow
 
 ```text
-git status
-git log -5 --oneline --decorate
-git show --stat --oneline HEAD
+Owner defines task and mode
+        ↓
+Main Engineer works on a sub-branch
+        ↓
+Pull request opened for tracking
+        ↓
+Chief Engineer reviews and recommends (three-lane mode only)
+        ↓
+Owner approves on record
+        ↓
+Main Engineer or Owner merges → main
 ```
 
-plus the project's ZIP snapshot script output, the real
-verification output, and the handoff. Both are needed: the ZIP shows the
-files as handed over; the Git output shows what is actually committed and
-whether anything is uncommitted. Neither replaces the other, and neither
-replaces running the checks.
+A task may move between harnesses. The incoming engineer reads the governance,
+`PROJECT_STATUS.md` and live Git state before continuing.
 
-**Reviewer** checks in this order: requirements → design → correctness and
-maintainability → tests and evidence → security and privacy → provenance →
-deployment implications → risks → Git state. Then replies:
+## 4. Implementation handoff
 
+```markdown
+# Implementation Handoff
+## Task
+## Scope
+## Approach
+## Changes (files / surfaces)
+## Tests / Verification (real output, labelled sandbox or live)
+## Evidence (screenshots, logs)
+## Remaining Risks
+## Unverified
+## Git
+Branch:
+Commit:
+PR:
+Mode:
+Author lane:
+Reviewer lane: Chief Engineer name, or "Owner only"
 ```
-REVIEW OUTCOME: APPROVE | REQUEST CORRECTION
-Reviewed commit: <sha>   Branch/PR: <n>
-Author lane: <lane>   Reviewer lane: <lane> (must differ)
-Evidence basis: handed-over material only | direct repository access
-Corrections (if any): 1) … 2) …
-Evidence relied on: <what was actually seen>   UNVERIFIED: <what was not>
-```
 
-An APPROVE is valid for the stated commit only. A coding lane may give a peer
-review, but it does not replace the Chief Engineer gate.
+## 5. Pull request
 
-## 5. Read-only audits and parallel work
+Every pull request states:
 
-Several read-only audits may inspect a clean repository at once. They change
-no application code and say so. Implementation uses its own branch or
-worktree; two coding agents never share a worktree.
+- what changed;
+- what was verified, with real output;
+- what could not be verified;
+- files left unchanged on purpose;
+- open questions for the Owner;
+- author lane and reviewer lane (or "Owner only" in two-lane mode).
 
-## 6. Handing work to the Project Owner (plain language)
+Owner steps are written in plain language, with exact commands and what to expect.
 
-The Project Owner is not an engineer. Every hand-off to them:
+Keep the description under 200 words. Use the pull request as the review surface:
+diff, commit history and visible CI/preview results. A review states what it
+actually inspected and what it could not see.
 
-- says in one or two plain sentences what changed and why;
-- gives numbered steps, each command in its own code block (Windows Command
-  Prompt unless told otherwise);
-- says what they should see after each step and what to do if it differs;
-- avoids jargon, or explains a term the first time;
-- names the author lane and the reviewer lane.
+## 6. Verification
 
-A lane that cannot push (governance §2a) hands over a Git bundle or patch so
-commits keep their author. If the project has `docs/PROJECT_PROCEDURES.md`, its step-by-step
-bundle instructions are there.
+- **VERIFIED** — direct repository, command, test, CI or runtime evidence.
+- **UNVERIFIED** — proposal, inference or claim lacking direct evidence.
+- **FAILED** — confirmed execution failure.
 
-## 7. Fresh-session rule
+Run the checks defined by the repository and report actual output. Do not call
+work fixed, passing, complete or production-ready without that evidence. Label
+checks run in a sandbox as sandbox evidence.
 
-At the start of a new engineering session:
+## 7. Isolation and audits
 
-1. inspect live Git state, and state which Git/GitHub/shell capabilities
-   this session actually has;
-2. read `AGENTS.md` and `AGENTS.project.md`, then the current
-   status/handover document and the task's handoff, if any;
-3. identify whether the task is implementation or read-only audit;
-4. state the evidence and handoff you will deliver;
-5. verify important prior claims before relying on them.
-
-Do not read governance or this workflow for this; open them only when
-`AGENTS.md` §1 says to. Do not treat prior chat history as authoritative.
-
-When switching lanes mid-task: commit or stash cleanly, refresh the handoff
-with the current Git state and next step, then start the new lane at step 1.
-
-## 8. Cost
-
-Use the least expensive capable lane that can safely do the task, within the
-Project Owner's fixed monthly budget (governance §11). Switching lanes when a
-session limit is hit is routine. If a cheaper lane keeps producing work that
-fails review, report it to the Project Owner; do not keep paying for
-corrections.
+- Each effort uses its own feature branch or worktree. Never let two agents edit
+  the same worktree at once.
+- Read-only audits may inspect concurrently, change no application code, and end
+  with `NO APPLICATION CODE CHANGES.`
+- Do not stack pull requests on each other when avoidable; merge or close the
+  earlier one first, or say clearly that a later one contains it.

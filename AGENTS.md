@@ -1,8 +1,7 @@
-# Agent Contract (universal master)
+# Agent Contract
 
-This file is identical in every project. Project facts, sensitive boundaries
-and verification commands live in `AGENTS.project.md`, never here. Do not
-edit this file per project.
+Project facts, sensitive boundaries and verification commands live in
+`AGENTS.project.md`, never here.
 
 It is harness-neutral. Claude Code reads `CLAUDE.md` too; OMP reads
 `.omp/RULES.md` and `.omp/AGENTS.md` too. Nothing in those files overrides
@@ -12,19 +11,15 @@ this one.
 
 ## 1. Read before substantive work
 
-**Always read:** this file, `AGENTS.project.md`, the current status/handoff
-document if the project has one, and the live Git state. Then read the code
-and tests for the area you are touching.
+**Always read:** this file, `AGENTS.project.md`,
+`docs/ENGINEERING_GOVERNANCE.md`, the current status/handoff document if the
+project has one, and the live Git state. Then read the code and tests for the
+area you are touching.
 
-**Read only when the task needs them:**
+**Read when the task needs it:**
 
-- `docs/ENGINEERING_GOVERNANCE.md` — when you merge, review, approve, or
-  need to know who is allowed to do something.
 - `docs/AI_ENGINEERING_WORKFLOW.md` — when you write a handoff, request a
-  review, switch lanes, or hand steps to the Project Owner.
-
-Do not read them for ordinary implementation or audit work; the rules you
-need for that are here.
+  review, or hand steps to the Project Owner.
 
 A previous agent's report or chat is context, not proof. Check important
 claims against the repository.
@@ -122,15 +117,16 @@ access. They are not equivalent.
 
 ## 7. Git and review boundary
 
-- `main` is protected. Work on a feature branch; never commit to `main`.
+- `main` is the source of truth. Work on a sub-branch and open a pull request;
+  never commit to `main`.
+- Any harness agent may serve as Main Engineer and may merge to `main` only
+  after the Owner's approval on record.
+- Chief Engineer review is advisory input, not a merge gate.
 - Passing tests, silence, a prior approval, or another agent's report is not
-  approval.
-- The author of a change never approves it.
-- OMP lanes never merge to `main`.
-- A merge needs an APPROVE on record for the current head commit.
+  approval. Only the Owner approves.
 
-Who may approve and who may execute a merge is defined only in
-`docs/ENGINEERING_GOVERNANCE.md` §6a. Do not restate it elsewhere.
+The authoritative definition is `docs/ENGINEERING_GOVERNANCE.md`. Do not
+restate it elsewhere.
 
 ---
 
@@ -153,7 +149,8 @@ A substantive task ends with a report containing:
 - files changed;
 - remaining risks, limitations and UNVERIFIED items;
 - Git state (branch, commit, PR if any);
-- handoff, including author lane and reviewer lane (they must differ).
+- handoff, including author lane and reviewer lane (or "Owner only" in
+  two-lane mode).
 
 The task is done when the authorized scope is complete, the diff is focused,
 claims are evidence-backed, and the work is ready for the required review.

@@ -1,12 +1,12 @@
 # Cô Hai Vintage — Project Status
 
-## Current state — 8 September 2026
+## Current state — 22 November 2026
 
-The modern Cô Hai Vintage reconstruction is running well on `main` and satisfies the large majority of the agreed functional and visual requirements. `main` remains the authoritative code source.
+`main` is at `5b19f7a` (merge of PR #15, 27 October 2026). GitHub Actions run 40528017292 passed on that commit, and Vercel Production deployment `7362205430` succeeded for the same SHA. `https://cohaivintage.com` returned HTTP 200 on 22 November 2026. `main` remains the authoritative code source.
 
-Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, with the remaining visual/live verification items intentionally carried forward.
+Phase 3 authentic content/media restoration and Phase 4 premium visual transformation are complete. Phase 5 production work is substantially complete, with photo-source replacement and the remaining visual/live verification items intentionally carried forward.
 
-## Brand identity refresh — 27 October 2026 (icon pack generated; review pending)
+## Brand identity refresh — 27 October 2026 (icon pack merged)
 
 - **VERIFIED:** The Owner's original square Cô Hai Vintage image is available as `public/instagram.jpg`; its source blob is unchanged from the supplied commit.
 - **VERIFIED:** The homepage Instagram icon links to the existing shared profile URL.
@@ -14,7 +14,7 @@ Phase 3 authentic content/media restoration and Phase 4 premium visual transform
 - **VERIFIED:** The icon-generation run succeeded: https://github.com/haibt163/cohai-vintage/actions/runs/40452150446. The temporary workflow used for generation was removed; generated static assets and the reusable generator remain.
 - **IMPLEMENTED:** `scripts/icons/generate-icons.py` uses `public/instagram.jpg` as its sole source, validates square framing, and checks raster output dimensions. Next.js discovers the icon files under `app/` automatically; the PWA manifest continues to reference the three self-hosted PNGs.
 - **VERIFIED:** After the RGBA correction, GitHub Actions PR validation passed lint, typecheck, production build, media checks, translation parity, and the advisory dependency audit on commit `1a7a7ad8a84b920c47fcfd5ac02ed08996f10fc5`: https://github.com/haibt163/cohai-vintage/actions/runs/40452327573.
-- **UNVERIFIED:** Desktop/iPhone/Android visual checks have not been performed. No production files have been changed; review PR #13 before merging.
+- **UNVERIFIED:** Desktop/iPhone/Android visual checks have not been performed. PR #13 is merged and deployed in `5b19f7a`; confirm the favicon and Home Screen icon on a device.
 
 ## Audit remediation — 29 September 2026 (MERGED to `main` via PR #1, 29 Sep 2026)
 
@@ -24,20 +24,14 @@ verification checklist). Summary of what the branch changes: `public/` reduced f
 accessibility layer, `check:media` CI step. PR #1 was reviewed and approved by ChatGPT and the Project Owner, then merged.
 
 Post-merge evidence: **lint FAILED once** on the slideshow (`react-hooks` rule against `setState` in an effect) and was fixed in `169d22e`
-(`useSyncExternalStore`); Vercel production deployment `8c506f9` (merge of PR #1) is **READY** and is the current `main` head (VERIFIED via the
-Vercel connector). **Live-site behaviour: VERIFIED 30 Sep 2026** — the Project Owner ran `node scripts/verify-deployment.mjs https://cohaivintage.com`
+(`useSyncExternalStore`); Vercel production deployment `8c506f9` (merge of PR #1) was **READY** at that time (VERIFIED via the
+Vercel connector); current deployment evidence is at the top of this document. **Live-site behaviour: VERIFIED 30 Sep 2026** — the Project Owner ran `node scripts/verify-deployment.mjs https://cohaivintage.com`
 (37/37 checks passed, including canonical/og:image/sitemap host, robots → sitemap, headers, redirects, JSON-LD, optimiser) and confirmed the
 visual check on device; the Instagram URL is also confirmed. Not re-listed elsewhere.
 
-## Engineering operating model — aligned to the CoHai Travel masters (30 Sep 2026)
+## Engineering governance — 22 November 2026
 
-The governance files follow the CoHai Travel master set, which the Project Owner has declared the standard for all current and future projects:
-`AGENTS.md` (contract, incl. the Karpathy-derived working principles), `AGENTS.project.md` (project specifics), `CLAUDE.md`, `.omp/AGENTS.md`,
-`.omp/RULES.md`, `docs/ENGINEERING_GOVERNANCE.md` and `docs/AI_ENGINEERING_WORKFLOW.md` (same names and numbering as Travel, plus Cô Hai Vintage
-additions in Governance §13 and Workflow Part B). Key rules: **the author of a change never approves it**; three-lane mode (Main Engineer → Chief
-Engineer → Project Owner) and two-lane mode (a chat lane authors, the other chat lane reviews) for audits and small tasks; the Project Owner may
-override any rule. `create-project-zip-universal.ps1` is the review-ZIP script (includes `.git`, excludes `archive/`). Re-diff against the Travel
-masters when they change.
+The Project Owner adopted a single harness-neutral standard in `docs/ENGINEERING_GOVERNANCE.md`. Any harness may serve as Main Engineer; every change uses a pull request from a sub-branch; only the Owner's approval on record authorizes a merge; Chief Engineer review is advisory; the Owner chooses two-lane or three-lane mode per task. The 30 September master alignment is superseded.
 
 ## Phase 3 — COMPLETE
 
@@ -114,7 +108,7 @@ The required local validation gate remains:
 - `npm run typecheck`
 - `npm run build`
 
-The latest visual-polish commit `7497eae840510022989686985cf5c4a33d9e2beb` has a successful Vercel status. This confirms the GitHub-side deployment check, but local lint/typecheck/build and final device review should still be run after future local media changes.
+The visual-polish commit `7497eae840510022989686985cf5c4a33d9e2beb` had a successful Vercel status at that time. That confirms the GitHub-side deployment check, but local lint/typecheck/build and final device review should still be run after future local media changes; current CI and deployment evidence is at the top of this document.
 
 ## Photography source finding — OPEN / PRIORITY
 
@@ -124,9 +118,9 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
 
 ## Pending issues / next-audit items
 
-0. **Post-merge verification and Owner decisions — OPEN / PRIORITY** — run `scripts/verify-deployment.mjs` against production and complete the
-   checklist in `AUDIT-2026-09-29.md` §4; Owner decisions: copy approval, Instagram URL, contact delivery, archive/history policy, price/availability, legal
-   pages. Next engineering phase (after verification): path-based locales, see `docs/PLAN-locale-routing.md`.
+0. **Owner decisions — OPEN / PRIORITY** — Owner decisions: copy approval, contact delivery, archive/history policy, price/availability, legal
+   pages. The 30 September live-site run passed and the Instagram URL is confirmed; complete any remaining checklist items in `AUDIT-2026-09-29.md`
+   §4. Next engineering phase: path-based locales, see `docs/PLAN-locale-routing.md`.
 
 1. **Photography sharpness / original-source replacement — OPEN / PRIORITY**
    - Put genuine originals in `photo-inbox/` and run `scripts/manage-photos.ps1` (preview, then `-Apply`). Replace = same filename as the current photo; add = new filename following the convention in `MEDIA-MAPPING.md`.
@@ -134,10 +128,10 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
    - Any number of photos can be processed at once; the script checks everything first and changes nothing on any problem.
    - Follow `PHOTO-REPLACEMENT-GUIDE.md` for the reusable workflow and safeguard rules.
 
-2. **Favicon / home-screen icons — FIXED IN BRANCH `chore/branded-icons`, live verification OPEN**
+2. **Favicon / home-screen icons — MERGED AND DEPLOYED (PR #13); live visual verification OPEN**
    - Root cause (VERIFIED from the repo): `app/favicon.ico` was still the untouched create-next-app starter icon (25,931 bytes, history: "Initial commit from Create Next App") and outranked the branded dynamic icon.
    - Fix: branded `app/favicon.ico` (16/32/48), `app/icon.svg`, `app/apple-icon.png` (180), manifest icons 192/512 + 512 maskable in `public/icons/`; the old dynamic `app/icon.tsx` / `app/apple-icon.tsx` were removed. `scripts/icons/generate-icons.py` regenerates all of them.
-   - After merge and deploy: run `node scripts/verify-deployment.mjs https://cohaivintage.com` (now includes icon checks), then look at the tab icon (hard refresh; browsers cache favicons for a long time) and re-add the iPhone Home Screen shortcut.
+   - The fix is deployed in `5b19f7a`: run `node scripts/verify-deployment.mjs https://cohaivintage.com` (includes icon checks), then look at the tab icon (hard refresh; browsers cache favicons for a long time) and re-add the iPhone Home Screen shortcut.
 
 3. **Final cross-device visual audit — OPEN**
    - Recheck desktop, tablet and iPhone after the next media replacements.
@@ -146,8 +140,8 @@ Do **not** solve screenshot softness primarily through CSS enlargement, sharpeni
 4. **Shop image presentation — OPEN FOR VISUAL RECHECK**
    - Verify current product mappings, framing and loading on desktop and iPhone before changing mappings.
 
-5. **Production deployment verification — OPEN**
-   - Confirm the latest `main` commit is the one actually served in production before closing Phase 5.
+5. **Production deployment — VERIFIED for `5b19f7a`; visual check OPEN**
+   - Vercel Production deployment `7362205430` was built from `5b19f7a`; the live origin returned HTTP 200 on 22 November 2026. Desktop/iPhone rendering remains UNVERIFIED.
 
 ## Known-good decisions — preserve these
 
@@ -204,4 +198,4 @@ Do not place WordPress/WooCommerce logs, plugin caches (Astra, Spectra, WPForms,
 
 ## Next-conversation handoff
 
-Start the next conversation by following `docs/AI_ENGINEERING_WORKFLOW.md` §10: read `docs/ENGINEERING_GOVERNANCE.md`, `AGENTS.md`, `AGENTS.project.md`, `PROJECT_STATUS.md`, `AUDIT-2026-09-29.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md`. The immediate priority remains **photography replacement and live verification**, not another broad redesign.
+Start the next conversation by reading `docs/ENGINEERING_GOVERNANCE.md`, `AGENTS.md`, `AGENTS.project.md`, `PROJECT_STATUS.md`, `AUDIT-2026-09-29.md`, `ORIGINAL-WORDPRESS.md`, `MEDIA-MAPPING.md`, and `PHOTO-REPLACEMENT-GUIDE.md`. The immediate priority remains **photography replacement and live verification**, not another broad redesign.
