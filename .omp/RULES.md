@@ -1,19 +1,20 @@
-# OMP Rules (universal master)
+# OMP Rules
 
 Short tripwire list. The reasons and details are in `AGENTS.md`; the
 project's own "never" items are in `AGENTS.project.md`. Both apply.
 
 ## Before you start
 
-1. Read `AGENTS.md` and `AGENTS.project.md`. Nothing else is mandatory.
+1. Read `AGENTS.md`, `AGENTS.project.md` and `docs/ENGINEERING_GOVERNANCE.md`.
 2. Check live Git state (`git status`, current branch) before changing files.
 3. Repository evidence beats any earlier model's claim.
 
 ## Never
 
-- merge to `main`, or assume you may merge because an approval exists;
+- merge to `main` without the Owner's approval on record, or commit directly
+  to `main`;
 - force-push, or rewrite history, without explicit authorization;
-- approve a change you authored;
+- approve any change; only the Owner approves;
 - treat silence, a green test run, or an earlier approval as approval;
 - claim a test, build, lint or typecheck passed without running it;
 - downgrade a real failure to get a green result;

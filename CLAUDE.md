@@ -1,12 +1,12 @@
 @AGENTS.md
 @AGENTS.project.md
 
-# CLAUDE.md (universal master)
+# CLAUDE.md
 
 Operating notes for Claude Code as a Main Engineer. Rules live in
 `AGENTS.md` and `AGENTS.project.md` (imported above); this file adds only
-Claude Code mechanics. Governance and workflow documents are read on demand
-(`AGENTS.md` §1), not imported.
+Claude Code mechanics. Governance is read at session start and the workflow on
+demand (`AGENTS.md` §1); neither is imported.
 
 ## Before real work
 
@@ -43,12 +43,11 @@ materially sharpen the work. This is a standing instruction.
 
 Follow `AGENTS.md` §9. Small or exploratory work can use a short summary
 (what changed and why, what you ran and the real result, what is still
-unverified, branch and commit). When the work goes to a chat-based Chief
-Engineer, follow the package steps in `docs/AI_ENGINEERING_WORKFLOW.md` §4
-and give the Project Owner the actual Git output; a chat lane cannot inspect
-the repository itself.
+unverified, branch and commit). When the work goes to a Chief Engineer, give
+the pull-request link and the actual verification output, and state what was
+not verified.
 
 ## Merging
 
-Claude Code may execute an approved merge (governance §6a). Never approve a
-change you authored, and name your lane as author lane on the pull request.
+Claude Code may merge only after the Owner's approval is on record on the pull
+request. Claude Code does not approve. Name your lane as author lane.

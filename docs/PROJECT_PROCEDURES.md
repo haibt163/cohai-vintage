@@ -3,7 +3,7 @@
 Project-specific commands and steps. This was Part B of the old
 `AI_ENGINEERING_WORKFLOW.md`; the section numbers (§12–§20) are kept so
 existing references still resolve. Universal rules are in `AGENTS.md`;
-roles and merge authority in `docs/ENGINEERING_GOVERNANCE.md`; report and
+roles, approval and the merge gate in `docs/ENGINEERING_GOVERNANCE.md`; report and
 review formats in `docs/AI_ENGINEERING_WORKFLOW.md`. Read this file when you
 verify, release, replace photos, or hand steps to the Project Owner.
 
@@ -31,19 +31,20 @@ production deploy run `node scripts/verify-deployment.mjs https://<production-do
 4. Commit in logical units with messages that say what and why.
 5. Run §12. Fix failures; never bypass safeguards (e.g. the photo apply script).
 6. Push the branch and open a PR: scope, files changed, verification output, risks, UNVERIFIED items, Owner decisions.
-7. Request Chief Engineer review (§14; reply format in `AI_ENGINEERING_WORKFLOW.md` §4). State the author lane and the reviewer lane (they must differ, governance §2b). Do not merge your own work.
+7. Open the pull request and request Chief Engineer review when three-lane mode is in use (§14). State the author lane and the reviewer lane (or "Owner only"). Merge only after the Owner's approval is on record (governance §4).
 
 ## 14. Requesting and performing a Chief Engineer review
 
-**Author prepares:** the ZIP (via `create-project-zip-universal.ps1`) or PR link; `git status`, `git log -5 --oneline --decorate`,
-`git show --stat --oneline HEAD`; the §12 output (plus preview URL and observations for visual changes); the handoff file listing UNVERIFIED items and open Owner decisions.
+**Author prepares:** the pull-request link; `git status`, `git log -5 --oneline --decorate`, `git show --stat --oneline HEAD`; the §12 output (plus
+preview URL and observations for visual changes); the handoff listing UNVERIFIED items and open Owner decisions.
 
-**Reviewer** (Claude Chat or ChatGPT, never the author's lane) follows the checklist and reply format in `AI_ENGINEERING_WORKFLOW.md` §4.
+**Reviewer** (Chief Engineer, when three-lane mode is in use) reviews the pull request directly and states what it inspected. The review is advisory:
+it informs the Owner's decision but is not the merge gate.
 
 ## 15. Merging
 
-1. Confirm an on-record APPROVE for the current head SHA and CI green.
-2. Executor = Project Owner, Claude Code or Codex CLI/App (not OMP, not a chat lane). Record the approval source in the PR.
+1. Confirm the Owner's approval on record on the pull request (a GitHub review marked Approve, or an explicit approval comment by the Owner) and CI green.
+2. Merge via the pull request. Any Main Engineer or the Owner may execute the merge; the Chief Engineer never merges. Record the approval source in the PR.
 3. After merge: confirm the Vercel production deployment is built from the new `main` SHA, run §16, update `PROJECT_STATUS.md`.
 
 ## 16. Release / deployment verification (Vercel)
@@ -64,7 +65,7 @@ iPhone → §12). Replace = same filename; add = new filename following the nami
 
 ## 18. Switching lanes mid-task
 
-Commit or stash cleanly, refresh the handoff (`AI_ENGINEERING_WORKFLOW.md` §3) with current Git state and next step, then start the new lane at the fresh-session rule (`AI_ENGINEERING_WORKFLOW.md` §7). Do not let two
+Commit or stash cleanly, refresh the handoff (`AI_ENGINEERING_WORKFLOW.md` §4) with current Git state and next step, then start the new lane at the fresh-session rule (`AI_ENGINEERING_WORKFLOW.md` §2). Do not let two
 agents share a worktree. Approval boundaries are identical in every lane.
 
 ## 19. Applying a chat-authored change (Git bundle) — steps for the Project Owner
@@ -83,8 +84,8 @@ git log --oneline -5
 git push -u origin <branch-name>
 ```
 3. Open the link that `git push` prints (or go to the repository on GitHub and click **Compare & pull request**). Write in the description: what changed,
-   **Author lane: Claude Chat**, **Reviewer lane: ChatGPT** (or the Project Owner).
-4. Paste the review request (§20) into the reviewing lane. When it replies **APPROVE**, click **Merge pull request** on GitHub (the Project Owner may do this).
+   **Author lane: Claude Chat**, **Reviewer lane: <Chief Engineer name>, or Owner only**.
+4. Paste the review request (§20) into the reviewing lane. A Chief Engineer review is advisory. The Owner approves on the pull request (GitHub Approve or an explicit approval comment), then click **Merge pull request**.
 5. After merging, run `git switch main` then `git pull`. Vercel deploys `main` automatically; then run §16.
 
 ## 20. Prompt templates
@@ -115,7 +116,8 @@ Deliver: VERIFIED / FAILED / UNVERIFIED / Owner decision, one line plus evidence
 ```
 **Chief Engineer review request**
 ```
-Review branch <n> @ <sha>. Package attached: ZIP (create-project-zip-universal.ps1), git status/log/show --stat,
+Review branch <n> @ <sha>. Package attached: PR link, git status/log/show --stat,
 verification output, handoff file. Say whether your review is based on handed-over material only.
-Reply in the review format in docs/AI_ENGINEERING_WORKFLOW.md §4.
+The review is advisory; the Owner approves on the pull request.
+Reply with what you inspected and your recommendation.
 ```

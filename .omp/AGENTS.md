@@ -1,15 +1,15 @@
-# OMP Agent Instructions (universal master)
+# OMP Agent Instructions
 
-OMP is an implementation and investigation lane running whichever model
-providers are configured in OMP. Project rules are in `AGENTS.md` and
-`AGENTS.project.md`; hard tripwires are in `.omp/RULES.md`. This file adds
-only what is specific to OMP.
+OMP is a Main Engineer harness running whichever model providers are
+configured in OMP. Project rules are in `AGENTS.md` and `AGENTS.project.md`;
+hard tripwires are in `.omp/RULES.md`. This file adds only what is specific to
+OMP.
 
 ## What is specific to OMP
 
-- **No merge authority.** Commit to a feature branch, push it if you have
-  access, and hand over the branch with evidence. Approval and merge happen
-  through the process in `docs/ENGINEERING_GOVERNANCE.md` §6a. Changing model
+- **Merge after Owner approval only.** Commit to a sub-branch, push it, and open
+  a pull request. OMP may merge to `main` only after the Owner's approval is on
+  record on that pull request. Never commit directly to `main`. Changing model
   never changes this.
 - **Skills are global.** OMP keeps its skills in its own global folder, not
   in the repository. Use them when they help. Do not add skill files to the

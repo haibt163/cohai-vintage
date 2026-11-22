@@ -4,19 +4,17 @@ Modern Next.js rebuild of the Cô Hai Vintage website, using recovered genuine W
 
 ## Current status
 
-The site is running well for most agreed requirements and `main` is the authoritative project branch.
-
-Phase 3 and Phase 4 are complete. Phase 5 is substantially complete, with a focused set of visual/live verification items intentionally carried into the next audit.
+`main` @ `5b19f7a` is green in GitHub Actions run 40528017292 and deployed to Vercel Production (deployment `7362205430`); `https://cohaivintage.com` returned HTTP 200 on 22 November 2026. Phase 3 and Phase 4 are complete. Phase 5 is substantially complete, with a focused set of visual/live verification items intentionally carried into the next audit.
 
 The latest visual polish includes a roughly 50/50 desktop homepage hero, stronger mouse/pointer parallax, Bodoni/Didot-style editorial headlines, and larger supporting/dek/body typography so the hierarchy remains readable rather than pairing huge headlines with tiny paragraphs.
 
 ### OPEN items
 
 - **Photography sharpness / source replacement:** confirmed that some recovered WordPress images are screenshots rather than original uploaded photographs. Replace those files manually with genuine originals while keeping the same filenames/paths where possible. Do not solve this by fake upscaling or stock substitutions.
-- **Favicon / home-screen icons:** the starter favicon was replaced with a branded icon set (see `PROJECT_STATUS.md` pending item 2); verify on the deployed site and on an actual iPhone after re-adding the Home Screen shortcut.
+- **Favicon / home-screen icons:** the starter favicon was replaced with a branded icon set, merged via PR #13 and deployed in `5b19f7a` (see `PROJECT_STATUS.md` pending item 2); verify on the deployed site and on an actual iPhone after re-adding the Home Screen shortcut.
 - **Final cross-device visual audit:** desktop/tablet/iPhone check for Vietnamese typography, image framing, Shop presentation, console errors and broken network requests.
 - **Shop image recheck:** visually verify the current product mappings and framing after source-photo replacement before changing mappings.
-- **Production deployment verification:** confirm the latest `main` build is what is actually served in production before closing Phase 5.
+- **Production visual verification:** the production deployment is confirmed for `5b19f7a`; complete the desktop/iPhone visual check before closing Phase 5.
 
 Do not treat CI success alone as closure for these visual items.
 
@@ -74,8 +72,8 @@ follow the convention in `MEDIA-MAPPING.md`. Unused recovered media is kept in `
 The recovered WordPress source is documented in:
 
 - `ORIGINAL-WORDPRESS.md`
-- `docs/ENGINEERING_GOVERNANCE.md` (roles, review, merge authority, evidence — CoHai Travel master, adapted)
-- `docs/AI_ENGINEERING_WORKFLOW.md` (workflow, handoff templates, project procedures)
+- `docs/ENGINEERING_GOVERNANCE.md` (roles, operating modes, approval and merge gate — single source of truth)
+- `docs/AI_ENGINEERING_WORKFLOW.md` (session flow and handoff formats)
 - `AGENTS.project.md` (project-specific agent instructions)
 - `.omp/AGENTS.md` and `.omp/RULES.md` (OMP harness instructions and hard rules)
 - `MEDIA-MAPPING.md`

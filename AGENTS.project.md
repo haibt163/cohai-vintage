@@ -1,13 +1,13 @@
 # Cô Hai Vintage — Project Instructions
 
-Project-specific facts and rules. Universal rules are in `AGENTS.md`; roles and merge authority in `docs/ENGINEERING_GOVERNANCE.md`; report and review
+Project-specific facts and rules. Universal rules are in `AGENTS.md`; roles, approval and the merge gate in `docs/ENGINEERING_GOVERNANCE.md`; report and review
 formats in `docs/AI_ENGINEERING_WORKFLOW.md`; project commands and steps in `docs/PROJECT_PROCEDURES.md`. This file adds project facts and gates; it never
 weakens the universal rules.
 
 ## 1. Project and stack
 
-Repository: `haibt163/cohai-vintage` (public). Canonical integration branch: `main` — the protected source of record. Normal implementation
-work uses a dedicated feature branch or worktree.
+Repository: `haibt163/cohai-vintage` (public). Canonical integration branch: `main` — the source of record. Every change reaches it through a pull request
+from a sub-branch (`docs/ENGINEERING_GOVERNANCE.md`).
 
 This repository is the authoritative source for the modern Cô Hai Vintage website rebuild (Saigon vintage-fashion/editorial + a small
 vintage Louis Vuitton collection). It is a clean Next.js implementation. Do NOT reproduce the old WordPress/Elementor/Astra site literally.
@@ -76,8 +76,8 @@ Preserve these approved decisions unless the Owner asks otherwise:
 ## 6. Phase roadmap and open work
 
 Phases 3 (authentic content/media) and 4 (premium visual experience) are complete. Phase 5 is substantially complete but stays OPEN until
-these are verified on a live deployment: photo source-resolution replacement audit · favicon and home-screen icons (fixed in `chore/branded-icons`, live check pending) · desktop/tablet/iPhone
-visual audit · Shop image/crop/loading recheck · production deployment/browser verification. **CI green does not close Phase 5.**
+these are verified on a live deployment: photo source-resolution replacement audit · favicon and home-screen icons (merged via PR #13; live
+visual check pending) · desktop/tablet/iPhone visual audit · Shop image/crop/loading recheck · production deployment/browser verification. **CI green does not close Phase 5.**
 
 The 29 Sep 2026 audit remediation branch and its open Owner decisions are tracked in `AUDIT-2026-09-29.md`. Current status lives in
 `PROJECT_STATUS.md`. Do not restart the reconstruction or begin a broad redesign unless explicitly asked.
@@ -106,7 +106,7 @@ WordPress/WooCommerce logs, plugin caches, `.htaccess`/`index.php` stubs (never 
 
 ## 10. Owner decision list (open)
 
-Copy approval · production domain env var · Instagram URL · contact delivery method · Git-history purge policy · `archive/` retention ·
+Copy approval · production domain env var · contact delivery method · Git-history purge policy · `archive/` retention ·
 price/availability/buy path · legal pages. Details: `AUDIT-2026-09-29.md` §3.
 
 ## 11. Sensitive boundaries and never-list
